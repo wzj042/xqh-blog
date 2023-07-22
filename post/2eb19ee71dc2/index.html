@@ -1,0 +1,308 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><meta name="referrer" content="no-referrer"><title>时间复杂度 |  虚青海的博客 </title><meta name="author" content="虚青海"><meta name="copyright" content="虚青海"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="算法复杂度分析什么是时间复杂度算法复杂度是指算法在编写成可执行程序后，运行时所需要的资源，资源包括时间资源(时间复杂度)和内存资源(空间复杂度)。 为什么要分析时间复杂度同一问题可用不同算法解决，而一个算法的质量优劣将影响到算法乃至程序的效率。 算法分析的目的在于选择合适算法和改进算法。  设计算法"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://xqher.gitee.io/post/2eb19ee71dc2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="A6nBPP2YDYuQRvcTcw2G7pAWsJMtiAEsaW8bIByQbRA"/><meta name="baidu-site-verification" content="code-2JYWfn6dbU"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?bd8ff323652e2c878ac481be337e605e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '时间复杂度',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-22 18:23:28'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://img2023.cnblogs.com/blog/1674552/202307/1674552-20230722183629733-139482028.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 摸鱼</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img2022.cnblogs.com/blog/1674552/202205/1674552-20220517193643247-1871241772.png')"><nav id="nav"><span id="blog-info"><a href="/" title=" 虚青海的博客 "><span class="site-name"> 虚青海的博客 </span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 摸鱼</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">时间复杂度</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-03T11:56:57.000Z" title="发表于 2023-02-03 19:56:57">2023-02-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-22T10:23:28.000Z" title="更新于 2023-07-22 18:23:28">2023-07-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="时间复杂度"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="算法复杂度分析"><a href="#算法复杂度分析" class="headerlink" title="算法复杂度分析"></a>算法复杂度分析</h2><h3 id="什么是时间复杂度"><a href="#什么是时间复杂度" class="headerlink" title="什么是时间复杂度"></a>什么是时间复杂度</h3><p>算法复杂度是指<strong>算法在编写成可执行程序后，运行时所需要的资源</strong>，资源包括时间资源(<strong>时间复杂度</strong>)和内存资源(<strong>空间复杂度</strong>)。</p>
+<h3 id="为什么要分析时间复杂度"><a href="#为什么要分析时间复杂度" class="headerlink" title="为什么要分析时间复杂度"></a>为什么要分析时间复杂度</h3><p>同一问题可用不同算法解决，而一个算法的质量优劣将影响到算法乃至程序的效率。 算法分析的目的在于选择合适算法和改进算法。</p>
+<blockquote>
+<p>设计算法时，一般是要先考虑系统环境，然后权衡时间复杂度和空间复杂度，选取一个平衡点。不过，时间复杂度要比空间复杂度更容易产生问题(所以大部分算法考虑的都是用空间换时间)，因此算法研究的主要也是时间复杂度，不特别说明的情况下，复杂度就是指时间复杂度。</p>
+</blockquote>
+<h3 id="时间复杂度-Time-Complexity"><a href="#时间复杂度-Time-Complexity" class="headerlink" title="时间复杂度 | Time Complexity"></a>时间复杂度 | Time Complexity</h3><blockquote>
+<p>评估执行程序所需的时间。可以估算出程序对处理器的使用程度。</p>
+</blockquote>
+<h4 id="时间频度"><a href="#时间频度" class="headerlink" title="时间频度"></a>时间频度</h4><p>一个算法花费的时间与算法中语句的执行次数成比例，一个算法中的语句执行次数称为语句频度或时间频度,记为T(n), 此处n为算法的问题规模(算法需要执行的运算次数)</p>
+<h4 id="时间复杂度的概念"><a href="#时间复杂度的概念" class="headerlink" title="时间复杂度的概念"></a>时间复杂度的概念</h4><p>定义: 存在常数c和函数f(N) , 使得当 N &gt;&#x3D; c 时 T(N) &lt;&#x3D; f(N), 表示为 T(n) &#x3D; O(f(n))</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202205/1674552-20220510234138882-1479906849.png" alt="f(n)和T(n)的关系"></p>
+<p>当 N &gt;&#x3D; 2 的时候，f(n) &#x3D; $n^2$总是大于 T(n) &#x3D; n + 2 的，于是我们说 f(n) 的增长速度是大于或者等于 T(n) 的，也说 f(n) 是 T(n) 的上界，可以表示为 T(n) &#x3D; O(f(n))。</p>
+<p>因为f(n) 的增长速度是大于或者等于 T(n) 的，即T(n) &#x3D; O(f(n))，所以我们可以用 f(n) 的增长速度来度量 T(n) 的增长速度，所以我们说这个算法的时间复杂度是 O(f(n))。</p>
+<p><strong>算法的时间复杂度，用来度量算法的运行时间，记作: T(n) &#x3D; O(f(n))。它表示随着 输入大小n 的增大，算法执行需要的时间的增长速度可以用 f(n) 来描述。</strong></p>
+<p>显然如果 T(n) &#x3D; $n^2$，那么 T(n) &#x3D; O($n^2$)，T(n) &#x3D; O($n^3$)，T(n) &#x3D; O($n^4$) 都是成立的，但是因为第一个 f(n) 的增长速度与 T(n) 是最接近的，所以第一个是最好的选择，所以我们说这个算法的复杂度是 O($n^2$) 。</p>
+<p><strong>如果一个算法的执行次数是 T(n)，那么只保留最高次项，同时忽略最高项的系数后得到函数 f(n)，此时算法的时间复杂度就是 O(f(n))。</strong></p>
+<ol>
+<li><p>对于一个循环，假设循环体的时间复杂度为 O(n)，循环次数为 m，则这个<br>循环的时间复杂度为 O(n×m)。<br></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">aFunc</span><span class="params">(<span class="type">int</span> n)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;         <span class="comment">// 循环次数为 n</span></span><br><span class="line">        printf(<span class="string">&quot;Hello, World!\n&quot;</span>);      <span class="comment">// 循环体时间复杂度为 O(1)</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时时间复杂度为 O(n × 1)，即 O(n)。</p>
+</li>
+<li><p>对于多个循环，假设循环体的时间复杂度为 O(n)，各个循环的循环次数分别是a, b, c…，则这个循环的时间复杂度为 O(n×a×b×c…)。分析的时候应该由里向外分析这些循环。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">aFunc</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;         <span class="comment">// 循环次数为 n</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; n; j++) &#123;       <span class="comment">// 循环次数为 n</span></span><br><span class="line">            printf(<span class="string">&quot;Hello, World!\n&quot;</span>);      <span class="comment">// 循环体时间复杂度为 O(1)</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时时间复杂度为 O(n × n × 1)，即 O(n^2)。</p>
+</li>
+<li><p>对于顺序执行的语句或者算法，总的时间复杂度等于其中最大的时间复杂度。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">aFunc</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="comment">// 第一部分时间复杂度为 O(n^2)</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            printf(<span class="string">&quot;Hello, World!\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 第二部分时间复杂度为 O(n)</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">        printf(<span class="string">&quot;Hello, World!\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时时间复杂度为 max(O(n^2), O(n))，即 O(n^2)。</p>
+</li>
+<li><p>对于条件判断语句，总的时间复杂度等于其中 时间复杂度最大的路径 的时间复杂度</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">aFunc</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (n &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 第一条路径时间复杂度为 O(n^2)</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">                printf(<span class="string">&quot;输入数据大于等于零\n&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 第二条路径时间复杂度为 O(n)</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            printf(<span class="string">&quot;输入数据小于零\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时时间复杂度为 max(O(n^2), O(n))，即 O(n^2)。</p>
+<p><strong>时间复杂度分析的基本策略是：从内向外分析，从最深层开始分析。如果遇到函数调用，要深入函数进行分析。</strong></p>
+</li>
+</ol>
+<h3 id="常见时间复杂度比较"><a href="#常见时间复杂度比较" class="headerlink" title="常见时间复杂度比较"></a>常见时间复杂度比较</h3><div class="table-box"><table><thead><tr><th align="center">n</th><th align="center">logn</th><th align="center">√n</th><th align="center">nlogn</th><th align="center">n²</th><th align="center">2ⁿ</th><th align="center">n!</th></tr></thead><tbody><tr><td align="center">5</td><td align="center">2</td><td align="center">2</td><td align="center">10</td><td align="center">25</td><td align="center">32</td><td align="center">120</td></tr><tr><td align="center">10</td><td align="center">3</td><td align="center">3</td><td align="center">30</td><td align="center">100</td><td align="center">1024</td><td align="center">3628800</td></tr><tr><td align="center">50</td><td align="center">5</td><td align="center">7</td><td align="center">250</td><td align="center">2500</td><td align="center">约10^15</td><td align="center">约3.0*10^64</td></tr><tr><td align="center">100</td><td align="center">6</td><td align="center">10</td><td align="center">600</td><td align="center">10000</td><td align="center">约10^30</td><td align="center">约9.3*10^157</td></tr><tr><td align="center">1000</td><td align="center">9</td><td align="center">31</td><td align="center">9000</td><td align="center">1000 000</td><td align="center">约10^300</td><td align="center">约4.0*10^2567</td></tr></tbody></table></div>
+
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202205/1674552-20220511001829185-1182477356.png" alt="直观比较图"></p>
+<p>常用的时间复杂度按照耗费的时间从小到大依次是：</p>
+<blockquote>
+<p>O(1)&lt;O(logn)&lt;O(n)&lt;O(nlogn)&lt;O(n²)&lt;O(n³)&lt;O(2ⁿ)&lt;O(n!)</p>
+</blockquote>
+<h3 id="空间复杂度-Space-Complexity"><a href="#空间复杂度-Space-Complexity" class="headerlink" title="空间复杂度 | Space Complexity"></a>空间复杂度 | Space Complexity</h3><blockquote>
+<p>评估执行程序所需的存储空间。可以估算出程序对计算机内存的使用程度。</p>
+</blockquote>
+<p>​	空间复杂度是对一个算法在运行过程中临时占用存储空间大小的量度，记做S(n)&#x3D;O(f(n))。</p>
+<ol>
+<li>存储算法本身所占用的存储空间。</li>
+<li>算法的<strong>输入输出数据</strong>所占用的存储空间。</li>
+<li>算法在运算过程中<strong>临时占用的存储空间</strong>这三个方面。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a[] = <span class="keyword">new</span> <span class="title class_">int</span>[n];</span><br></pre></td></tr></table></figure>
+
+<p>这个例子的空间复杂度为O(n)。</p>
+<p><img src="https://img-blog.csdnimg.cn/20190716173714459.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzEyNjExNw==,size_16,color_FFFFFF,t_70" alt="常用算法的复杂度"></p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/f4cca5ce055a">（数据结构）十分钟搞定时间复杂度（算法的时间复杂度） - 简书 (jianshu.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/itachi85/article/details/54882603">算法（一）时间复杂度_刘望舒的博客-CSDN博客_时间复杂度</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_32608881/article/details/117632634?spm=1001.2101.3001.6650.3&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~default-3-117632634-blog-54882603.pc_relevant_default&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~default-3-117632634-blog-54882603.pc_relevant_default&utm_relevant_index=4">时间复杂度&amp;空间复杂度_程序员简笔的博客-CSDN博客_时间复杂度</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43126117/article/details/96151406">如何计算算法的复杂度_营琪的博客-CSDN博客_计算复杂度</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://xqher.gitee.io">虚青海</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://xqher.gitee.io/post/2eb19ee71dc2/">https://xqher.gitee.io/post/2eb19ee71dc2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://xqher.gitee.io" target="_blank"> 虚青海的博客 </a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AE%97%E6%B3%95/">算法</a><a class="post-meta__tags" href="/tags/%E5%A4%8D%E6%9D%82%E5%BA%A6/">复杂度</a></div><div class="post_share"><div class="social-share" data-image="https://img2022.cnblogs.com/blog/1674552/202205/1674552-20220517193643247-1871241772.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/post/82c8d3e69f19/" title="Ubuntu20.04简单配置"><img class="cover" src="https://img2023.cnblogs.com/blog/1674552/202305/1674552-20230508153315167-1707518652.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Ubuntu20.04简单配置</div></div></a></div><div class="next-post pull-right"><a href="/post/e0578cda5c64/" title="记录第一次搭建博客"><img class="cover" src="https://img2022.cnblogs.com/blog/1674552/202205/1674552-20220517193643247-1871241772.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">记录第一次搭建博客</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/post/ab0a74d4871b/" title="蓝桥杯笔记"><img class="cover" src="https://img2022.cnblogs.com/blog/1674552/202205/1674552-20220517193643247-1871241772.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-11</div><div class="title">蓝桥杯笔记</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://img2023.cnblogs.com/blog/1674552/202307/1674552-20230722183629733-139482028.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">虚青海</div><div class="author-info__description">想到啥写啥.</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Xqh233"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Xqh233" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:xqher@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">这里是公告, 确实</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="toc-number">1.</span> <span class="toc-text">算法复杂度分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-number">1.1.</span> <span class="toc-text">什么是时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%88%86%E6%9E%90%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-number">1.2.</span> <span class="toc-text">为什么要分析时间复杂度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6-Time-Complexity"><span class="toc-number">1.3.</span> <span class="toc-text">时间复杂度 | Time Complexity</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E9%A2%91%E5%BA%A6"><span class="toc-number">1.3.1.</span> <span class="toc-text">时间频度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">1.3.2.</span> <span class="toc-text">时间复杂度的概念</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E6%AF%94%E8%BE%83"><span class="toc-number">1.4.</span> <span class="toc-text">常见时间复杂度比较</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6-Space-Complexity"><span class="toc-number">1.5.</span> <span class="toc-text">空间复杂度 | Space Complexity</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">引用</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/157ba0d2c7bb/" title="Android Studio Google账号登录不了的一个解决方法"><img src="https://img2022.cnblogs.com/blog/1674552/202205/1674552-20220517193643247-1871241772.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Android Studio Google账号登录不了的一个解决方法"/></a><div class="content"><a class="title" href="/post/157ba0d2c7bb/" title="Android Studio Google账号登录不了的一个解决方法">Android Studio Google账号登录不了的一个解决方法</a><time datetime="2023-07-08T14:16:38.000Z" title="发表于 2023-07-08 22:16:38">2023-07-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/82c8d3e69f19/" title="Ubuntu20.04简单配置"><img src="https://img2023.cnblogs.com/blog/1674552/202305/1674552-20230508153315167-1707518652.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Ubuntu20.04简单配置"/></a><div class="content"><a class="title" href="/post/82c8d3e69f19/" title="Ubuntu20.04简单配置">Ubuntu20.04简单配置</a><time datetime="2023-05-08T07:33:13.000Z" title="发表于 2023-05-08 15:33:13">2023-05-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/2eb19ee71dc2/" title="时间复杂度"><img src="https://img2022.cnblogs.com/blog/1674552/202205/1674552-20220517193643247-1871241772.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="时间复杂度"/></a><div class="content"><a class="title" href="/post/2eb19ee71dc2/" title="时间复杂度">时间复杂度</a><time datetime="2023-02-03T11:56:57.000Z" title="发表于 2023-02-03 19:56:57">2023-02-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/e0578cda5c64/" title="记录第一次搭建博客"><img src="https://img2022.cnblogs.com/blog/1674552/202205/1674552-20220517193643247-1871241772.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="记录第一次搭建博客"/></a><div class="content"><a class="title" href="/post/e0578cda5c64/" title="记录第一次搭建博客">记录第一次搭建博客</a><time datetime="2023-02-03T11:56:57.000Z" title="发表于 2023-02-03 19:56:57">2023-02-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/69abeca3241e/" title="取模运算转位运算"><img src="[&quot;https://img2023.cnblogs.com/blog/1674552/202301/1674552-20230128155616027-1247227374.png&quot;]" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="取模运算转位运算"/></a><div class="content"><a class="title" href="/post/69abeca3241e/" title="取模运算转位运算">取模运算转位运算</a><time datetime="2023-01-28T06:56:58.000Z" title="发表于 2023-01-28 14:56:58">2023-01-28</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By 虚青海</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">这里居然有个友链→<a target="_blank" rel="noopener" href="https://aiepoch.cn/">及境丹青</a>←! <br><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2022099830号-1</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><div class="aplayer no-destroy" data-volume="0.2" data-theme="#009688" data-order="random" data-id="2220142299" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="false"> </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

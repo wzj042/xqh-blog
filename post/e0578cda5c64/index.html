@@ -1,0 +1,411 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><meta name="referrer" content="no-referrer"><title>记录第一次搭建博客 |  虚青海的博客 </title><meta name="author" content="虚青海"><meta name="copyright" content="虚青海"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="基本上是按照从零开始免费搭建自己的博客(一)——本地搭建hexo框架 | 半亩方塘 (gitee.io)中内容来的  快逃 已经换成Butterfly主题了，然后改了自动加frontMatter的脚本。有一次参数调错把刚写的仅存的几篇博客玩炸了，只有html文件保留。想了想果然还是得将markdo"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://xqher.gitee.io/post/e0578cda5c64/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="A6nBPP2YDYuQRvcTcw2G7pAWsJMtiAEsaW8bIByQbRA"/><meta name="baidu-site-verification" content="code-2JYWfn6dbU"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?bd8ff323652e2c878ac481be337e605e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '记录第一次搭建博客',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-22 18:33:31'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://img2023.cnblogs.com/blog/1674552/202307/1674552-20230722183629733-139482028.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 摸鱼</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img2022.cnblogs.com/blog/1674552/202205/1674552-20220517193643247-1871241772.png')"><nav id="nav"><span id="blog-info"><a href="/" title=" 虚青海的博客 "><span class="site-name"> 虚青海的博客 </span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 摸鱼</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">记录第一次搭建博客</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-03T11:56:57.000Z" title="发表于 2023-02-03 19:56:57">2023-02-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-22T10:33:31.000Z" title="更新于 2023-07-22 18:33:31">2023-07-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">博客搭建</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>14分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="记录第一次搭建博客"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p>基本上是按照<a target="_blank" rel="noopener" href="https://yushuaigee.gitee.io/2020/12/31/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E5%85%8D%E8%B4%B9%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2(%E4%B8%80)%E2%80%94%E2%80%94%E6%9C%AC%E5%9C%B0%E6%90%AD%E5%BB%BAhexo%E6%A1%86%E6%9E%B6/">从零开始免费搭建自己的博客(一)——本地搭建hexo框架 | 半亩方塘 (gitee.io)</a>中内容来的</p>
+</blockquote>
+<h2 id="快逃"><a href="#快逃" class="headerlink" title="快逃"></a>快逃</h2><blockquote>
+<p>已经换成Butterfly主题了，然后改了自动加frontMatter的脚本。有一次参数调错把刚写的仅存的几篇博客玩炸了，只有html文件保留。想了想果然还是得将markdown源文件分开放</p>
+</blockquote>
+<h2 id="效果预览"><a href="#效果预览" class="headerlink" title="效果预览"></a>效果预览</h2><p>如果搭建完了这里会放一个预览链接和图片</p>
+<p><a href="https://xqher.gitee.io/">https://xqher.gitee.io</a></p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/e8f6147f34d1e575e157bdbe895d4829.png" alt="预览效果"></p>
+<h2 id="搭建目的"><a href="#搭建目的" class="headerlink" title="搭建目的"></a>搭建目的</h2><p> 搭建博客的目的是方便浏览管理一些学习时的笔记，之前也用过Typora导出html然后用Gitee部署的方式，但是由于没怎么学过前端。所有笔记存在一个文件内显然不是一个好方式。所以还是打算学一下怎么搭建一个博客，顺便将自己不太熟没接触过的概念了解一下。</p>
+<p>这里是使用Gitee + 博客园(作为图床) + Typora的搭建方式</p>
+<p>主要是在线服务基本都是国内提供，能避免不少麻烦，图床不用Gitee是因为前段时间似乎有Gitee替换了图片链接还是什么导致很多博客用Gitee作图床的都丢了图片，权衡再三又不想多了额外开支，还是选择以前用的小工具将博客园作为图床。</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/2889c3b7aae78aa3eea06df39b6b8fed.png" alt="思维导图"></p>
+<p>看完大概就想到那么多，于是先准备好需要的原材料</p>
+<h2 id="原材料准备"><a href="#原材料准备" class="headerlink" title="原材料准备"></a>原材料准备</h2><ul>
+<li>编写博客的软件(使用Markdown):<a target="_blank" rel="noopener" href="https://typoraio.cn/#">Typora官网</a></li>
+<li>Gitee账号|仓库一个:[有账号的情况下准备一个部署用的仓库](# 有账号的情况下准备一个部署用的仓库)</li>
+<li>Git工具以及初步部署:安装Git和初步使用</li>
+<li>Hexo框架搭建|安装node.js : [安装node.js以配置Hexo框架](# 安装node.js以配置Hexo框架)</li>
+<li>使用博客园充当Typora的图床 : <a href="#Python%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%88%B0%E5%8D%9A%E5%AE%A2%E5%9B%AD">Python上传图片到博客园</a></li>
+</ul>
+<p>以上有一些重复性的内容因为我太懒或许之后复习的时候会补个链接，这里估计会按下不表</p>
+<h3 id="有账号的情况下准备一个部署用的仓库"><a href="#有账号的情况下准备一个部署用的仓库" class="headerlink" title="有账号的情况下准备一个部署用的仓库"></a>有账号的情况下准备一个部署用的仓库</h3><h4 id="1-新建一个以自己用户名为名的仓库"><a href="#1-新建一个以自己用户名为名的仓库" class="headerlink" title="1.新建一个以自己用户名为名的仓库"></a>1.新建一个以自己用户名为名的仓库</h4><p>这里主要是用户名的话部署出来的域名比较简洁</p>
+<p>类似这样<a href="https://xqher.gitee.io/">https://xqher.gitee.io</a> ,但是没开启pages服务的且上传索引页面的情况下此链接只会跳转对应仓库</p>
+<p>配置Readme 和 License之后就可以上传个静态的索引网页来查看是否启动成功</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/096cad58d61d21aeb352aa30eb1d86c7.png" alt="使用Gittee服务"></p>
+<p>注意Gitee账号想要使用pages功能部署网页需要上传身份证实名</p>
+<p>且不像Github更新文件后会自动部署，需要用到上图的更新功能手动更新，当然之后也可以用脚本实现自动化更新</p>
+<h2 id="安装node-js以配置Hexo框架"><a href="#安装node-js以配置Hexo框架" class="headerlink" title="安装node.js以配置Hexo框架"></a>安装node.js以配置Hexo框架</h2><h3 id="Hexo框架"><a href="#Hexo框架" class="headerlink" title="Hexo框架"></a>Hexo框架</h3><blockquote>
+<p>一个专门用于博客类网站的开源项目</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/7d66e1c0e0839d0ba270218969fc6097.png" alt="官网首页图片"></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">Hexo中文网</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo">hexojs&#x2F;hexo (github)</a></li>
+</ul>
+<p>这里我只要知道我虽然我不懂前端，但我安装好框架也能搭建博客就可以了(当然以后也免不了学一点)</p>
+<h3 id="Hexo依赖环境-Node-js"><a href="#Hexo依赖环境-Node-js" class="headerlink" title="Hexo依赖环境:Node.js"></a>Hexo依赖环境:Node.js</h3><blockquote>
+<p>Node.js是运行在服务端的JavaScript,能够脱离浏览器单独运行js,类似于安装了解释器后可以独立编译代码。</p>
+</blockquote>
+<h4 id="下载Node-js"><a href="#下载Node-js" class="headerlink" title="下载Node.js"></a>下载Node.js</h4><p><a target="_blank" rel="noopener" href="https://nodejs.org/zh-cn/">Node.js 中文官网</a></p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/fc4cbd588a1a278ae2aa69ac8ee133b7.png" alt="官网首页截图"></p>
+<p>这里还是习惯性的使用维护版，因为新版可能有一些未发现的特性不好解决</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/e6e587bb11cc97fad46ff5c36c1c697c.png" alt="安装"></p>
+<p>一路确认安装即可，注意考量是否勾选最后一个选项，这是安装额外的工具<br>我反正不熟悉这个，就没勾选</p>
+<blockquote>
+<p>Automatically install the necessary tools.Note that this will also install Chocolatey. The script will pop-up in a new window after the installation completes.<br>自动安装必要的工具。请注意，这也将安装Chocolatey。安装完成后，脚本将弹出到一个新窗口中。</p>
+</blockquote>
+<h4 id="测试Node-js是否安装成功"><a href="#测试Node-js是否安装成功" class="headerlink" title="测试Node.js是否安装成功"></a>测试Node.js是否安装成功</h4><p><code>win+r</code>打开运行框输入<code>cmd</code>进入命令行然后输入<code>npm -v</code>查看是否出现版本号，出现则安装成功。此处npm类似pip都是管理依赖包的工具</p>
+<blockquote>
+<p>顺带一提，平时输入<code>notepad</code>打开个记事本记录点东西也很常用<code>win+r</code>  -&gt; <code>notepad</code></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/1bae9637066d858a088b59dd51ac4b31.png" alt="image-20220428223252632"></p>
+<h4 id="使用CNpm替代Npm"><a href="#使用CNpm替代Npm" class="headerlink" title="使用CNpm替代Npm"></a>使用CNpm替代Npm</h4><p><a target="_blank" rel="noopener" href="https://npmmirror.com/">npmmirror 中国镜像站</a></p>
+<p>直接用npm装cnpm就可以用cnpm装模块了</p>
+<h3 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h3><p>这里早安装了但是又犯懒，就跳过了。随便百度一下都有安装Git的教程</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/mukes/article/details/115693833">Git 详细安装教程（详解 Git 安装过程的每一个步骤）_mukes的博客-CSDN博客_git安装</a></p>
+<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><p>首先准备一个安装Hexo框架和以后博客文件的文件夹，注意不要存放路径出现中文,我这里是<code>E:\WorkPlace\Blog</code></p>
+<blockquote>
+<p>习惯把一些工程文件放在根目录下一个WorkPlace文件夹内，环境之类也单独放一个文件夹可能好管理一点</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/24ccb983a59228127f9822e9687539d9.png" alt="Git操作图"></p>
+<p>进入文件夹后右键选择<code>Git Base Here</code></p>
+<p>然后依次输入以下指令(建议手打一遍加深印象)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#安装 hexo 框架 -g 表示安装全局模块，有点类似正则表达式的g</span></span><br><span class="line">npm install -g hexo-cli</span><br><span class="line"><span class="comment">#初始化文件夹 会用git clone一个默认模板库</span></span><br><span class="line">hexo init</span><br><span class="line"><span class="comment">#安装hexo依赖包类似pip requirements文件后安装需要的依赖包</span></span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/hexojs/hexo-starter.git</span><br><span class="line"><span class="comment">#默认模板地址，改了一些东西找不回来的话可以直接克隆替换</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/img_convert/1c9d7a22d12ab504f2af496cc7fef104.png" alt="或许输入指令回车确认后等到有输出再继续输入比较好"></p>
+<p>如果ping github之类的ping不同导致命令卡住，可以使用类似Steam++之类的代理(真挺好用)</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/f7d8c8d156cf5d24b68050d0208363bf.png" alt="Steam++"></p>
+<h3 id="测试本地博客效果"><a href="#测试本地博客效果" class="headerlink" title="测试本地博客效果"></a>测试本地博客效果</h3><p>于是这里再在Git bash窗口中输入以下指令开启本地博客查看效果</p>
+<p>其中g是generate的缩写，s是server的缩写</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#两种写法都可以</span></span><br><span class="line"><span class="comment">#生成静态网站</span></span><br><span class="line">hexo g</span><br><span class="line"><span class="comment">#启动服务器</span></span><br><span class="line">hexo s</span><br><span class="line"><span class="comment">#或者写在一行</span></span><br><span class="line">hexo g &amp;&amp; hexo s</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/img_convert/a29f394edb87be5606ecfd3e9a1389d7.png" alt="命令行执行结果"></p>
+<p>注意Ctrl + C 会关掉运行中的本地服务，需要测试的话这里可以直接点击<a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000/</a></p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/987320a1ab7ae23548a90579ad421439.png" alt="默认博客效果"></p>
+<p>以上图片是默认的效果，还可以安装自己想要的主题</p>
+<h3 id="选择喜欢的主题"><a href="#选择喜欢的主题" class="headerlink" title="选择喜欢的主题"></a>选择喜欢的主题</h3><p>在Hexo的主题站<a target="_blank" rel="noopener" href="https://hexo.io/themes/">Themes | Hexo</a>中收录很多主题，可以在上面选择喜欢的</p>
+<p>而恰巧本人是个粥批，一眼选中了下面这个<a target="_blank" rel="noopener" href="https://ark.theme.yueplus.ink/">| Arknights (yueplus.ink)</a></p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/c5ccf7f5fd2bb13aa038545fccff299e.png" alt="image-20220428230153109"></p>
+<p>感觉不错，可能排版我个人觉得还可以改一下，不过还是等我学了前端再说阿布</p>
+<h3 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h3><p>选中喜欢的主题后找到主题的Github页面</p>
+<p>在Theme文件夹内克隆仓库</p>
+<p>当然有些仓库内提供好了克隆的命令，直接克隆然后将主题文件夹扔到themes内也可以</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#这里就将文件直接克隆到了themes/arknights里</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/Yue-plus/hexo-theme-arknights.git themes/arknights</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/img_convert/2d1a71ab32c5a5862f087fe85ce46277.png" alt="克隆仓库"></p>
+<p>然后配置config启动主题(不同主题可能有不同需求，参照仓库内安装说明)</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/c1f0c307183e89742196489300f21b0c.png" alt="设置主题"></p>
+<p>这里只是展示设置主题后重新启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#清理 生成 启动</span></span><br><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo s</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>git bash内无法使用粘贴?不如试试右键粘贴</p>
+</blockquote>
+<p>这一步不同主题可能效果不同，反正我这个主题还没完成安装，需要配置更多东西</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/ca4133c9f64b30721f116bc3580d08e0.png" alt="提示"></p>
+<p>这里我直接将原仓库的配置文件拷了下来</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights/blob/hexo/_config.arknights.yml">hexo-theme-arknights&#x2F;_config.arknights.yml at hexo · Yue-plus&#x2F;hexo-theme-arknights (github.com)</a></p>
+<p>然后还是不行，就上网搜索了以下更换主题的坑</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/137946156">部署Hexo踩过的坑—hexo更换主题 - 知乎 (zhihu.com)</a></p>
+<p>在Hexo目录下git bash 执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-renderer-jade hexo-generator-feed hexo-generator-sitemap hexo-browsersync hexo-generator-archive</span><br></pre></td></tr></table></figure>
+
+<p>等他跑完重新清理部署一遍，于是终于部署好了</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/11a275863457b4df89f17641eb7ebd0d.png" alt="效果"></p>
+<p>接下来就是参考仓库设置一些文字，图片，功能开关之类的。以及如何新建博客等如何操作</p>
+<h3 id="修改主题内容"><a href="#修改主题内容" class="headerlink" title="修改主题内容"></a>修改主题内容</h3><p>在config 和 主题config中修改内容即可</p>
+<p>开启更多功能还需要看仓库介绍</p>
+<h3 id="发布到Gitee上"><a href="#发布到Gitee上" class="headerlink" title="发布到Gitee上"></a>发布到Gitee上</h3><p>首先安装发布插件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/img_convert/9bd04a8dd1a7db1cfe84b65b48237a2c.png" alt="image-20220429042044687"></p>
+<p>配置_config.yml文件</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 其中 xxxxxx 是前面多次用到的你的GitHub用户名，注意是master分支</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@gitee.com:xxxxxx/xxxxxx.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 接着执行下面的命令 s表示服务起在本地，现在的d表示部署在远端</span></span><br><span class="line">hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
+
+<h2 id="博客相关功能设置"><a href="#博客相关功能设置" class="headerlink" title="博客相关功能设置"></a>博客相关功能设置</h2><p>这个可以写的太多了，放到另一篇博客里了</p>
+<h3 id="链接地址修改"><a href="#链接地址修改" class="headerlink" title="链接地址修改"></a>链接地址修改</h3><p>可以在markdown的yaml部分加上自定义的字段声明文件分类位置</p>
+<p>但我这里因为本身已经放在不同文件夹下了，直接将permalink修改成<code>:hash/</code>似乎就可以了</p>
+<p>这里是用文件名的hash作为博客的url</p>
+<p>然后将config.yml下的permalink修改一下然后生成测试效果，图片是用title的效果</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/cc7c04a015e84fdeca68942d94a479bf.png" alt="image-20220429124057194"></p>
+<h3 id="引入其它文章"><a href="#引入其它文章" class="headerlink" title="引入其它文章"></a>引入其它文章</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% post_link Note/Drawing/draw_make_money%&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中后面的就是要引入的其它文章地址，不需要后缀</p>
+<p>注意后面别整个十几级目录名字太长</p>
+<h2 id="新建博客一键发布"><a href="#新建博客一键发布" class="headerlink" title="新建博客一键发布"></a>新建博客一键发布</h2><h3 id="新建博客的方式"><a href="#新建博客的方式" class="headerlink" title="新建博客的方式"></a>新建博客的方式</h3><p>Hexo的目录下的source-&gt;_posts里就是博客文件的存放位置</p>
+<p>我干脆直接把markdown文件啥的全扔在里面，用Typora在里面写了。</p>
+<p>就是注意新建的markdown文件需要新建yaml Front-matter,通过在文章开头键入<code>---</code>以填入博客的名称 分类 标签 日期等参数</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">记录第一次搭建博客</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2022-04-29 04:14:10</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">测试</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">博客</span> </span><br><span class="line"><span class="bullet">-</span> <span class="string">Hexo</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">Node.js</span></span><br><span class="line">  <span class="attr">categories:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">博客搭建</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这里或许可以新建个py文件在发布前检查md文件是否已设置Front-matter,没有就自动加上一些通用的参数</p>
+<h3 id="加上几个脚本然后实现一键发布更新"><a href="#加上几个脚本然后实现一键发布更新" class="headerlink" title="加上几个脚本然后实现一键发布更新"></a>加上几个脚本然后实现一键发布更新</h3><p>这里因为懒，写了个自动加上FrontMatter的脚本</p>
+<p>这个脚本我实在不好说，只能说勉强能跑</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#检测当前md文件是否已添加Front Matter</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> shutil</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> yaml</span><br><span class="line">target = <span class="string">r&#x27;E:\\WorkPlace\\Blog\\source\\_posts\\Note\\&#x27;</span></span><br><span class="line">source = <span class="string">r&#x27;E:\\WorkPlace\\Note\\&#x27;</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">getAllSub</span>(<span class="params">path</span>):</span><br><span class="line">    fileList = []</span><br><span class="line">    <span class="comment"># walk  方法用于在目录树中游走输出目录中的文件名</span></span><br><span class="line">    <span class="keyword">for</span> parent,dirs,files <span class="keyword">in</span> os.walk(path):</span><br><span class="line">        <span class="keyword">for</span> fileName <span class="keyword">in</span> files:</span><br><span class="line">            <span class="comment"># 在部署的博客文件夹内建相应文件夹</span></span><br><span class="line">            path = parent[<span class="built_in">len</span>(source):] </span><br><span class="line">            targetPath = target+path + <span class="string">r&#x27;\\&#x27;</span></span><br><span class="line">            targetFile = targetPath+fileName</span><br><span class="line">            sourceFile = parent+<span class="string">r&#x27;\\&#x27;</span>+fileName</span><br><span class="line">            <span class="keyword">try</span> :</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&#x27;在目标文件夹复制文件夹:&#x27;</span>, targetPath)</span><br><span class="line">                os.makedirs(targetPath)</span><br><span class="line">            <span class="keyword">except</span> FileExistsError:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&#x27;已复制文件夹&#x27;</span>)</span><br><span class="line">            <span class="comment"># 把目录和文件名合成一个路径</span></span><br><span class="line">            <span class="keyword">if</span> fileName.endswith(<span class="string">&#x27;.md&#x27;</span>):</span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">&#x27;检查FrontMatter&#x27;</span>)</span><br><span class="line">                    file = <span class="built_in">open</span>(sourceFile,<span class="string">&#x27;r&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">                    hasConfig = file.readline().strip() == <span class="string">&#x27;---&#x27;</span></span><br><span class="line">                    times = TimeStampFormat(os.path.getmtime(sourceFile))</span><br><span class="line">                    dates = TimeStampFormat(os.path.getctime(sourceFile))</span><br><span class="line">                    name = os.path.basename(sourceFile)[:-<span class="number">3</span>]</span><br><span class="line">                    frontMatter = <span class="string">f&#x27;&#x27;&#x27;---</span></span><br><span class="line"><span class="string">title: <span class="subst">&#123;name&#125;</span></span></span><br><span class="line"><span class="string">date: <span class="subst">&#123;dates&#125;</span></span></span><br><span class="line"><span class="string">updated: <span class="subst">&#123;times&#125;</span></span></span><br><span class="line"><span class="string">tags: </span></span><br><span class="line"><span class="string">categories: </span></span><br><span class="line"><span class="string">---</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line">                    <span class="keyword">if</span> <span class="keyword">not</span> hasConfig:</span><br><span class="line">                        <span class="keyword">with</span> <span class="built_in">open</span>(sourceFile, <span class="string">&#x27;r+&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">                            content = f.read()</span><br><span class="line">                            f.seek(<span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line">                            f.write(frontMatter+content)</span><br><span class="line">                            <span class="built_in">print</span>(<span class="string">&#x27;添加FrontMatter...&#x27;</span>)</span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        yml = []</span><br><span class="line">                        start = <span class="literal">False</span></span><br><span class="line">                        content = []</span><br><span class="line">                        <span class="keyword">with</span> <span class="built_in">open</span>(sourceFile, <span class="string">&#x27;r+&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">                            <span class="keyword">for</span> line <span class="keyword">in</span> f:</span><br><span class="line">                                <span class="keyword">if</span> start <span class="keyword">and</span> line.strip() == <span class="string">&#x27;---&#x27;</span>:</span><br><span class="line">                                    yml.append(line.strip()+<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">                                    <span class="comment">#解析yaml 更新标题 日期 覆盖写入</span></span><br><span class="line">                                    start = <span class="literal">False</span></span><br><span class="line">                                <span class="keyword">elif</span> line.strip() != <span class="string">&#x27;---&#x27;</span>:</span><br><span class="line">                                    start = <span class="literal">True</span></span><br><span class="line">                                    yml.append(line)</span><br><span class="line">                                <span class="keyword">elif</span> line.strip() == <span class="string">&#x27;---&#x27;</span>:</span><br><span class="line">                                    yml.append(line)</span><br><span class="line">                                <span class="keyword">else</span>:</span><br><span class="line">                                    content.append(line)</span><br><span class="line">                        <span class="comment">#列表转字符串 替换日期名称</span></span><br><span class="line">                        text = <span class="string">&#x27;&#x27;</span>.join(yml)</span><br><span class="line">                        </span><br><span class="line"></span><br><span class="line">                        tname = text[text.index(<span class="string">&#x27;title: &#x27;</span>)+<span class="number">7</span>:text.index(<span class="string">&#x27;date:&#x27;</span>)]</span><br><span class="line">                        tdate = text[text.index(<span class="string">&#x27;date: &#x27;</span>)+<span class="number">6</span>:text.index(<span class="string">&#x27;updated:&#x27;</span>)]</span><br><span class="line">                        tupdated = text[text.index(<span class="string">&#x27;updated: &#x27;</span>)+<span class="number">9</span>:text.index(<span class="string">&#x27;tags:&#x27;</span>)]</span><br><span class="line">                        </span><br><span class="line">                        text = text.replace(tname,name+<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">                        text = text.replace(tdate,dates+<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">                        text = text.replace(tupdated,times+<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">                        <span class="keyword">with</span> <span class="built_in">open</span>(sourceFile,<span class="string">&#x27;w&#x27;</span>,encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">                            f.write(text+<span class="string">&#x27;&#x27;</span>.join(content))</span><br><span class="line"></span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">&#x27;复制源文件=&gt;&#x27;</span>,targetFile,<span class="string">&#x27;...&#x27;</span>)</span><br><span class="line">                    shutil.copyfile(parent+<span class="string">r&#x27;\\&#x27;</span>+fileName, targetFile)</span><br><span class="line">                <span class="keyword">except</span> shutil.SameFileError:</span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">&#x27;文件已复制&#x27;</span>)</span><br><span class="line">                fileList.append(targetFile)</span><br><span class="line">            </span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;\n\n\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> fileList</span><br><span class="line"></span><br><span class="line"><span class="comment"># 时间格式标准化</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">TimeStampFormat</span>(<span class="params">timestamp</span>):</span><br><span class="line">    <span class="keyword">return</span> time.strftime(<span class="string">&#x27;%Y-%m-%d %H:%M:%S&#x27;</span>, time.localtime(timestamp))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    fileList = getAllSub(source)</span><br><span class="line">   </span><br><span class="line">        </span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;---------处理结束---------&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cd /e/WorkPlace/Blog</span><br><span class="line">pwd</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;hexo g&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line">hexo g</span><br><span class="line">echo -e &quot;\033[47;30m&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;hexo d&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;\033[0m&quot;</span><br><span class="line">hexo d</span><br><span class="line">sleep 2</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">执行完毕不退出</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">exec</span> /bin/bash</span></span><br></pre></td></tr></table></figure>
+
+<p>新建一个.sh后缀的脚本，注意路径</p>
+<p>一个更新博客用的脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> playwright.sync_api <span class="keyword">import</span> sync_playwright</span><br><span class="line"></span><br><span class="line">USERNAME = <span class="string">&#x27;ac&#x27;</span></span><br><span class="line">PASSWORD = <span class="string">&#x27;pwd&#x27;</span></span><br><span class="line">GITEE_PAGES_URL = <span class="string">&#x27;https://gitee.com/xqher/xqher/pages&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    <span class="keyword">with</span> sync_playwright() <span class="keyword">as</span> p:</span><br><span class="line">        <span class="keyword">for</span> browser_type <span class="keyword">in</span> [p.chromium]:</span><br><span class="line">            browser = browser_type.launch(headless=<span class="literal">False</span>)</span><br><span class="line">            page = browser.new_page()</span><br><span class="line">            page.goto(<span class="string">&#x27;https://gitee.com/login&#x27;</span>)</span><br><span class="line">            page.click(<span class="string">&#x27;input[name=&quot;user[login]&quot;]&#x27;</span>);</span><br><span class="line">            page.fill(<span class="string">&#x27;input[name=&quot;user[login]&quot;]&#x27;</span>, USERNAME);</span><br><span class="line">            page.click(<span class="string">&#x27;input[name=&quot;user[login]&quot;]&#x27;</span>);</span><br><span class="line">            page.fill(<span class="string">&#x27;input[name=&quot;user[password]&quot;]&#x27;</span>, PASSWORD);</span><br><span class="line">            page.click(<span class="string">&quot;input[value=&#x27;登 录&#x27;]&quot;</span>)</span><br><span class="line">            time.sleep(<span class="number">3</span>)</span><br><span class="line">            page.goto(GITEE_PAGES_URL)</span><br><span class="line">            page.on(<span class="string">&quot;dialog&quot;</span>, <span class="keyword">lambda</span> dialog: dialog.accept())</span><br><span class="line">            page.click(<span class="string">&quot;.update_deploy&quot;</span>)</span><br><span class="line">            page.on(<span class="string">&quot;dialog&quot;</span>, <span class="keyword">lambda</span> dialog: dialog.accept())</span><br><span class="line">            <span class="comment"># text = &quot;已开启 Gitee Pages 服务，网站地址：&quot;</span></span><br><span class="line">            <span class="comment"># state=&quot;attached&quot;, &quot;detached&quot;, &quot;hidden&quot;, &quot;visible&quot;</span></span><br><span class="line">            <span class="comment"># page.wait_for_selector(&#x27;span:text(&quot;正在部署，请耐心等待...&quot;)&#x27;, timeout=12 * 1000, state=&#x27;hidden&#x27;)</span></span><br><span class="line">            time.sleep(<span class="number">7</span>)</span><br><span class="line">            page.wait_for_selector(<span class="string">&#x27;span:text(&quot;正在部署，请耐心等待...&quot;)&#x27;</span>, timeout=<span class="number">10</span> * <span class="number">1000</span>, state=<span class="string">&#x27;hidden&#x27;</span>)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;OK&#x27;</span>)</span><br><span class="line">            browser.close()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<p>最后用一个bat脚本将所有操作放在一起</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">:: post_my_blog.bat</span><br><span class="line">python ScanBlog.py</span><br><span class="line">D:\Programs\Git\git-bash.exe deploy.sh</span><br><span class="line">python gitee_updater.py</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+
+<p>重命名为bat后缀文件双击就可以了，注意文件路径</p>
+<h2 id="Python上传图片到博客园"><a href="#Python上传图片到博客园" class="headerlink" title="Python上传图片到博客园"></a>Python上传图片到博客园</h2><p>详情参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/starrys/p/12851194.html">Python+Typora博客图片上传 - 沉云 - 博客园 (cnblogs.com)</a></p>
+<p>当然，用博客园的图得配置一下Header</p>
+<p>观察了网页的代码，估计是通过pug这个文件生成的，参照以前图片403的情况处理方式，加上了个referrer就解决了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">meta(name=&quot;referrer&quot; content=&quot;no-referrer&quot;)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/img_convert/01700219679500809a655ad96c55ee33.png" alt="image-20220429045600487"></p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/0aa8c535709bda43bd4f360997a8aaeb.png" alt="搞定了"></p>
+<p>因为python还不是很懂(主要是这个工具需要手动维持Cookies,大概吧,觉得似乎容易过期)这里就没用这种方式，需要的话参考上面那个链接即可</p>
+<p>也可以使用这个windows上的简单工具，配置好账号密码就能直接使用</p>
+<p>参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/a15802025636987/article/details/118971622">windows-Typora自动上传图床（超简单详细）_勿念不悔的博客-CSDN博客</a></p>
+<h3 id="关于博客园怎么找到MetaWeblog地址"><a href="#关于博客园怎么找到MetaWeblog地址" class="headerlink" title="关于博客园怎么找到MetaWeblog地址"></a>关于博客园怎么找到MetaWeblog地址</h3><p><img src="https://img-blog.csdnimg.cn/img_convert/829d28f7e6f51ecb6514cd816306bac2.png" alt="image-20220428220804739"></p>
+<p>参考图中选择设置，其它设置，就可以看到MetaWeblog地址</p>
+<p><img src="https://img2023.cnblogs.com/blog/1674552/202307/1674552-20230722183232150-1629113071.png" alt="Snipaste_2023-07-22_18-32-29"></p>
+<p>因为博客园图床为检查referrer，在下载的主题下的head.pug处添加meta(name&#x3D;’referrer’, content&#x3D;’no-referrer’)以设置页面referrer</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://xqher.gitee.io">虚青海</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://xqher.gitee.io/post/e0578cda5c64/">https://xqher.gitee.io/post/e0578cda5c64/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://xqher.gitee.io" target="_blank"> 虚青海的博客 </a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">博客搭建</a></div><div class="post_share"><div class="social-share" data-image="https://img2022.cnblogs.com/blog/1674552/202205/1674552-20220517193643247-1871241772.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/post/2eb19ee71dc2/" title="时间复杂度"><img class="cover" src="https://img2022.cnblogs.com/blog/1674552/202205/1674552-20220517193643247-1871241772.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">时间复杂度</div></div></a></div><div class="next-post pull-right"><a href="/post/69abeca3241e/" title="取模运算转位运算"><img class="cover" src="[&quot;https://img2023.cnblogs.com/blog/1674552/202301/1674552-20230128155616027-1247227374.png&quot;]" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">取模运算转位运算</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/post/9be19165efb8/" title="替换ButterFly的cdn"><img class="cover" src="https://img2022.cnblogs.com/blog/1674552/202205/1674552-20220517193643247-1871241772.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-21</div><div class="title">替换ButterFly的cdn</div></div></a></div><div><a href="/post/d9227607d84f/" title="博客刷新后下载源码或出现源码页面的问题"><img class="cover" src="https://img2022.cnblogs.com/blog/1674552/202205/1674552-20220517193643247-1871241772.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-12</div><div class="title">博客刷新后下载源码或出现源码页面的问题</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://img2023.cnblogs.com/blog/1674552/202307/1674552-20230722183629733-139482028.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">虚青海</div><div class="author-info__description">想到啥写啥.</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Xqh233"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Xqh233" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:xqher@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">这里是公告, 确实</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E9%80%83"><span class="toc-number">1.</span> <span class="toc-text">快逃</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%88%E6%9E%9C%E9%A2%84%E8%A7%88"><span class="toc-number">2.</span> <span class="toc-text">效果预览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E7%9B%AE%E7%9A%84"><span class="toc-number">3.</span> <span class="toc-text">搭建目的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E6%9D%90%E6%96%99%E5%87%86%E5%A4%87"><span class="toc-number">4.</span> <span class="toc-text">原材料准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E8%B4%A6%E5%8F%B7%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%E5%87%86%E5%A4%87%E4%B8%80%E4%B8%AA%E9%83%A8%E7%BD%B2%E7%94%A8%E7%9A%84%E4%BB%93%E5%BA%93"><span class="toc-number">4.1.</span> <span class="toc-text">有账号的情况下准备一个部署用的仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AA%E4%BB%A5%E8%87%AA%E5%B7%B1%E7%94%A8%E6%88%B7%E5%90%8D%E4%B8%BA%E5%90%8D%E7%9A%84%E4%BB%93%E5%BA%93"><span class="toc-number">4.1.1.</span> <span class="toc-text">1.新建一个以自己用户名为名的仓库</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85node-js%E4%BB%A5%E9%85%8D%E7%BD%AEHexo%E6%A1%86%E6%9E%B6"><span class="toc-number">5.</span> <span class="toc-text">安装node.js以配置Hexo框架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hexo%E6%A1%86%E6%9E%B6"><span class="toc-number">5.1.</span> <span class="toc-text">Hexo框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hexo%E4%BE%9D%E8%B5%96%E7%8E%AF%E5%A2%83-Node-js"><span class="toc-number">5.2.</span> <span class="toc-text">Hexo依赖环境:Node.js</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDNode-js"><span class="toc-number">5.2.1.</span> <span class="toc-text">下载Node.js</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95Node-js%E6%98%AF%E5%90%A6%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F"><span class="toc-number">5.2.2.</span> <span class="toc-text">测试Node.js是否安装成功</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8CNpm%E6%9B%BF%E4%BB%A3Npm"><span class="toc-number">5.2.3.</span> <span class="toc-text">使用CNpm替代Npm</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Git"><span class="toc-number">5.3.</span> <span class="toc-text">安装Git</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Hexo"><span class="toc-number">5.4.</span> <span class="toc-text">安装Hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E6%9C%AC%E5%9C%B0%E5%8D%9A%E5%AE%A2%E6%95%88%E6%9E%9C"><span class="toc-number">5.5.</span> <span class="toc-text">测试本地博客效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E5%96%9C%E6%AC%A2%E7%9A%84%E4%B8%BB%E9%A2%98"><span class="toc-number">5.6.</span> <span class="toc-text">选择喜欢的主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98"><span class="toc-number">5.7.</span> <span class="toc-text">安装主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E4%B8%BB%E9%A2%98%E5%86%85%E5%AE%B9"><span class="toc-number">5.8.</span> <span class="toc-text">修改主题内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%91%E5%B8%83%E5%88%B0Gitee%E4%B8%8A"><span class="toc-number">5.9.</span> <span class="toc-text">发布到Gitee上</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%9A%E5%AE%A2%E7%9B%B8%E5%85%B3%E5%8A%9F%E8%83%BD%E8%AE%BE%E7%BD%AE"><span class="toc-number">6.</span> <span class="toc-text">博客相关功能设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80%E4%BF%AE%E6%94%B9"><span class="toc-number">6.1.</span> <span class="toc-text">链接地址修改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E5%85%A5%E5%85%B6%E5%AE%83%E6%96%87%E7%AB%A0"><span class="toc-number">6.2.</span> <span class="toc-text">引入其它文章</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E5%BB%BA%E5%8D%9A%E5%AE%A2%E4%B8%80%E9%94%AE%E5%8F%91%E5%B8%83"><span class="toc-number">7.</span> <span class="toc-text">新建博客一键发布</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-number">7.1.</span> <span class="toc-text">新建博客的方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E4%B8%8A%E5%87%A0%E4%B8%AA%E8%84%9A%E6%9C%AC%E7%84%B6%E5%90%8E%E5%AE%9E%E7%8E%B0%E4%B8%80%E9%94%AE%E5%8F%91%E5%B8%83%E6%9B%B4%E6%96%B0"><span class="toc-number">7.2.</span> <span class="toc-text">加上几个脚本然后实现一键发布更新</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%88%B0%E5%8D%9A%E5%AE%A2%E5%9B%AD"><span class="toc-number">8.</span> <span class="toc-text">Python上传图片到博客园</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E5%8D%9A%E5%AE%A2%E5%9B%AD%E6%80%8E%E4%B9%88%E6%89%BE%E5%88%B0MetaWeblog%E5%9C%B0%E5%9D%80"><span class="toc-number">8.1.</span> <span class="toc-text">关于博客园怎么找到MetaWeblog地址</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/157ba0d2c7bb/" title="Android Studio Google账号登录不了的一个解决方法"><img src="https://img2022.cnblogs.com/blog/1674552/202205/1674552-20220517193643247-1871241772.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Android Studio Google账号登录不了的一个解决方法"/></a><div class="content"><a class="title" href="/post/157ba0d2c7bb/" title="Android Studio Google账号登录不了的一个解决方法">Android Studio Google账号登录不了的一个解决方法</a><time datetime="2023-07-08T14:16:38.000Z" title="发表于 2023-07-08 22:16:38">2023-07-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/82c8d3e69f19/" title="Ubuntu20.04简单配置"><img src="https://img2023.cnblogs.com/blog/1674552/202305/1674552-20230508153315167-1707518652.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Ubuntu20.04简单配置"/></a><div class="content"><a class="title" href="/post/82c8d3e69f19/" title="Ubuntu20.04简单配置">Ubuntu20.04简单配置</a><time datetime="2023-05-08T07:33:13.000Z" title="发表于 2023-05-08 15:33:13">2023-05-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/2eb19ee71dc2/" title="时间复杂度"><img src="https://img2022.cnblogs.com/blog/1674552/202205/1674552-20220517193643247-1871241772.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="时间复杂度"/></a><div class="content"><a class="title" href="/post/2eb19ee71dc2/" title="时间复杂度">时间复杂度</a><time datetime="2023-02-03T11:56:57.000Z" title="发表于 2023-02-03 19:56:57">2023-02-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/e0578cda5c64/" title="记录第一次搭建博客"><img src="https://img2022.cnblogs.com/blog/1674552/202205/1674552-20220517193643247-1871241772.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="记录第一次搭建博客"/></a><div class="content"><a class="title" href="/post/e0578cda5c64/" title="记录第一次搭建博客">记录第一次搭建博客</a><time datetime="2023-02-03T11:56:57.000Z" title="发表于 2023-02-03 19:56:57">2023-02-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/69abeca3241e/" title="取模运算转位运算"><img src="[&quot;https://img2023.cnblogs.com/blog/1674552/202301/1674552-20230128155616027-1247227374.png&quot;]" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="取模运算转位运算"/></a><div class="content"><a class="title" href="/post/69abeca3241e/" title="取模运算转位运算">取模运算转位运算</a><time datetime="2023-01-28T06:56:58.000Z" title="发表于 2023-01-28 14:56:58">2023-01-28</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By 虚青海</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">这里居然有个友链→<a target="_blank" rel="noopener" href="https://aiepoch.cn/">及境丹青</a>←! <br><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2022099830号-1</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><div class="aplayer no-destroy" data-volume="0.2" data-theme="#009688" data-order="random" data-id="2220142299" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="false"> </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

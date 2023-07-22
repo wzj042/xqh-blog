@@ -1,0 +1,335 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><meta name="referrer" content="no-referrer"><title>从YAML了解标记语言 |  虚青海的博客 </title><meta name="author" content="虚青海"><meta name="copyright" content="虚青海"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="因为对yaml不是很了解，就搜索了相关的知识用来了解一些常见的标记语言居然是手动复制到csdn, 感觉缝都缝了，不发怪可惜的再考虑要不要抄一个转发到csdn,又怀疑自己是否真的需要(  最近在试图学习用思维导图总结学习的知识，这里也试试总结下吧  标记语言|Markup Language首先看标记"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://xqher.gitee.io/post/336ea7e30a48/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="A6nBPP2YDYuQRvcTcw2G7pAWsJMtiAEsaW8bIByQbRA"/><meta name="baidu-site-verification" content="code-2JYWfn6dbU"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?bd8ff323652e2c878ac481be337e605e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '从YAML了解标记语言',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-09-04 13:31:38'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://img2023.cnblogs.com/blog/1674552/202307/1674552-20230722183629733-139482028.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 摸鱼</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img2022.cnblogs.com/blog/1674552/202205/1674552-20220517193643247-1871241772.png')"><nav id="nav"><span id="blog-info"><a href="/" title=" 虚青海的博客 "><span class="site-name"> 虚青海的博客 </span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 摸鱼</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">从YAML了解标记语言</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-11T12:56:21.000Z" title="发表于 2022-05-11 20:56:21">2022-05-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-09-04T05:31:38.000Z" title="更新于 2022-09-04 13:31:38">2022-09-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">基本概念</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="从YAML了解标记语言"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p>因为对<strong>yam</strong>l不是很了解，就搜索了相关的知识用来了解一些常见的<strong>标记语言</strong><br>居然是手动复制到csdn, 感觉缝都缝了，不发怪可惜的<br>再考虑要不要抄一个转发到csdn,又怀疑自己是否真的需要(</p>
+</blockquote>
+<p>最近在试图学习用思维导图总结学习的知识，这里也试试总结下吧</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/0ce19046f18a7d72147c0dad3247c76f.png" alt="总结这篇博客的内容"></p>
+<h2 id="标记语言-Markup-Language"><a href="#标记语言-Markup-Language" class="headerlink" title="标记语言|Markup Language"></a>标记语言|Markup Language</h2><p>首先看标记语言的概念</p>
+<blockquote>
+<p><strong>标记语言</strong>,是一种将文本以及文本相关的其他信息结合起来,展现出关于<strong>文档结构和数据处理细节</strong>的电脑文字编码。与文本相关的其他信息(包括文本的结构和表示信息等)与原来的文本结合在一起，但是使用标记(markup)进行表示。</p>
+<p>标记语言不仅仅是一种语言，就像许多语言一样，它需要一个<strong>运行时环境</strong>，使其有用。提供运行时环境的元素称为用户代理</p>
+</blockquote>
+<p>我这里理解为<strong>标记语言</strong>就是将<strong>数据</strong>用一种<strong>规范的格式</strong>呈现的方式，常用于格式化和链接</p>
+<h2 id="常见的标记语言介绍"><a href="#常见的标记语言介绍" class="headerlink" title="常见的标记语言介绍"></a>常见的标记语言介绍</h2><p>所以这里就可以引出常见的几种标记语言了</p>
+<blockquote>
+<p>xml,html,xhtml(xml和html的合体)</p>
+<p>json,yaml</p>
+</blockquote>
+<p>比较常见用于承载数据的应该就是json,xml和yaml了</p>
+<img src="https://img2022.cnblogs.com/blog/1674552/202204/1674552-20220430212946220-1631337887.png" alt="大家都知道了" style="zoom: 25%;" />
+
+<p>html属于是上网冲浪天天见了，网页都是html编写的</p>
+<blockquote>
+<p>当然包括这篇博客，用f12或者右键检查都能看到网页的html代码</p>
+<p>html用于格式化并显示数据</p>
+</blockquote>
+<h3 id="XML-可拓展标记语言"><a href="#XML-可拓展标记语言" class="headerlink" title="XML | 可拓展标记语言"></a>XML | 可拓展标记语言</h3><blockquote>
+<p><strong>XML(eXtensible Markup Language)是独立于软件和硬件的信息传输工具</strong></p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20200406215034662.png" alt="img"></p>
+<p>以前写Android的时候经常见到<code>.xml</code>文件，但没怎么了解过多写几个例子也能领悟怎么用(至少是自己需要的部分直到该怎么做)<br>这里就放一个XML的实例吧</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 首先进行一个例子的引,首先这个是注释 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 第一行是XML的声明,它定义了XML的版本(1.0)和所使用的编码(UTF-8:万国码,可显示各种语言) --&gt;</span></span><br><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 必须要有根元素 此处是msg --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">msg</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 可以嵌套标签 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">receiver</span>&gt;</span>Xqh<span class="tag">&lt;/<span class="name">receiver</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">sender</span>&gt;</span>Hsy<span class="tag">&lt;/<span class="name">sender</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>A xml example<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 标签大小写敏感 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Time</span>&gt;</span>2022-4-30 22:06:30<span class="tag">&lt;/<span class="name">Time</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">content</span>&gt;</span></span><br><span class="line">    	This is msg content.</span><br><span class="line">        And next is a attach file.</span><br><span class="line">        <span class="comment">&lt;!-- 标签可以添加属性提供有关元素的额外信息，但属性值必须加引号 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">file</span> <span class="attr">type</span>=<span class="string">&quot;gif&quot;</span>&gt;</span>emoji.gif<span class="tag">&lt;/<span class="name">file</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">content</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">msg</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>上面就是一个XML的实例，它包含了发送者和接收者的信息，同时具有标题以及内容。</p>
+<p>更多的使用方法和定义描述或许以后会写一篇博客记录，想了解更多可以参考</p>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/xml/xml-tree.html">XML 树结构 | 菜鸟教程 (runoob.com)</a></p>
+<h3 id="Json-Js对象标记"><a href="#Json-Js对象标记" class="headerlink" title="Json | Js对象标记"></a>Json | Js对象标记</h3><blockquote>
+<p>Json指的是JavaScript对象表示法(<strong>J</strong>ava<strong>S</strong>cript <strong>O</strong>bject <strong>N</strong>otation)</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20200406215145478.png" alt="img"></p>
+<p><img src="https://img-blog.csdnimg.cn/20190521092503132.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h4eGp4dw==,size_16,color_FFFFFF,t_70" alt="img"></p>
+<p>是比较简单的键值对形式的语言，直接看一个实例</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;code&quot;</span><span class="punctuation">:</span><span class="number">200</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;msg&quot;</span><span class="punctuation">:</span><span class="string">&quot;success&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;content&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;receiver&quot;</span><span class="punctuation">:</span><span class="punctuation">[</span><span class="string">&quot;Xqh&quot;</span><span class="punctuation">,</span><span class="string">&quot;Hsy&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;files&quot;</span><span class="punctuation">:</span><span class="punctuation">[</span></span><br><span class="line">            <span class="punctuation">&#123;</span></span><br><span class="line">                <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span><span class="string">&quot;emoji.gif&quot;</span><span class="punctuation">,</span></span><br><span class="line">                <span class="attr">&quot;url&quot;</span><span class="punctuation">:</span><span class="string">&quot;http://www.xxx.yyy/zzz.gif&quot;</span></span><br><span class="line">            <span class="punctuation">&#125;</span></span><br><span class="line">        <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>可以通过对象，数组，键值对三种方式存储数据，可以放在js文件内，也可以存放在<code>.json</code>文件内</p>
+<p>一些网页的api返回通常也是json格式</p>
+<h3 id="YAML-YAML-不是一种标记语言"><a href="#YAML-YAML-不是一种标记语言" class="headerlink" title="YAML |  YAML 不是一种标记语言"></a>YAML |  YAML 不是一种标记语言</h3><blockquote>
+<p>YAML 是 “YAML Ain’t a Markup Language”（YAML 不是一种标记语言）的递归缩写。在开发的这种语言时，YAML 的意思其实是：”Yet Another Markup Language”（仍是一种标记语言）。</p>
+</blockquote>
+<p>主要是依赖空白符号缩进，适合用于表达配置，数据结构等，例如这篇博客上传时就在开头使用了YAML编写了FrontMatter，文件后缀名通常是<code>.yml</code>(虽然开发者建议使用<code>.yaml</code>)</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#为上传的md文件声明的一些参数</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">从YAML了解标记语言</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2022-04-29 14:55:12</span></span><br><span class="line"><span class="attr">updated:</span> <span class="number">2022-05-01 02:22:37</span></span><br><span class="line"><span class="attr">tags:</span> </span><br><span class="line"><span class="bullet">-</span> <span class="string">标记语言</span></span><br><span class="line"><span class="attr">categories:</span> </span><br><span class="line"><span class="bullet">-</span> <span class="string">基本概念</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h4><ul>
+<li>大小写敏感</li>
+<li>使用缩进表示层级关系</li>
+<li>缩进不允许使用tab, 只允许空格</li>
+<li>缩进的空格数不重要, 只要相同层级的元素左对齐即可</li>
+<li>‘<strong>#</strong>‘ 表示注释</li>
+</ul>
+<p>数据类型有三种</p>
+<ul>
+<li><p>对象: 键值对的集合,也称为映射(mapping)&#x2F;哈希(hashes)&#x2F;字典(dictionary)</p>
+</li>
+<li><p>数组: 一组依次序排列的值,又称为序列(sequence)&#x2F;列表(list)</p>
+</li>
+<li><p>纯量(scalars): 单个的,不可再分的值</p>
+</li>
+</ul>
+<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">这里是标题捏</span></span><br><span class="line"><span class="attr">array:</span> [<span class="string">这，是，一，个，多，维，数，组</span>]</span><br><span class="line"><span class="comment">#这一行是注释捏</span></span><br><span class="line"><span class="attr">list:</span></span><br><span class="line"> <span class="bullet">-</span> <span class="string">这样</span></span><br><span class="line"> <span class="bullet">-</span> <span class="string">也是数组,同级缩进要对齐</span></span><br><span class="line"> <span class="bullet">-</span> <span class="string">记得冒号和-后面都要加上一个空格</span></span><br><span class="line"> <span class="bullet">-</span> <span class="string">&#x27;这也算纯量吧,可以用引号包裹特殊字符&#x27;</span></span><br><span class="line"> <span class="comment">#大小写true false都可以</span></span><br><span class="line"> <span class="bullet">-</span> <span class="literal">FALSE</span></span><br><span class="line"> <span class="bullet">-</span> <span class="literal">TRUE</span></span><br><span class="line"><span class="attr">compound:</span></span><br><span class="line"> <span class="attr">YAML:</span> <span class="string">就是现在写的格式</span></span><br><span class="line"> <span class="attr">JSON:</span> <span class="string">这是数组和对象的符合结构</span></span><br><span class="line"> <span class="attr">XML:</span> <span class="string">如果用xml和json写会比较复杂</span></span><br><span class="line"><span class="attr">value:</span></span><br><span class="line"> <span class="attr">float:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="number">3.14</span></span><br><span class="line">  <span class="bullet">-</span> <span class="number">1e+5</span></span><br><span class="line"> <span class="attr">null:</span></span><br><span class="line">  <span class="attr">des:</span> <span class="string">使用~表示null</span></span><br><span class="line">  <span class="attr">exp:</span> <span class="string">~</span></span><br><span class="line"> <span class="attr">date:</span></span><br><span class="line">  <span class="comment">#只能使用ISO 8601格式 即yyyy-MM-dd 虽然开头的yaml直接写成yyyy-MM-dd hh:mm:ss了</span></span><br><span class="line">  <span class="bullet">-</span> <span class="number">2022-05-01</span></span><br><span class="line"> <span class="attr">datetime:</span></span><br><span class="line">  <span class="comment">#时间使用ISO 8601格式，时间和日期之间使用T连接，最后使用+代表时区</span></span><br><span class="line">  <span class="bullet">-</span> <span class="number">2022-05-01T01:30:54+08:00</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#引用和锚点 注意锚点间不要加上引用</span></span><br><span class="line"><span class="attr">simple:</span> <span class="string">一个简单的量</span></span><br><span class="line"></span><br><span class="line"><span class="attr">def:</span> <span class="meta">&amp;def</span></span><br><span class="line"> <span class="attr">name:</span> <span class="string">&#x27;格式化后可以看到使用锚点引用之后的结果&#x27;</span></span><br><span class="line"> <span class="attr">desc:</span> <span class="string">&#x27;&amp;用于建立锚点，&lt;&lt;表示合并到当前数据,*用来引用锚点&#x27;</span></span><br><span class="line"> <span class="attr">reuse:</span> <span class="string">或许是一些通用的玩意会用</span></span><br><span class="line"></span><br><span class="line"><span class="attr">useDef:</span></span><br><span class="line"> <span class="bullet">-</span> <span class="attr">attr:</span> <span class="string">&#x27;一用到&amp; 和 * 就想起c语言的指针了&#x27;</span></span><br><span class="line"> <span class="bullet">-</span> <span class="string">&amp;anchor</span> <span class="string">第二个锚点</span></span><br><span class="line"> <span class="bullet">-</span> <span class="attr">ac:</span> <span class="meta">*anchor</span></span><br><span class="line"> <span class="bullet">-</span> <span class="string">&lt;&lt;:</span> <span class="meta">*def</span></span><br></pre></td></tr></table></figure>
+
+<p>可以自己编写后使用<a target="_blank" rel="noopener" href="https://verytoolz.com/yaml-validator.html">YAML在线验证 (verytoolz.com)</a>验证一下</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/294618dd81d204c93f28270d08b179ed.png" alt="image-20220501020615408"></p>
+<p>为了这醋包了好久的饺子，最后加上三种标记语言的对比吧</p>
+<h2 id="三种信息标记形式的比较"><a href="#三种信息标记形式的比较" class="headerlink" title="三种信息标记形式的比较"></a>三种信息标记形式的比较</h2><ul>
+<li>XML: 最早的通用信息标记语言, 可拓展性好, 但<strong>繁琐</strong></li>
+<li>JSON: 适合程序处理，比XML简洁</li>
+<li>YAML: 文本信息比例最高，可读性好, 强调以数据作为重心</li>
+</ul>
+<p>基于技术栈，使用JavaScript时json是相对适合的序列化语言,对于java则更多使用xml,因为都是用空格缩进，使用python时使用yaml或许更加友好</p>
+<blockquote>
+<p>虽然python与yaml更搭配，但原作者在Python项目中却选择了json</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/61296a6f4bf0b34926f9ed3566b0627d.png" alt="没了"></p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%A0%87%E8%AE%B0%E8%AF%AD%E8%A8%80/5964436">标记语言_百度百科 (baidu.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lsgsanxiao/p/5126170.html">编程语言 标记语言 脚本语言分别有哪些？ 区别是什么？ - 三小 - 博客园 (cnblogs.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/pqjwyn/p/13255578.html">YAML &amp; JSON &amp;XML如何选择 - 潇湘待雨 - 博客园 (cnblogs.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/xml/xml-intro.html">XML 简介 – 什么是 XML？ | 菜鸟教程 (runoob.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hxxjxw/article/details/105352337">信息标记的三种形式—XML、JSON、YAML_hxxjxw的博客-CSDN博客_json xml yaml</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/yaml-intro.html">YAML 入门教程 | 菜鸟教程 (runoob.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2016/07/yaml.html">YAML 语言教程 - 阮一峰的网络日志 (ruanyifeng.com)</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://xqher.gitee.io">虚青海</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://xqher.gitee.io/post/336ea7e30a48/">https://xqher.gitee.io/post/336ea7e30a48/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://xqher.gitee.io" target="_blank"> 虚青海的博客 </a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%A0%87%E8%AE%B0%E8%AF%AD%E8%A8%80/">标记语言</a></div><div class="post_share"><div class="social-share" data-image="https://img2022.cnblogs.com/blog/1674552/202205/1674552-20220517193643247-1871241772.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/post/49faecebaf38/" title="Python学习-安装环境"><img class="cover" src="https://img2022.cnblogs.com/blog/1674552/202205/1674552-20220517193643247-1871241772.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Python学习-安装环境</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://img2023.cnblogs.com/blog/1674552/202307/1674552-20230722183629733-139482028.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">虚青海</div><div class="author-info__description">想到啥写啥.</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Xqh233"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Xqh233" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:xqher@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">这里是公告, 确实</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E8%AE%B0%E8%AF%AD%E8%A8%80-Markup-Language"><span class="toc-number">1.</span> <span class="toc-text">标记语言|Markup Language</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E6%A0%87%E8%AE%B0%E8%AF%AD%E8%A8%80%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.</span> <span class="toc-text">常见的标记语言介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#XML-%E5%8F%AF%E6%8B%93%E5%B1%95%E6%A0%87%E8%AE%B0%E8%AF%AD%E8%A8%80"><span class="toc-number">2.1.</span> <span class="toc-text">XML | 可拓展标记语言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Json-Js%E5%AF%B9%E8%B1%A1%E6%A0%87%E8%AE%B0"><span class="toc-number">2.2.</span> <span class="toc-text">Json | Js对象标记</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#YAML-YAML-%E4%B8%8D%E6%98%AF%E4%B8%80%E7%A7%8D%E6%A0%87%E8%AE%B0%E8%AF%AD%E8%A8%80"><span class="toc-number">2.3.</span> <span class="toc-text">YAML |  YAML 不是一种标记语言</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="toc-number">2.3.1.</span> <span class="toc-text">基本语法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B"><span class="toc-number">2.3.2.</span> <span class="toc-text">实例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E7%A7%8D%E4%BF%A1%E6%81%AF%E6%A0%87%E8%AE%B0%E5%BD%A2%E5%BC%8F%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-number">3.</span> <span class="toc-text">三种信息标记形式的比较</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">引用</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/157ba0d2c7bb/" title="Android Studio Google账号登录不了的一个解决方法"><img src="https://img2022.cnblogs.com/blog/1674552/202205/1674552-20220517193643247-1871241772.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Android Studio Google账号登录不了的一个解决方法"/></a><div class="content"><a class="title" href="/post/157ba0d2c7bb/" title="Android Studio Google账号登录不了的一个解决方法">Android Studio Google账号登录不了的一个解决方法</a><time datetime="2023-07-08T14:16:38.000Z" title="发表于 2023-07-08 22:16:38">2023-07-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/82c8d3e69f19/" title="Ubuntu20.04简单配置"><img src="https://img2023.cnblogs.com/blog/1674552/202305/1674552-20230508153315167-1707518652.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Ubuntu20.04简单配置"/></a><div class="content"><a class="title" href="/post/82c8d3e69f19/" title="Ubuntu20.04简单配置">Ubuntu20.04简单配置</a><time datetime="2023-05-08T07:33:13.000Z" title="发表于 2023-05-08 15:33:13">2023-05-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/2eb19ee71dc2/" title="时间复杂度"><img src="https://img2022.cnblogs.com/blog/1674552/202205/1674552-20220517193643247-1871241772.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="时间复杂度"/></a><div class="content"><a class="title" href="/post/2eb19ee71dc2/" title="时间复杂度">时间复杂度</a><time datetime="2023-02-03T11:56:57.000Z" title="发表于 2023-02-03 19:56:57">2023-02-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/e0578cda5c64/" title="记录第一次搭建博客"><img src="https://img2022.cnblogs.com/blog/1674552/202205/1674552-20220517193643247-1871241772.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="记录第一次搭建博客"/></a><div class="content"><a class="title" href="/post/e0578cda5c64/" title="记录第一次搭建博客">记录第一次搭建博客</a><time datetime="2023-02-03T11:56:57.000Z" title="发表于 2023-02-03 19:56:57">2023-02-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/69abeca3241e/" title="取模运算转位运算"><img src="[&quot;https://img2023.cnblogs.com/blog/1674552/202301/1674552-20230128155616027-1247227374.png&quot;]" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="取模运算转位运算"/></a><div class="content"><a class="title" href="/post/69abeca3241e/" title="取模运算转位运算">取模运算转位运算</a><time datetime="2023-01-28T06:56:58.000Z" title="发表于 2023-01-28 14:56:58">2023-01-28</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By 虚青海</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">这里居然有个友链→<a target="_blank" rel="noopener" href="https://aiepoch.cn/">及境丹青</a>←! <br><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2022099830号-1</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><div class="aplayer no-destroy" data-volume="0.2" data-theme="#009688" data-order="random" data-id="2220142299" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="false"> </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

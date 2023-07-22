@@ -1,0 +1,351 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><meta name="referrer" content="no-referrer"><title>KMP学习笔记 |  虚青海的博客 </title><meta name="author" content="虚青海"><meta name="copyright" content="虚青海"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="KMP学习笔记前置基础知识 学习KMP算法时四处缝合的笔记    字符串模式匹配假定给出两字符串 123&amp;#x2F;&amp;#x2F; 此处为了表明字符串由子串组成使用了拼接进行强调String S &amp;#x3D; &amp;quot;A&amp;quot;+&amp;quot;ABBCC&amp;quot;+&amp;quot;DDEEFFGG&amp;quot;;String T"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://xqher.gitee.io/post/8d4e25576333/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="A6nBPP2YDYuQRvcTcw2G7pAWsJMtiAEsaW8bIByQbRA"/><meta name="baidu-site-verification" content="code-2JYWfn6dbU"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?bd8ff323652e2c878ac481be337e605e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'KMP学习笔记',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-08 22:45:14'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://img2023.cnblogs.com/blog/1674552/202307/1674552-20230722183629733-139482028.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 摸鱼</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img2022.cnblogs.com/blog/1674552/202210/1674552-20221004111341363-1758232878.png')"><nav id="nav"><span id="blog-info"><a href="/" title=" 虚青海的博客 "><span class="site-name"> 虚青海的博客 </span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 摸鱼</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">KMP学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-10-03T01:15:53.000Z" title="发表于 2022-10-03 09:15:53">2022-10-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-08T14:45:14.000Z" title="更新于 2023-07-08 22:45:14">2023-07-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>12分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="KMP学习笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="KMP学习笔记"><a href="#KMP学习笔记" class="headerlink" title="KMP学习笔记"></a>KMP学习笔记</h1><h2 id="前置基础知识"><a href="#前置基础知识" class="headerlink" title="前置基础知识"></a>前置基础知识</h2><blockquote>
+<p>学习KMP算法时四处缝合的笔记</p>
+</blockquote>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202210/1674552-20221003132005895-2004026497.jpg" alt="不懂就查"></p>
+<ol>
+<li><p>字符串模式匹配<br>假定给出两字符串</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 此处为了表明字符串由子串组成使用了拼接进行强调</span></span><br><span class="line"><span class="type">String</span> <span class="variable">S</span> <span class="operator">=</span> <span class="string">&quot;A&quot;</span>+<span class="string">&quot;ABBCC&quot;</span>+<span class="string">&quot;DDEEFFGG&quot;</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">T</span> <span class="operator">=</span> <span class="string">&quot;ABBCC&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>​	此处T称为模式，在主串S中寻找子串T的过程就叫做模式匹配。</p>
+</li>
+<li><p>BF(Brute Force)算法(朴素的模式匹配算法)</p>
+<p>​	BF算法即暴力算法，是普通的模式匹配算法，是将主串S的第一个字符与模式T的第一个字符进行匹配，若相等则继续往后比较S和T的字符。不相等则比较S的第二个字符和T的第一个字符依次比较直到得出最后的比较结果。<br>​	此处假定给出主串S和模式T为:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 指定S长度m为8，T长度n为5</span></span><br><span class="line"><span class="type">String</span> <span class="variable">S</span> <span class="operator">=</span> <span class="string">&quot;AAAAAAAG&quot;</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">T</span> <span class="operator">=</span> <span class="string">&quot;AAAAG&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>​	从第一位逐位判断可以看到会在主串S在第五个位置发现不匹配模式T，于是S后移三位才能匹配到T，中间遍历了两次T的长度n就重复了。最坏情况下模式T位于主串最后位，需要迭代m-n+1轮，每轮比对n次则一共比较了(m-n+1) * n 次。时间复杂度随着m大于n会逼近至O(mn)</p>
+</li>
+<li><p>前&#x2F;后缀, 公共前缀后缀</p>
+<p>​	前后缀指不包含字符串本身，即不包含首尾字符的子串，如字符串 ABCBCA </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 其前缀包括</span></span><br><span class="line"><span class="type">String</span> <span class="variable">prefix</span> <span class="operator">=</span> <span class="string">&quot;A AB ABC ABCB ABCBC&quot;</span>;</span><br><span class="line"><span class="comment">// 后缀包括 </span></span><br><span class="line"><span class="type">String</span> <span class="variable">suffix</span> <span class="operator">=</span> <span class="string">&quot;A CA BCA CBCA BCBCA&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>​	而公共前缀后缀则指前后缀相同 如此处 只有 一个公共前缀后缀 A</p>
+<p>​</p>
+</li>
+</ol>
+<p>	</p>
+<h2 id="BF算法暴力匹配"><a href="#BF算法暴力匹配" class="headerlink" title="BF算法暴力匹配"></a>BF算法暴力匹配</h2><p>先从比较好理解的BF算法的运行过程开始再引出KMP算法<br>首先规定i是主串S的索引下标，j是模式T的索引下标，分表表示主串S和模式T当前匹配的位置。则代码运行基于以下两条原理</p>
+<ul>
+<li>如果当前字符匹配成功( <code>S[i] = T[j]</code> )，则继续匹配下一个字符 ( i++, j++ )</li>
+<li>如果匹配失败(称为失配 <code>S[i] != T[j]</code> )，则主串从当前已匹配字符的下一位继续匹配，模式则从头匹配。即令 <code>i = i - j + 1， j = 0</code></li>
+</ul>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>以下是BF实现代码和运行实例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">String</span> <span class="variable">S</span> <span class="operator">=</span> <span class="string">&quot;ababcabcacbab&quot;</span>;</span><br><span class="line">		<span class="type">String</span> <span class="variable">T</span> <span class="operator">=</span> <span class="string">&quot;abcac&quot;</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="type">long</span> <span class="variable">st</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">		<span class="type">int</span> <span class="variable">res</span> <span class="operator">=</span> BF(S.toCharArray(), T.toCharArray());</span><br><span class="line">		<span class="keyword">if</span>(res != -<span class="number">1</span>) &#123;</span><br><span class="line">			System.out.printf(<span class="string">&quot;匹配主串索引为%d\n&quot;</span>, res);</span><br><span class="line">			System.out.printf(<span class="string">&quot;匹配结果为 &#x27;%s&#x27; \n&quot;</span>, S.substring(res, res+T.length()));	</span><br><span class="line">		&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;模式不匹配&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.printf(<span class="string">&quot;运行时间: %d ms. \n&quot;</span>, (System.currentTimeMillis() - st));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">static</span> <span class="type">int</span> <span class="title function_">BF</span><span class="params">(<span class="type">char</span>[] S, <span class="type">char</span>[] T)</span> &#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span>(i!=S.length &amp;&amp; j!=T.length) &#123;</span><br><span class="line">			<span class="keyword">if</span>(S[i] == T[j]) &#123;</span><br><span class="line">				i++;</span><br><span class="line">				j++;</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">				i = i - j + <span class="number">1</span>;</span><br><span class="line">				j = <span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 模式能遍历完说明匹配成功 返回当前匹配字符开始处</span></span><br><span class="line">		<span class="keyword">if</span>(j==T.length) <span class="keyword">return</span> i-j;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="运行步骤"><a href="#运行步骤" class="headerlink" title="运行步骤"></a>运行步骤</h3><p>用实例中的主串和模式的运行过程来理解代码</p>
+<p>首先初始化两个索引指针，未遍历到的字符统一标志为黑色</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202210/1674552-20221003124933147-2096095329.png" alt="step-1"></p>
+<p>第一次循环至失配, 标志为红色的为当前失配坐标处，蓝色则为当前循环匹配子串<br>可以看到第一次匹配至2就出现了a和c不匹配，所以i重设为 i - j + 1 &#x3D; 1，j &#x3D; 0 从头开始遍历字符串</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202210/1674552-20221003125042697-56523220.png" alt="step-2"></p>
+<p>第二次循环第一位判断就失配了，于是此时 i &#x3D; i -  j + 1 &#x3D; 2, j &#x3D; 0 标记为灰色字体为不再需要遍历的子串</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202210/1674552-20221003125222308-1221264391.png" alt="step-3"></p>
+<p>第三次循环至第7位失配，重设为 i &#x3D; 3, j &#x3D; 0 从此看出每次 i 索引位都是设为当次循环匹配字符开始处的下一位</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202210/1674552-20221003130421650-1470219130.png" alt="step-4"></p>
+<p>第四五次循环都是第一位失配</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202210/1674552-20221003130449492-780076830.png" alt="step-5"></p>
+<p>第六次匹配成功，此时i &#x3D; 9，j &#x3D; 4 匹配成功自家后j到达模式长度结束循环，最终代码返回前判断模式是否遍历完来决定是返回当前匹配索引开始处还是表示不匹配的-1</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202210/1674552-20221003130701160-76303289.png" alt="step-6"></p>
+<h3 id="缺点分析"><a href="#缺点分析" class="headerlink" title="缺点分析"></a>缺点分析</h3><p>在运行时会出现已经匹配了一段字符后失配则重新回溯的情况。如第四五次循环，第三次循环中已经匹配过的bc显然与第一个字符a是不匹配的，那这两次循环实际上是没有意义浪费了时间的。如果将第三次循环结束后将模式当前索引向左滑动三位继续 i &#x3D; 6, j &#x3D; 1 的字符匹配，会明显加快进程。这样就引出了不回溯 i 以加快匹配效率的KMP算法。</p>
+<h2 id="KMP算法"><a href="#KMP算法" class="headerlink" title="KMP算法"></a>KMP算法</h2><blockquote>
+<p>KMP(Knuth–Morris–Pratt)算法是一种字符串<code>模式匹配</code>算法。核心原理是利用匹配失败后的信息，尽量减少模式串与主串的匹配此处以达到快速匹配的目的。时间复杂度为O(m+n)<br>        它的改进在于，每当从某个起始位置开始一轮匹配后，如果在匹配过程中出现失配，不回溯 i 而是利用已经得到的部分匹配结果将 指针 在 模式 上向右移动(退回)尽可能远的一段距离 再按照规则进行下一轮匹配 </p>
+</blockquote>
+<h3 id="失效函数值-Next"><a href="#失效函数值-Next" class="headerlink" title="失效函数值 Next"></a>失效函数值 Next</h3><p>而实现每个位置失配都能找到相应模式退回相应的回溯值通过一个 通常被命名为next的 <code>失效函数值</code> 实现。这个数组存储模式每个子串的<code>最长公共前缀后缀</code>长度。因为是前缀后缀长度，不包含字符串本身，所以第一位值标记为-1占位。<br>    如对于字符串<code>abcac</code>  可以构建出失效函数值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] next = &#123;-<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>因为列出每一位 a, ab, abc , abca 只有最后一位有公共前缀后缀， 则值为长度1。 其他都没有公共前缀后缀则值为0。</p>
+<h4 id="代码实现求失效函数值"><a href="#代码实现求失效函数值" class="headerlink" title="代码实现求失效函数值"></a>代码实现求失效函数值</h4><p>能够手推出失效函数值还需要能用代码实现，这里通过第一位占位 值为-1 和第一个子串为单个字符则没有前后缀 值为0 可简单推出 next[0] &#x3D; -1, next[1] &#x3D; 0 于是接下来的问题是如何用代码实现继续往下构造</p>
+<p>此处通过一个模式串构建失效函数值的例子来试图弄明白罢！</p>
+<p>给定模式P如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">P</span> <span class="operator">=</span> <span class="string">&quot;ABCDABE&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>先手推出next</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>[] = &#123;-<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>手推的过程中可以感受到有一个比对前后缀的过程，这里可以用BF算法中的思想，将读取每一个子串作为模式，原本的模式作为主串进行匹配。</p>
+<p>先初始化出 一个长度为P长度且第一个值为-1的数组，此处再定义一个用于遍历模式的指针j 此处j作为”主”串指针，t则为模式指针</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="type">int</span>[] buildNext(<span class="type">char</span>[] P) &#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">m</span> <span class="operator">=</span> P.length;</span><br><span class="line">		<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">		<span class="type">int</span>[] next = <span class="keyword">new</span> <span class="title class_">int</span>[m];</span><br><span class="line">		<span class="type">int</span> <span class="variable">t</span> <span class="operator">=</span> next[<span class="number">0</span>] = -<span class="number">1</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> next;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那么首先遍历条件就是 j &lt; m -1 了 ，即遍历范围除了模式本身。而判断条件是主串中 模式指针和主串指针 是否匹配(确实)</p>
+<p>于是添加代码如下, 此处判断t &#x3D;&#x3D; -1是用于判断首位, 并且或判断的短路效应会使前面 t&#x3D;&#x3D;-1 条件为true时会停止继续判断   P[j] &#x3D;&#x3D; P[t] 的条件避免越界错误<br>     注意能理解将模式作为主串即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="type">int</span>[] buildNext(<span class="type">char</span>[] P) &#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">m</span> <span class="operator">=</span> P.length;</span><br><span class="line">		<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">		<span class="type">int</span>[] next = <span class="keyword">new</span> <span class="title class_">int</span>[m];</span><br><span class="line">		<span class="type">int</span> <span class="variable">t</span> <span class="operator">=</span> next[<span class="number">0</span>] = -<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span>(j &lt; m -<span class="number">1</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(t &lt; <span class="number">0</span> || P[j] == P[t]) &#123;</span><br><span class="line">				</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> next;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>于是匹配或位于 行首则将指针各自加1并 在匹配的情况下 将 当前匹配 最长公共前后缀长度 结果t 存入next的主串指针处，失配则将模式串指针赋值为当前next 的模式串指针处</p>
+<p>因为int数组构建默认值都为0，失配一般都会将模式串指针t重新赋值为 0 (回溯)</p>
+<p>此处匹配前后缀的原理是主串指针一直自加，一开始差值为1恰好判断子串长度为2位，如果失配则模式指针回溯已重新匹配当前循环前后缀</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        </span><br><span class="line">		<span class="type">int</span>[] next =buildNext(<span class="string">&quot;ABCDABE&quot;</span>.toCharArray());</span><br><span class="line">		System.out.println(Arrays.toString(next));</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">static</span> <span class="type">int</span>[] buildNext(<span class="type">char</span>[] P) &#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">m</span> <span class="operator">=</span> P.length;</span><br><span class="line">		<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">		<span class="type">int</span>[] next = <span class="keyword">new</span> <span class="title class_">int</span>[m];</span><br><span class="line">		<span class="type">int</span> <span class="variable">t</span> <span class="operator">=</span> next[<span class="number">0</span>] = -<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span>(j &lt; m -<span class="number">1</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(t &lt; <span class="number">0</span> || P[j] == P[t]) &#123;</span><br><span class="line">				j++;</span><br><span class="line">				t++;</span><br><span class="line">				next[j] = t;</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">				t = next[t];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> next;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>附带了实现和运行例子</p>
+<h4 id="运行步骤-1"><a href="#运行步骤-1" class="headerlink" title="运行步骤"></a>运行步骤</h4><p>此处大致将例子 <code>String P = &quot;ABCDABE&quot;;</code>运行过程描述一下方便理解。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202210/1674552-20221003215618157-1711909244.png" alt="代码运行评价"></p>
+<h3 id="KMP代码实现"><a href="#KMP代码实现" class="headerlink" title="KMP代码实现"></a>KMP代码实现</h3><p>首先规定 i 是主串S的 索引指针，j 是模式P 的索引指针。则KMP代码基于以下三条规则运行</p>
+<ul>
+<li>如果 <code>j = -1</code>, 则 <code>i++, j++</code> 继续往下匹配</li>
+<li>如果字符匹配 <code>(S[i] = P[j])</code> , 则  <code>i++, j++</code> 继续往下匹配</li>
+<li>如果失配 <code>( j != -1, 且 S[i] != P[j])</code> , 则主串指针 i 不变， j 设为 失效函数值中相应值 <code>( j = next[i] )</code>，意味着失配时模式指针相对于主串指针向右移动 <code>j - next[j]</code> 位。</li>
+</ul>
+<p>则有代码如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		<span class="type">String</span> <span class="variable">S</span> <span class="operator">=</span> <span class="string">&quot;ababcabcacbab&quot;</span>;</span><br><span class="line">		<span class="type">String</span> <span class="variable">T</span> <span class="operator">=</span> <span class="string">&quot;abcac&quot;</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="type">int</span>[] next =buildNext(<span class="string">&quot;abcac&quot;</span>.toCharArray());</span><br><span class="line">		</span><br><span class="line">		<span class="type">long</span> <span class="variable">st</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">		<span class="type">int</span> <span class="variable">res</span> <span class="operator">=</span> KMP(<span class="number">0</span>, next, S.toCharArray(), T.toCharArray());</span><br><span class="line">		<span class="keyword">if</span>(res != -<span class="number">1</span>) &#123;</span><br><span class="line">			System.out.printf(<span class="string">&quot;匹配主串索引为%d\n&quot;</span>, res);</span><br><span class="line">			System.out.printf(<span class="string">&quot;匹配结果为 &#x27;%s&#x27; \n&quot;</span>, S.substring(res, res+T.length()));	</span><br><span class="line">		&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;模式不匹配&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.printf(<span class="string">&quot;运行时间: %d ms. \n&quot;</span>, (System.currentTimeMillis() - st));</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">static</span> <span class="type">int</span>[] buildNext(<span class="type">char</span>[] P) &#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">m</span> <span class="operator">=</span> P.length;</span><br><span class="line">		<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">		<span class="type">int</span>[] next = <span class="keyword">new</span> <span class="title class_">int</span>[m];</span><br><span class="line">		<span class="type">int</span> <span class="variable">t</span> <span class="operator">=</span> next[<span class="number">0</span>] = -<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span>(j &lt; m -<span class="number">1</span>) &#123;</span><br><span class="line">			<span class="keyword">if</span>(<span class="number">0</span> &gt; t || P[j] == P[t]) &#123;</span><br><span class="line">				j++;</span><br><span class="line">				t++;</span><br><span class="line">				next[j] = t;</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">				t = next[t];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> next;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">static</span> <span class="type">int</span> <span class="title function_">KMP</span><span class="params">(<span class="type">int</span> start, <span class="type">int</span>[] next, <span class="type">char</span>[] S, <span class="type">char</span>[] T)</span> &#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> start;</span><br><span class="line">		<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">while</span>(i != S.length &amp;&amp; j != T.length) &#123;</span><br><span class="line">			<span class="keyword">if</span>(j &lt; <span class="number">0</span> || S[i] == T[j]) &#123;</span><br><span class="line">				i++;</span><br><span class="line">				j++;</span><br><span class="line">			&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">				j = next[j];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(j == T.length) <span class="keyword">return</span> i - j;</span><br><span class="line">		<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="运行步骤-2"><a href="#运行步骤-2" class="headerlink" title="运行步骤"></a>运行步骤</h3><p>实在懒得逐个写解释了(</p>
+<p>判断-1只有首位不相等才会发生</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202210/1674552-20221004011623481-272691780.png" alt="run progree"></p>
+<h3 id="使用情景"><a href="#使用情景" class="headerlink" title="使用情景"></a>使用情景</h3><p>如果多跑几个会发现实际上KMP花费的实际往往比暴力算法还久(当然样例量级小到一定程度也差不了多少)，这是因为KMP算法的优势是在查找的串越长，重复序列越多优势才越多的(因为需要构建失效函数值才能启动，而朴素算法直接就能启动)。例如只有01的超长包括重复字符串就很适合用KMP匹配。实际使用使用暴力算法还是KMP还得看数据量级</p>
+<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><p>有空了在这里贴点KMP例题方便巩固一下知识点</p>
+<h3 id="28-找出字符串中第一个匹配项的下标"><a href="#28-找出字符串中第一个匹配项的下标" class="headerlink" title="28. 找出字符串中第一个匹配项的下标"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/">28. 找出字符串中第一个匹配项的下标</a></h3><p>这都题可以直接调indexOf的api，但可以写kmp练手(</p>
+<p>手撕朴素法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">strStr</span><span class="params">(String haystack, String needle)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(i!=haystack.length() &amp;&amp; j!=needle.length())&#123;</span><br><span class="line">            <span class="keyword">if</span>(haystack.charAt(i)==needle.charAt(j))&#123;</span><br><span class="line">                i++;</span><br><span class="line">                j++;</span><br><span class="line"></span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                i = i - j + <span class="number">1</span>;</span><br><span class="line">                j = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(j == needle.length()) <span class="keyword">return</span> i-j;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>KMP ，不熟练写了两个bug，一开始是子串指针回溯手糊写成了回溯 主串指针，第二个是判断 j 忘记写了，写上j &#x3D;&#x3D; -1 的效率比 j&lt;0 慢了一倍是没想到的。应该是我推导代码的时候哪里理解错了? 蒜了，想不明白，洗洗睡了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">strStr</span><span class="params">(String haystack, String needle)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(needle.length()==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">m</span> <span class="operator">=</span> haystack.length();</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> needle.length();</span><br><span class="line">        <span class="type">int</span>[] next = buildNext(needle);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(i!=m &amp;&amp; j!=n)&#123;</span><br><span class="line">            <span class="keyword">if</span>(j&lt;<span class="number">0</span> || haystack.charAt(i)==needle.charAt(j))&#123;</span><br><span class="line">                i++;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                j = next[j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(j == n) <span class="keyword">return</span> i-j;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span>[] buildNext(String P)&#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">m</span> <span class="operator">=</span> P.length();</span><br><span class="line">        <span class="type">int</span>[] next = <span class="keyword">new</span> <span class="title class_">int</span>[m];</span><br><span class="line">        <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> next[<span class="number">0</span>] = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(i&lt;m-<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(j&lt;<span class="number">0</span> || P.charAt(i)==P.charAt(j))&#123;</span><br><span class="line">                i++;</span><br><span class="line">                j++;</span><br><span class="line">                next[i] = j;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                j = next[j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考引用"><a href="#参考引用" class="headerlink" title="参考引用"></a>参考引用</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/BF%E7%AE%97%E6%B3%95/4326761">BF算法_百度百科</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yyzsir/article/details/89462339">KMP算法详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/leetbook/read/array-and-string/cpoo6/">（选修）字符串匹配算法：KMP</a></li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://xqher.gitee.io">虚青海</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://xqher.gitee.io/post/8d4e25576333/">https://xqher.gitee.io/post/8d4e25576333/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://xqher.gitee.io" target="_blank"> 虚青海的博客 </a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/KMP/">KMP</a><a class="post-meta__tags" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a></div><div class="post_share"><div class="social-share" data-image="https://img2022.cnblogs.com/blog/1674552/202210/1674552-20221004111341363-1758232878.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/post/0d650c5adae7/" title="Python逆向有道词典sign参数"><img class="cover" src="https://img2022.cnblogs.com/blog/1674552/202211/1674552-20221126170242495-957511538.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Python逆向有道词典sign参数</div></div></a></div><div class="next-post pull-right"><a href="/post/c1668d50ac8a/" title="开发流程记录"><img class="cover" src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220927211814642-994800873.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">开发流程记录</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://img2023.cnblogs.com/blog/1674552/202307/1674552-20230722183629733-139482028.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">虚青海</div><div class="author-info__description">想到啥写啥.</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Xqh233"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Xqh233" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:xqher@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">这里是公告, 确实</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#KMP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"><span class="toc-number">1.</span> <span class="toc-text">KMP学习笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">1.1.</span> <span class="toc-text">前置基础知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BF%E7%AE%97%E6%B3%95%E6%9A%B4%E5%8A%9B%E5%8C%B9%E9%85%8D"><span class="toc-number">1.2.</span> <span class="toc-text">BF算法暴力匹配</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">1.2.1.</span> <span class="toc-text">代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.2.2.</span> <span class="toc-text">运行步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9%E5%88%86%E6%9E%90"><span class="toc-number">1.2.3.</span> <span class="toc-text">缺点分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#KMP%E7%AE%97%E6%B3%95"><span class="toc-number">1.3.</span> <span class="toc-text">KMP算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%B1%E6%95%88%E5%87%BD%E6%95%B0%E5%80%BC-Next"><span class="toc-number">1.3.1.</span> <span class="toc-text">失效函数值 Next</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%E6%B1%82%E5%A4%B1%E6%95%88%E5%87%BD%E6%95%B0%E5%80%BC"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">代码实现求失效函数值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%AD%A5%E9%AA%A4-1"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">运行步骤</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#KMP%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.3.2.</span> <span class="toc-text">KMP代码实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%AD%A5%E9%AA%A4-2"><span class="toc-number">1.3.3.</span> <span class="toc-text">运行步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%83%85%E6%99%AF"><span class="toc-number">1.3.4.</span> <span class="toc-text">使用情景</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98"><span class="toc-number">1.4.</span> <span class="toc-text">例题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#28-%E6%89%BE%E5%87%BA%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8C%B9%E9%85%8D%E9%A1%B9%E7%9A%84%E4%B8%8B%E6%A0%87"><span class="toc-number">1.4.1.</span> <span class="toc-text">28. 找出字符串中第一个匹配项的下标</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E5%BC%95%E7%94%A8"><span class="toc-number">1.5.</span> <span class="toc-text">参考引用</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/157ba0d2c7bb/" title="Android Studio Google账号登录不了的一个解决方法"><img src="https://img2022.cnblogs.com/blog/1674552/202205/1674552-20220517193643247-1871241772.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Android Studio Google账号登录不了的一个解决方法"/></a><div class="content"><a class="title" href="/post/157ba0d2c7bb/" title="Android Studio Google账号登录不了的一个解决方法">Android Studio Google账号登录不了的一个解决方法</a><time datetime="2023-07-08T14:16:38.000Z" title="发表于 2023-07-08 22:16:38">2023-07-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/82c8d3e69f19/" title="Ubuntu20.04简单配置"><img src="https://img2023.cnblogs.com/blog/1674552/202305/1674552-20230508153315167-1707518652.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Ubuntu20.04简单配置"/></a><div class="content"><a class="title" href="/post/82c8d3e69f19/" title="Ubuntu20.04简单配置">Ubuntu20.04简单配置</a><time datetime="2023-05-08T07:33:13.000Z" title="发表于 2023-05-08 15:33:13">2023-05-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/2eb19ee71dc2/" title="时间复杂度"><img src="https://img2022.cnblogs.com/blog/1674552/202205/1674552-20220517193643247-1871241772.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="时间复杂度"/></a><div class="content"><a class="title" href="/post/2eb19ee71dc2/" title="时间复杂度">时间复杂度</a><time datetime="2023-02-03T11:56:57.000Z" title="发表于 2023-02-03 19:56:57">2023-02-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/e0578cda5c64/" title="记录第一次搭建博客"><img src="https://img2022.cnblogs.com/blog/1674552/202205/1674552-20220517193643247-1871241772.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="记录第一次搭建博客"/></a><div class="content"><a class="title" href="/post/e0578cda5c64/" title="记录第一次搭建博客">记录第一次搭建博客</a><time datetime="2023-02-03T11:56:57.000Z" title="发表于 2023-02-03 19:56:57">2023-02-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/69abeca3241e/" title="取模运算转位运算"><img src="[&quot;https://img2023.cnblogs.com/blog/1674552/202301/1674552-20230128155616027-1247227374.png&quot;]" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="取模运算转位运算"/></a><div class="content"><a class="title" href="/post/69abeca3241e/" title="取模运算转位运算">取模运算转位运算</a><time datetime="2023-01-28T06:56:58.000Z" title="发表于 2023-01-28 14:56:58">2023-01-28</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By 虚青海</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">这里居然有个友链→<a target="_blank" rel="noopener" href="https://aiepoch.cn/">及境丹青</a>←! <br><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2022099830号-1</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><div class="aplayer no-destroy" data-volume="0.2" data-theme="#009688" data-order="random" data-id="2220142299" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="false"> </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>

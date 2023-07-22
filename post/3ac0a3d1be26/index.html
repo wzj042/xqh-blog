@@ -1,0 +1,1571 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><meta name="referrer" content="no-referrer"><title>CS速成笔记 |  虚青海的博客 </title><meta name="author" content="虚青海"><meta name="copyright" content="虚青海"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="CS速成课笔记前言首先是大致介绍笔记组成，来源，参考以及建议。  内容源于【计算机科学速成课】- Crash Course Computer Science ，是学习时做的一些简单笔记，从别的大佬的笔记里扒了不少内容和图片，仅用于自己学习复习时使用。加了一些自己帮助学习的例子私货。原字幕我看文件大小"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://xqher.gitee.io/post/3ac0a3d1be26/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="A6nBPP2YDYuQRvcTcw2G7pAWsJMtiAEsaW8bIByQbRA"/><meta name="baidu-site-verification" content="code-2JYWfn6dbU"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?bd8ff323652e2c878ac481be337e605e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'CS速成笔记',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-09-28 13:07:03'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://img2023.cnblogs.com/blog/1674552/202307/1674552-20230722183629733-139482028.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 摸鱼</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220809214409822-534956115.png')"><nav id="nav"><span id="blog-info"><a href="/" title=" 虚青海的博客 "><span class="site-name"> 虚青海的博客 </span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> 摸鱼</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">CS速成笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-08-09T10:55:13.000Z" title="发表于 2022-08-09 18:55:13">2022-08-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-09-28T05:07:03.000Z" title="更新于 2022-09-28 13:07:03">2022-09-28</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/CS/">CS</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">35.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>106分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="CS速成笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="CS速成课笔记"><a href="#CS速成课笔记" class="headerlink" title="CS速成课笔记"></a>CS速成课笔记</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>首先是大致介绍笔记组成，来源，参考以及建议。</p>
+<blockquote>
+<p>内容源于<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1EW411u7th">【计算机科学速成课】- Crash Course Computer Science</a> ，是学习时做的一些简单笔记，从别的大佬的笔记里扒了不少内容和图片，仅用于自己学习复习时使用。加了一些自己帮助学习的例子<del>私货</del>。原字幕我看文件大小估计至少12w个字(因为是双语字幕而且经常出现重复行，源文件938k直接砍半抹零头保守估计400k，然后假定文件使用UTF-8编码，则一个汉字3b，那么20kb就包含6000多个汉字，那这400k就保守估计出12w的汉字了)那我这笔记还算精炼的Σ(っ °Д °;)っ</p>
+</blockquote>
+<p>笔记组成大致如下</p>
+<p>1-9章:<code>计算机基本组成</code> - 从开关到逻辑门到CPU</p>
+<p>10-16章:<code>编程语言</code> - 编程方式语言发展，处理数据方法的发展</p>
+<p>17-23章:<code>操作系统与文件系统</code> - 怎样管理计算机与相关文件</p>
+<p>24-25章:<code>促进计算机发展的历史</code> - 战争与商业化对计算机的发展促进</p>
+<p>26-27章:<code>计算机图形界面</code> - 计算机与人交互方式的简化</p>
+<p>28-30章:<code>互联网组成</code> - 计算机数据交互方式的发展</p>
+<p>31-33章:<code>计算机安全</code> - 网络数据安全怎样受到挑战与保护手法</p>
+<p>34-40章:<code>计算机拓展应用</code> - 让计算机利用自身优势做的从与人类相似到超越人类</p>
+<p>1-27章: 计算机发展到从专注硬件到软件，专注于将计算机<code>贴近人类</code></p>
+<p>28-40章:计算机网络与AI教育，专注于将计算机<code>超越人类</code></p>
+<p><a href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5">参考链接如下</a></p>
+<p>建议学习时如果像我一样觉得看视频太拖沓(但是视频补充的例子确实很关键)可以参考他人笔记以及视频字幕。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/1c7/crash-course-computer-science-chinese">视频字幕</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/78717667">偏概括的笔记，作者记到压缩那一章附近就没了，CrashCourse_CS_notes (P1-P5) - Syddd的文章 </a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/460879375">相对完整的笔记，但是作者中间互联网到加密那一块没有做笔记。计算机科学速成课笔记 - 问夏的文章</a></p>
+<p><a target="_blank" rel="noopener" href="https://shimo.im/docs/PJAUY30F1uYksv0h/read">特别精炼的笔记</a></p>
+<h3 id="计算机的基本元件-开关"><a href="#计算机的基本元件-开关" class="headerlink" title="计算机的基本元件-开关"></a>计算机的基本元件-开关</h3><blockquote>
+<p>前一章感觉只是介绍历史的草草看过觉得没有特别需要注意的就没特意去记笔记</p>
+</blockquote>
+<p>计算机是由各种电路组合而成的，而电路由电源，用电器(负载)，中间环节(导线，开关)组成。以下是开关的演变，从继电器到真空管到晶体管。</p>
+<h4 id="继电器"><a href="#继电器" class="headerlink" title="继电器"></a>继电器</h4><p>早起的电路开关<code>继电器</code>是用电控制的机械开关，它连接着一个线圈，当线圈通电时会产生感应磁场吸引上方机械臂从而闭合电路(联通线路得到高电平)。但是金属机械臂是有质量的，<code>无法快速开关</code>而且反复移动会<code>很容易产生损耗</code>。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220813131648513-724955622.png" alt="继电器"></p>
+<h4 id="真空管"><a href="#真空管" class="headerlink" title="真空管"></a>真空管</h4><h5 id="单项流通电流-二极管"><a href="#单项流通电流-二极管" class="headerlink" title="单项流通电流 - 二极管"></a>单项流通电流 - 二极管</h5><p><code>热电子管</code>把两个电极放在一个气密的<code>真空</code>玻璃灯泡中。其中一个电极A可以加热以<code>发射电子</code>(热电子发射Thermioic emission)，另一个电极B则会<code>吸引电子</code>来<code>形成电流</code>。只有当电极B<code>带正电</code>时才能吸引电子，否则电子无法从电极A跨越真空区域。这种电流只能<code>单向流动</code>的电子部件就是<code>二极管</code>(二极管通常让电流从阴极流向阳极，吸引电子的被称为阳极，发送电子的被称为阴极)。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220813151526090-1689601119.png" alt="二极管"></p>
+<h5 id="可控制电流开闭-三极管"><a href="#可控制电流开闭-三极管" class="headerlink" title="可控制电流开闭 - 三极管"></a>可控制电流开闭 - 三极管</h5><p>而之后又在两个电极间加入了第三个<code>控制电极</code>，向控制电极施加正电荷会允许流动，反之则阻止电子流动。因此通过控制线路开闭实现了继电器的功能的就是<code>三极真空管</code>。因为真空管内没有会动的组件，意味着<code>更少的磨损</code>，但是也<code>相对比较脆弱</code>而且<code>会像灯泡一样烧坏</code>，体积也比较大。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220813151557631-1219400134.png" alt="三极管"></p>
+<h4 id="晶体管"><a href="#晶体管" class="headerlink" title="晶体管"></a>晶体管</h4><p>晶体管也是一个用于控制电路闭合断开的开关，晶体管有两个电极，这两个电极之间通过半导体材料隔开。半导体这种材料有时候导电，有时候不导电(常温下导电性位于导体与绝缘间，通过外界干扰改变导电性)。而控制线链接到一个”门“电极，通过改变门的电荷就可以改变半导体材料的导电性。控制了半导体导电性就可以控制电流是否流动了。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220813154742749-881793106.png" alt="晶体管"></p>
+<h3 id="布尔逻辑和逻辑门"><a href="#布尔逻辑和逻辑门" class="headerlink" title="布尔逻辑和逻辑门"></a>布尔逻辑和逻辑门</h3><h4 id="布尔逻辑"><a href="#布尔逻辑" class="headerlink" title="布尔逻辑"></a>布尔逻辑</h4><p>布尔逻辑把一些简单的逻辑思维数学化，而此处逻辑即判断事物真假或是非，布尔逻辑以代数的形式将真假区分为变量值true和false。</p>
+<blockquote>
+<p>例: </p>
+<ul>
+<li>所有人都会死(大前提，true)</li>
+<li>苏格拉底是人(小前提，true)</li>
+<li>所以，苏格拉底也是会死的(结论,true)</li>
+</ul>
+</blockquote>
+<p>以上例子是亚里士多德提出的经典逻辑三段论，客观推导下结论必然为真，而布尔代数则是多个判断之间的逻辑关系演算，也被称为逻辑代数。<strong>即用布尔逻辑以布尔代数的形式运算多个判断之间的关系。</strong></p>
+<h4 id="布尔代数"><a href="#布尔代数" class="headerlink" title="布尔代数"></a>布尔代数</h4><p>布尔代数不是算数运算，但仍有相应的规则与运算法则</p>
+<blockquote>
+<ol>
+<li>布尔代数中，数值只能取<code>true和false</code> 或者 <code>0和1</code></li>
+<li>布尔代数中，变量可以进行<code>&quot;或且非&quot;</code>三种逻辑操作</li>
+<li>布尔运算满足<code>交换律</code>，<code>结合律</code>，<code>吸收律</code>，<code>反演律</code></li>
+</ol>
+</blockquote>
+<h4 id="逻辑门"><a href="#逻辑门" class="headerlink" title="逻辑门"></a>逻辑门</h4><p>在计算机中布尔逻辑以开关接通状态为1(true),开关不通状态为0(false)。这样就可以用<code>电路的开关模拟逻辑状态</code>，组成逻辑电路。又因为组成的逻辑电路可以控制电流的流通堵塞与路径，又被称作<code>逻辑门</code>。</p>
+<h5 id="AND-与门"><a href="#AND-与门" class="headerlink" title="AND 与门"></a>AND 与门</h5><p>对应布尔代数且操作，设有两输入<code>A，B</code>其同时为<code>TRUE</code>时输出<code>TRUE</code>，否则都输出<code>FALSE</code></p>
+<table>
+<thead>
+<tr>
+<th align="center">输入A</th>
+<th>输入B</th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">T</td>
+<td>F</td>
+<td>F</td>
+</tr>
+<tr>
+<td align="center">F</td>
+<td>T</td>
+<td>F</td>
+</tr>
+<tr>
+<td align="center">T</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td align="center">F</td>
+<td>F</td>
+<td>F</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>此处使用T代表True，F代表False,像这样列出所有情况的表也称为真值表</p>
+</blockquote>
+<h5 id="OR-或门"><a href="#OR-或门" class="headerlink" title="OR 或门"></a>OR 或门</h5><p>两输出其中一个为<code>TRUE</code>则输出<code>TRUE</code>，都不为<code>TRUE</code>则输出<code>FALSE</code></p>
+<table>
+<thead>
+<tr>
+<th align="center">输入A</th>
+<th>输入B</th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">T</td>
+<td>F</td>
+<td>T</td>
+</tr>
+<tr>
+<td align="center">F</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td align="center">T</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td align="center">F</td>
+<td>F</td>
+<td>F</td>
+</tr>
+</tbody></table>
+<h5 id="NOT-非门"><a href="#NOT-非门" class="headerlink" title="NOT 非门"></a>NOT 非门</h5><p>非门只接受一个输入，且会将输入置反，即输入<code>TRUE</code>输出<code>FALSE</code>,输入<code>FALSE</code>输出<code>TRUE</code></p>
+<table>
+<thead>
+<tr>
+<th align="center">输入A</th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">T</td>
+<td>F</td>
+</tr>
+<tr>
+<td align="center">F</td>
+<td>T</td>
+</tr>
+</tbody></table>
+<h5 id="XOR-异或门"><a href="#XOR-异或门" class="headerlink" title="XOR 异或门"></a>XOR 异或门</h5><p>异或门是基于以上三种逻辑门构建的，其逻辑为接受两个输入，两输入相同则输出<code>FALSE</code>,输入不同则输出<code>TRUE</code></p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220809195539067-1810979611.png" alt="三种逻辑门的电路图示"></p>
+<p>真值表如下</p>
+<table>
+<thead>
+<tr>
+<th>输入A</th>
+<th>输入B</th>
+<th>输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T</td>
+<td>F</td>
+<td>T</td>
+</tr>
+<tr>
+<td>F</td>
+<td>T</td>
+<td>T</td>
+</tr>
+<tr>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+</tr>
+<tr>
+<td>T</td>
+<td>T</td>
+<td>F</td>
+</tr>
+</tbody></table>
+<p>其中电路图如下，最好将真值表带入进行运算一遍，还可以试试用红石电路实现(因为红石电路不懂怎么优化结构，最后只实现一个全加器<a href="%E5%8E%9F%E7%90%86%E6%98%AFA,B%E8%BE%93%E5%85%A5%E5%8D%8A%E5%8A%A0%E5%99%A8%E5%BE%97%E5%8D%8A%E5%8A%A0%E5%99%A8%E8%BF%9B%E4%BD%8D%E5%86%8D%E4%B8%8E%E8%BE%93%E5%85%A5C%E4%B8%80%E5%90%8C%E4%BA%A4%E7%94%B1%E5%8F%A6%E4%B8%80%E4%B8%AA%E5%8D%8A%E5%8A%A0%E5%99%A8%E8%BF%90%E7%AE%97%EF%BC%8C%E5%AE%9E%E7%8E%B0%E4%BA%860-4%E7%9A%84%E5%8A%A0%E6%B3%95%EF%BC%8C%E4%B9%8B%E5%90%8E%E6%9B%B4%E8%BF%9B%E4%BD%8D%E5%8F%AA%E9%9C%80%E8%A6%81%E5%B0%86%E5%85%A8%E5%8A%A0%E5%99%A8%E6%8A%BD%E8%B1%A1%E5%90%8E%E8%BF%9B%E4%BD%8D%E4%BE%9D%E6%AC%A1%E4%BA%A4%E7%94%B1%E4%B8%8B%E4%B8%80%E4%B8%AA%E5%85%A8%E5%8A%A0%E5%99%A8%E5%A4%84%E7%90%86%E5%8D%B3%E5%8F%AF%EF%BC%8C%E5%8D%8A%E5%8A%A0%E5%99%A8%E5%88%99%E6%98%AF%E5%BC%82%E6%88%96%E8%BF%90%E7%AE%97%E4%B8%AD%E4%B8%A4%E8%BE%93%E5%85%A5%E4%B8%BATRUE%E6%97%B6%E8%BE%93%E5%87%BA%E8%BF%9B%E4%BD%8D%E5%8D%B3%E5%8F%AF%E5%AE%9E%E7%8E%B0(AB%E8%BE%93%E5%85%A5%E5%86%8D%E5%8A%A0%E4%B8%80%E4%B8%AA%E4%B8%8E%E9%97%A8%E5%88%A4%E6%96%AD%E8%BF%9B%E4%BD%8D)%EF%BC%8C%E5%8D%B31+1%E8%BF%9B%E4%BD%8D%E5%BE%9710(%E4%BA%8C%E8%BF%9B%E5%88%B6)">^1</a>就没有接着做了)</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220809200217191-238648965.png" alt="异或门电路组成"></p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220809200336799-1928802352.png" alt="异或门图示"></p>
+<p>理解异或门组成后便可将其抽象，概括为与其它逻辑门一样直接用于运算即可，不必关心具体实现用了几根晶体管</p>
+<h3 id="二进制"><a href="#二进制" class="headerlink" title="二进制"></a>二进制</h3><h4 id="二进制表示正负整数"><a href="#二进制表示正负整数" class="headerlink" title="二进制表示正负整数"></a>二进制表示正负整数</h4><p>二进制以01表示任何整数，简单说便是逢2进1。</p>
+<blockquote>
+<p>例如</p>
+<ul>
+<li>十进制8可以二进制表示为0000 1000(前方0补位，表示八位二进制)</li>
+<li>十进制11可表示为二进制 0000 1011</li>
+</ul>
+</blockquote>
+<p>例子中二进制以<code>八位二进制数</code>至多表示0到255,即0至$2^8 -1$平时常见的二进制数通常是32位类型。而能表示到最大255是因为此处忽略了符号，即此前二进制表示为<code>无符号整数</code>，如果需要表达负数数值范围会改为 -128至127(1000 0000 至 0111 1111)</p>
+<p>而二进制也可以表示负数，二进制位数中<code>最高位为符号位</code>，其为1时则表示是负数。(即表示正数还是负数看人，也看下面的码制)</p>
+<blockquote>
+<p>如</p>
+<ul>
+<li>1000 1000 可表示为二进制 -8(八位二进制，有符号表示为-8，无符号则表示为136)</li>
+</ul>
+</blockquote>
+<h4 id="码制"><a href="#码制" class="headerlink" title="码制"></a>码制</h4><p>计算机中的符号数有三种表示方法，即原码，反码和补码。三种表示方法均有符号位和数值位两部分，符号位都是0表示正，1表示负。数值位则三种表示方法都不同。原码…嗯…就是原码即符号位加上数值位真值的绝对值</p>
+<blockquote>
+<p>例</p>
+<ul>
+<li>0000 1001 原码 &#x3D; 0000 1001 (八位二进制原码表达范围为-127至127)</li>
+</ul>
+</blockquote>
+<h5 id="反码"><a href="#反码" class="headerlink" title="反码"></a>反码</h5><p>将二进制每一位取反<a href="%E8%BF%9B%E5%88%B6%E6%95%B0%E5%8F%96%E5%8F%8D%E9%83%BD%E5%8F%AF%E4%BB%A5%E4%BB%A5%E8%AF%A5%E8%BF%9B%E5%88%B6%E4%BD%8D%E6%95%B0-1%E5%8E%BB%E5%87%8F%E6%AF%8F%E4%B8%80%E4%BD%8D%E6%95%B0%EF%BC%8C%E5%A6%82%E5%85%AB%E8%BF%9B%E5%88%B6%E5%8F%96%E5%8F%8D%E5%88%99%E7%94%A87%E5%87%8F%E6%AF%8F%E4%B8%80%E4%BD%8D">^2</a> (即用每一位都是1的二进制数去减操作数)</p>
+<blockquote>
+<p>例</p>
+<ul>
+<li>110001的反码 &#x3D; 001110 &#x3D; 111111 - 110001 (八位二进制反码表达范围为-127至127)</li>
+</ul>
+</blockquote>
+<h5 id="补码"><a href="#补码" class="headerlink" title="补码"></a>补码</h5><p>而补码则是原码取反码后+1(即补码想取原码需要-1后取反，但记-1后取反不如直接在该补码上再求补码也可得出原码)，<strong>注意计算机中数值都是以补码形式存储</strong></p>
+<blockquote>
+<p>例</p>
+<ul>
+<li>0101 补码 &#x3D; 1010 + 1 &#x3D; 1011 (八位二进制补码表达范围为-128至127)</li>
+</ul>
+</blockquote>
+<p>此处补码能表示至-128 是因为 1000 0000 数学上表示为128，而原码反码在8位内存中无法表示， 又因为表示补码有限保证符号位不变，而1000 0000恰好保证补码表示为负数，与0000 0000表示一个就浪费了，刚好多表示一个数即-128</p>
+<p><code>补码的补码</code>又等于<code>原码</code>即 <code>原码 取反 +1</code> <code>取反 +1</code> &#x3D; <code>原码</code></p>
+<blockquote>
+<p>例:</p>
+<p> 1001 补码 &#x3D; 0111 补码 → 1001</p>
+</blockquote>
+<h4 id="bit和byte"><a href="#bit和byte" class="headerlink" title="bit和byte"></a>bit和byte</h4><p>1位二进制为1bit,八位2进制则为1bytes</p>
+<blockquote>
+<p>1bytes &#x3D; 8bits</p>
+<p>1Mb &#x3D; 1024bytes</p>
+<p>1Gb &#x3D; 1024Mb</p>
+<p>1Tb &#x3D; 1024 Gb</p>
+</blockquote>
+<h4 id="二进制表示-浮点数"><a href="#二进制表示-浮点数" class="headerlink" title="二进制表示 浮点数"></a>二进制表示 浮点数</h4><p><code>浮点数</code>(如1.14514)等小数是程序中常用的数据类型，而现代计算机一般都以<code>IEEE 754</code>标准存储浮点数，在内存中存储的形式为:</p>
+<table>
+<thead>
+<tr>
+<th align="center">数字符号位(数符)</th>
+<th align="center">指数位(阶码)</th>
+<th align="center">有效位数(尾数)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">sign</td>
+<td align="center">exponent</td>
+<td align="center">fraction</td>
+</tr>
+</tbody></table>
+<p>不同长度的浮点数指数位于小数位分配数量不同，其中常用浮点数分配位数表如下</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">sign</th>
+<th align="center">exponent</th>
+<th align="center">fraction&#x2F;significand</th>
+<th align="center">all</th>
+<th align="center">offset</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">32位单精度浮点数</td>
+<td align="center">1</td>
+<td align="center">8</td>
+<td align="center">23</td>
+<td align="center">32</td>
+<td align="center">127</td>
+</tr>
+<tr>
+<td align="center">64位单精度浮点数</td>
+<td align="center">1</td>
+<td align="center">11</td>
+<td align="center">52</td>
+<td align="center">64</td>
+<td align="center">1023</td>
+</tr>
+</tbody></table>
+<p>以下是浮点数转二进制的例子:</p>
+<blockquote>
+<p>例如114.125(很想写514但是转成小数位数太多了)</p>
+<ol>
+<li>先把整数部分和小数部分转换成二进制<ol>
+<li>整数部分除二求余得: 1110010</li>
+<li>小数部分乘二取整得: 001<ol>
+<li>0.125 x 2 &#x3D;》 0 0.25 x 2 &#x3D;&gt; 0 0.5 x 2 &#x3D;&gt; 1 1 &#x3D;&#x3D;&gt; 001</li>
+</ol>
+</li>
+<li>合起来为1110010.001转换为二进制浮点数，即把小数点移动到整数位只有1，即为: 1.110010001 * 2^110 小数点左移6(二进制110)位.</li>
+</ol>
+</li>
+<li>二进制浮点数对应三部分的值<ol>
+<li>数字符号位: 浮点数为正数，此处为0</li>
+<li>指数计算公式为: 指数位数+偏移量， 偏移量为(2^(e-1)-1)；e为指数位数。此处指数位数为刚才左移的位数，此处为110，此处为32位单精度小数，偏移量为127，因此指数为: 110 + 01111111 &#x3D; 10000100,尾数则为小数点后数:110010001</li>
+<li>则最终结果为 <code>0</code> <code>10000100</code> <code>11001000100000000000000</code></li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<h4 id="二进制表示文字-Ascii码"><a href="#二进制表示文字-Ascii码" class="headerlink" title="二进制表示文字-Ascii码"></a>二进制表示文字-Ascii码</h4><p>用于表示文字(英文字母等)经常会使用的是<a target="_blank" rel="noopener" href="https://www.asciim.cn/">Ascii码</a>，由七位二进制组成的，默认只收录了128个字符，后128个是拓展Ascii码用于收容外来语字母，图形符号和数学符号</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220810142651252-250696817.png" alt="Ascii码节选"></p>
+<p>常用需要记的几个Ascii码如下</p>
+<blockquote>
+<ul>
+<li>字符0-9的Ascii码: 48 - 57</li>
+<li>大写字母A-Z的Ascii码: 65 - 90</li>
+<li>小写字母a-z的Ascii码: 97 - 122(大小写a相差32)</li>
+<li>空字符Ascii码: 0</li>
+<li>制表符(tab)Ascii码: 9</li>
+<li>换行符Ascii码: 10</li>
+</ul>
+</blockquote>
+<p>其余为了统一文本的unicode-8之类的就不拓展了，总之二进制可以表示的除了数字文字还有包括各类文件等所有东西…</p>
+<h3 id="算数逻辑单元-ALU"><a href="#算数逻辑单元-ALU" class="headerlink" title="算数逻辑单元 ALU"></a>算数逻辑单元 ALU</h3><h4 id="ALU-Arithmetic-and-Logic-Unit"><a href="#ALU-Arithmetic-and-Logic-Unit" class="headerlink" title="ALU | Arithmetic and Logic Unit"></a>ALU | Arithmetic and Logic Unit</h4><p><code>ALU</code>是计算机里<code>负责运算</code>的组件,基本由一个<code>算术单元</code>与一个<code>逻辑单元</code>组成，基本上是为了解决用逻辑门<code>实现加法</code>的单元</p>
+<h4 id="处理一位加法-半加器"><a href="#处理一位加法-半加器" class="headerlink" title="处理一位加法|半加器"></a>处理一位加法|半加器</h4><p>一位加法(两个一位input)真值表如下</p>
+<table>
+<thead>
+<tr>
+<th align="center">InputA</th>
+<th align="center">InputB</th>
+<th align="center">Output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">10</td>
+</tr>
+</tbody></table>
+<p>很明显除了第四行别的异或门都能处理，那么只要再异或门的输入ab上再加一个与门进行判断就能处理进位了</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220810164030775-1436036974.png" alt="半加器组成电路"></p>
+<h4 id="处理3bit加法-全加器"><a href="#处理3bit加法-全加器" class="headerlink" title="处理3bit加法|全加器"></a>处理3bit加法|全加器</h4><table>
+<thead>
+<tr>
+<th align="center">InputA</th>
+<th align="center">InputB</th>
+<th align="center">InputC</th>
+<th align="center">进位</th>
+<th align="center">总和</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+</tbody></table>
+<p>全加器则是处理<code>三位输入</code>，除了ab还有<code>进位输入c</code>，然后将ab输入的<code>输出和s</code>与<code>进位输入c</code>输入到<code>另一个半加器</code>中即可输入<code>abc的和</code>，而<code>该半加器</code>的<code>输出进位co</code>与<code>输入ab的输出进位co</code>进行<code>与操作</code>后即可得到abc的<code>进位co</code></p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220810165946743-656629503.png" alt="全加器"></p>
+<h4 id="八位行波进位加法器"><a href="#八位行波进位加法器" class="headerlink" title="八位行波进位加法器"></a>八位行波进位加法器</h4><p>将上一位全加器&#x2F;半加器的进位输出作为下一位全加器的进位输入，依靠八个FA(Full Adder)或者一个HA(Half Adder)和七个FA组成</p>
+<blockquote>
+<p>因为第一位没有进位输入所以可以使用HA</p>
+</blockquote>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220810173947335-1733073567.png" alt="八位行波进位加法器"></p>
+<h4 id="溢出-StackOverFlow"><a href="#溢出-StackOverFlow" class="headerlink" title="溢出 StackOverFlow"></a>溢出 StackOverFlow</h4><p>上面的八位行波进位加法器在最后一位仍然有进位输出，而这个加法器在执行是输出了该进位这说明加法运算超出了表达的最大范围255，导致数值溢出。这往往会造成一些程序bug，例如</p>
+<p>1.吃豆人256关崩溃</p>
+<img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220928130702482-424391079.png" alt="吃豆人256关崩溃" style="zoom: 25%;" />
+
+<p>2.核平甘地(貌似是传闻)</p>
+<blockquote>
+<p>游戏中角色有和平属性(侵略指数)，其中角色甘地的和平属性为1，而其中选择的阵营又有一个会导致角色和平数值-2，于是如果玩家或ai操控甘地角色选择了该阵营则为导致数值从1-2溢出到最高的255，于是甘地成为了游戏中最狂热的战争狂人。具体的表现就是喜欢拿核弹砸玩家的脸</p>
+</blockquote>
+<img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220810174803797-932308201.jpg" alt="和平核弹，小子" style="zoom: 50%;" />
+
+<h4 id="超前进位加法器"><a href="#超前进位加法器" class="headerlink" title="超前进位加法器"></a>超前进位加法器</h4><p>现代计算机上使用的加法器，对普通全加器进行改良后的并行加法器</p>
+<h4 id="ALU可实现操作与结构"><a href="#ALU可实现操作与结构" class="headerlink" title="ALU可实现操作与结构"></a>ALU可实现操作与结构</h4><p>ALU可实现的八种基本数学运算</p>
+<blockquote>
+<ul>
+<li>加法 ADD</li>
+<li>带进位的加法 ADD WITH CARRY</li>
+<li>减法 SUBTRACT</li>
+<li>带借位的减法 SUBTRACT WITH BORROW</li>
+<li>增量 INCREMENT</li>
+<li>减量 DECREMENT</li>
+<li>数字无改变通过 PASS THROUGH</li>
+</ul>
+</blockquote>
+<img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220810211826508-93700193.jpg" alt="img" style="zoom:50%;" />
+
+<p>AB是输入(8位)，R是输出(8位)，F是用于告诉ALU执行什么操作的操作码(4位)，D是输出的标志(1位)，八位ALU通常有三种标志</p>
+<ul>
+<li>溢出标志，操作溢出</li>
+<li>为0标志，通过一堆或门对每个数字进行判断得出是否全部位为0</li>
+<li>为负标志，相减看是否大于0判断</li>
+</ul>
+<h3 id="寄存器和内存"><a href="#寄存器和内存" class="headerlink" title="寄存器和内存"></a>寄存器和内存</h3><h4 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h4><p>随机存储器(RAM)在通电时才可存取数据，而不通电也可长期存储数据的则是持久存储(PMem)</p>
+<h4 id="一位数据存储"><a href="#一位数据存储" class="headerlink" title="一位数据存储"></a>一位数据存储</h4><p>只需要在AND，OR门输出上接一条回路到输出即可实现存储0和1</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220811225418427-1650437421.png" alt="OR GATE"></p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220811225347532-1577698395.png" alt="AND GATE"></p>
+<h4 id="锁存器-LATCH"><a href="#锁存器-LATCH" class="headerlink" title="锁存器 LATCH"></a>锁存器 LATCH</h4><p>组合逻辑门即可实现AND-OR锁存器(AND-OR LATCH)</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220811225617150-149376687.png" alt="AND-OR LATCH"></p>
+<p>其中SET的<code>0作为初始值</code>一开始被默认初始化存储在锁存器中，<code>不复位(复位设为0)</code>的情况下SET设为1即可将<code>SET值存储</code>于锁存器中。无论SET当前输入与锁存器中存储着什么，<code>复位(复位设为1)</code>后都会将存储内存与输出都<code>初始化为初始值0</code>‘</p>
+<p><strong>即<code>SET</code>控制锁存器存储并<code>输出1</code>，<code>RESET</code>控制锁存器存储并<code>输出0</code></strong></p>
+<h4 id="门锁-GATED-LATCH"><a href="#门锁-GATED-LATCH" class="headerlink" title="门锁 GATED LATCH"></a>门锁 GATED LATCH</h4><p>WRITE ENABLE控制数据是否可写，可写时通过DATA INPUT输入写入相应数据，不可写时则存储了数据可写时DATA INPUT写入的数据(初始值0)。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220811231147337-1995557595.png" alt="GATED LATCH"></p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220812003847351-768864455.png" alt="抽象"></p>
+<h4 id="寄存器-REGISTER"><a href="#寄存器-REGISTER" class="headerlink" title="寄存器 REGISTER"></a>寄存器 REGISTER</h4><p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220812013520423-2002453181.png" alt="并排排列的8位寄存器"></p>
+<p>寄存器是多个锁存器的集合。一个锁存器存储一位数字，想要存储多位数字的寄存器包含锁存器的个数称为位宽<code>WIDTH</code>。8位寄存器用一根总线(BUS)控制所有锁存器的<code>WRITE ENABLE</code>。则总用线为8条输入8条输出加1条总线等于17条。而为了避免并排放置锁存器增加线路造成的空间浪费，通常使用<code>矩阵排列锁存器</code>的方式来减少线路使用以减少空间。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220812013619617-963376843.png" alt="矩阵排列"></p>
+<p>启用单个锁存器只需要打开相应的行线和列线，确保WRITE ENABLE允许写入线为1才能写入数据。那么256位寄存器只需要 16根行线 + 16根列线 + 1根数据线+ 1根允许写入线+ 1根允许读取线</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220812014147058-1277659305.png" alt="矩阵排列组成原理"></p>
+<h4 id="指定寄存器中行列"><a href="#指定寄存器中行列" class="headerlink" title="指定寄存器中行列"></a>指定寄存器中行列</h4><p>使用<code>地址</code>描述寄存器的行列，对于256位寄存器(16*16的矩阵)只需要两个4BITS的行地址和列地址即可。如选择4行2列则地址为”01000010“</p>
+<p>为了实现将地址二进制位传给寄存器，需要使用到<code>多路复用器MULTIPLEXER</code>,输入4BITS的二进制地址后会选择某一行或某一列的线将其设为1</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220812015023605-439680229.png" alt="多路复用器"></p>
+<h4 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h4><p>接着抽象出一个256位内存，8位地址分别是行的4位与列的4位</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220812020507016-414358226.png" alt="A new level of abstraction"></p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220812020816333-465966993.png" alt="并列组合"></p>
+<p>而单独一个内存也只能存储256bits的数据，也做不了甚么，于是进一步并列组成，将8个256bits的内存组成一个可以存储256byte(1byte &#x3D; 8bits)的RAM。</p>
+<p>最后将此进一步抽象为一个整体的可寻址内存，现代计算机的内存都是采取类似的方法迭代扩大来扩大内存规模。而内存地址增多，地址的bits也需要不断增加。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220812021009315-757469025.png" alt="可寻址内存"></p>
+<p>以上是一块用锁存器组成一步步抽象出来的SRAM(静态随机存取存储器)</p>
+<h3 id="中央处理器CPU"><a href="#中央处理器CPU" class="headerlink" title="中央处理器CPU"></a>中央处理器CPU</h3><h4 id="CPU-Central-Processing-Unit-组成与用处"><a href="#CPU-Central-Processing-Unit-组成与用处" class="headerlink" title="CPU | Central Processing Unit 组成与用处"></a>CPU | Central Processing Unit 组成与用处</h4><p>前面的<code>ALU(算术逻辑单元)</code>用于<code>执行计算</code>，<code>REGISTER(寄存器)</code>用来<code>存一个很小的值</code>，<code>RAM(内存)</code>用于在<code>不同地址存大量值</code>，而除了独立于CPU的内存外加上<code>时钟</code>与其它组件组合起来就可以基本组成一个CPU。而组成这些组件时<code>会忽略部分细节的抽象化</code>，用一条线链接两个组件时这条线只是所有必须线路的抽象，而这种抽象的高层次视角称为<code>微体系架构</code>。</p>
+<p>CPU负责<code>执行程序</code>，而<code>程序是指令的有序集合</code>，根据指令的不同CPU会执行不同的操作。如计算指令，CPU会让ALU进行数学运算，也可能是内存指令，CPU会和内存通信，然后读写值。</p>
+<p>对CPU支持的所有指令分配一个id组成指令表，在假设的下表中有四个指令，前四位bit存储的<code>操作码</code>表明当前指令的操作，后四位则是<code>操作涉及的数据来源</code>(内存地址或寄存器)。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220812154447733-1749225690.png" alt="指令表"></p>
+<p>而CPU指令的组成还需要两个寄存器,分别存储当前指令与指令的内存地址</p>
+<ol>
+<li>指令地址寄存器 : 存储当前指令的内存地址</li>
+<li>指令寄存器 : 存储当前指令</li>
+</ol>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220812161555373-1850153066.png" alt="指令运行"></p>
+<p>上图为假设在RAM中已存放程序然后执行的流程。指令的运行有三个阶段，分别是<code>取指令</code>，<code>解码</code>和<code>执行</code>。</p>
+<h4 id="指令运行流程"><a href="#指令运行流程" class="headerlink" title="指令运行流程"></a>指令运行流程</h4><blockquote>
+<ol>
+<li>取指令<ol>
+<li>指令地址寄存器<code>链接内存</code>，内存取得指令地址内容将<code>对应地址数据内容</code>传到<code>指令寄存器</code>中(图中内存将第一位内容00101110传入指令寄存器)</li>
+</ol>
+</li>
+<li>解码<ol>
+<li>指令由<code>控制单元</code>根据指令表解码(控制单元由逻辑门组成，用于判断指令)，从前四位匹配得出当前是LOAD_A指令,将后四位内存地址中的值(RAM[1110] &#x3D; RAM[14] &#x3D; 0011 &#x3D; 3)存入A寄存器中</li>
+</ol>
+</li>
+<li>执行<ol>
+<li>指令判断后根据需要打开允许写入和读取线等将数据按照指令执行。执行完毕后<code>指令地址寄存器+1</code>以进行下一个指令。执行就结束了</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220812174404148-1646196121.png" alt="解码到执行"></p>
+<p>因为判断每一个指令需要相应的逻辑电路，所以这里将这些抽象为一个整体部件控制单元(Control Unit)</p>
+<p  style="color:#d81174;width:100%;text-align:center;">A <span  style="font-weight:bold;font-size:21px;">NEW LEVEL</span> OF <span style="color:#fed200;font-weight:bold;font-size:21px;text-shadow:0 0 5px #e14667;text-decoration: underline;border-bottom: #fed200 1px solid ;">ABSTRACTION</span></p>
+
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220812174845940-1147293703.png" alt="控制单元"></p>
+<p>为了处理运算指令，还需要组合上ALU。例如相加操作，控制单元接受指令和数据后，将数据和操作码输入ALU，然后ALU将输出值传回控制单元，关闭ALU，将输出值传入指定的寄存器中。最后指令地址+1结束该次循环。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220812185921280-342255187.png" alt="ALU组合"></p>
+<p>以上指令运行流程一次的速度就称为<code>时间速度</code>单位时Hz,1Hz代表一秒执行一个周期。而cpu中是自动执行，时钟以精确的时间间隔触发电信号来确保cpu按照一定间隔自动执行指令。</p>
+<p>CPU<code>超频提高时钟速度</code>以<code>提升CPU性能</code>但<code>过度超频容易过热</code>，降频降低时钟速度以<code>降低CPU性能</code>以<code>省电</code>。</p>
+<h3 id="指令和程序"><a href="#指令和程序" class="headerlink" title="指令和程序"></a>指令和程序</h3><h4 id="指令集"><a href="#指令集" class="headerlink" title="指令集"></a>指令集</h4><p>指令集是对于特定CPU存储在其内部的固定程序，通过指令集中的不同指令按照一定顺序排列就可以实现不同的程序。这里拓展上次的四条语句</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220813185329044-429482247.png" alt="拓展语句"></p>
+<h4 id="循环和条件指令"><a href="#循环和条件指令" class="headerlink" title="循环和条件指令"></a>循环和条件指令</h4><p>其中JUMP_等命令适用于控制程序循环，类似c语言的goto(goto不被建议使用)。例如<code>JUMP_NEG</code>指令会根据ALU中的计算的结果(此处为小于0)决定是否跳转，除了<code>JUMP_NEG</code>判断负数跳转外，包括<code>JUMP IF EQUAL</code>(相同跳转),<code>JUMP IF GREATER</code>(大于跳转)等都可以使程序实现循环执行的功能。</p>
+<h4 id="指令长度"><a href="#指令长度" class="headerlink" title="指令长度"></a>指令长度</h4><p>此处假设cpu指令都是8位，操作码占了4位，最多也只能代表16个指令。相对如今计算机来说非常少。现代计算机有两种方法来解决</p>
+<ol>
+<li>用更多位代表指令，例如拓展至32位或者64位指令长度</li>
+<li>或者使用<code>可变指令长度</code>，例如一些指令后面不会跟随数据的如HALT,就会立马执行节省后面的指令位，而执行到JUMP等携带数据的指令能利用到之前节省的空间(个人理解)，携带数据的指令后面的被称为<code>立即值(立即数)</code>，这样设计，指令可以是<code>任意长度</code>。</li>
+</ol>
+<h3 id="高级CPU设计"><a href="#高级CPU设计" class="headerlink" title="高级CPU设计"></a>高级CPU设计</h3><blockquote>
+<p>过了下一章之后就偏软件了，虽然也很核心(例如数据结构啥的)但估计会筛去一点觉得不重要的</p>
+</blockquote>
+<h4 id="为CPU提速"><a href="#为CPU提速" class="headerlink" title="为CPU提速"></a>为CPU提速</h4><p>为CPU提升速度早期计算机到现代计算机厂商和科学家们发明了各种新技术来提高性能。</p>
+<ol>
+<li><p>减少晶体管切换时间</p>
+<ol>
+<li>早期提速的方式便是<code>减少晶体管的切换时间</code>，使晶体管组成了逻辑门，ALU以及各种部件</li>
+</ol>
+</li>
+<li><p>利用复杂电路实现算法</p>
+<ol>
+<li>例如除法和乘法需要程序多次运行减法和加法，为了省去循环的功夫，现代cpu直接在<code>硬件层面上设计</code>了除法等<code>复杂电路</code>以节省某些运算。让cpu更大更复杂，但也加快了运行速度</li>
+</ol>
+</li>
+<li><p>给CPU增加缓存</p>
+<ol>
+<li>RAM是CPU之外的独立组件，通过总线(Bus)传递数据，为了避免数据传输带来的延迟，解决的方法是为CPU<code>增加一点RAM作为缓存</code>。读取时RAM将一批数据提前传入CPU缓存，这样处理的时候CPU直接从离得近的缓存中获取数据就比从RAM中获取数据要快</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>如果想要的数据已存在缓存中则叫做<code>缓存命中</code>，否则叫做<code>缓存未命中</code>。缓存也可以作为临时空间存储一些运算过程中的中间值，适合长&#x2F;复杂的运算。但是计算完后的值想要存储会先存入缓存中，而缓存中的值可能还有运算的中间值导致缓存和RAM内数据不一致，因此缓存里的数据要对RAM里的数据进行<code>同步更新</code>。对此缓存里的每块空间都有一个叫做<code>脏位</code>的标记声明该数据<code>是否修改过</code>。同步更新一般是发生在缓存满了，又需要缓存时。这时会检查缓存中的脏位，如果是脏的就将数据写回RAM中。</p>
+</blockquote>
+<h4 id="指令运行方式"><a href="#指令运行方式" class="headerlink" title="指令运行方式"></a>指令运行方式</h4><p>还可以通过不同的指令运行方式以提升CPU速度。</p>
+<ol>
+<li>顺序串行执行<ol>
+<li>严格按照顺序上一条命令结束才执行下一条命令</li>
+<li><img src="https://pic1.zhimg.com/80/v2-024095a35bc161fba4464cb5b67bc7e4_1440w.jpg" alt="串行执行"></li>
+</ol>
+</li>
+<li>顺序并行执行<ol>
+<li>在上一条指令执行时就处理下一个指令的解码步骤，下下条指令的读取步骤。</li>
+<li><img src="https://pic1.zhimg.com/80/v2-625d9b2a4084fe9f4ac7f23781df0c60_1440w.jpg" alt="并行执行"></li>
+</ol>
+</li>
+<li>乱序执行<ol>
+<li>cpu进一步<code>动态排序</code>有依赖关系的指令，最小化这种流水线停工时间，非常复杂但是高效率。类似于贪心算法中的区间调度问题</li>
+</ol>
+</li>
+<li>推测执行 | 分支预测<ol>
+<li>简单的处理器看到JUMP指令会等待JUMP的条件值再继续执行，而高级的处理器会<code>提前猜测</code>哪个条件可能大，提前把指令放在流水线上，如果猜测正确立即执行，错误则清空刚才加载的指令重新加载。而为了减少清空次数提高猜测准确率的方法就是<code>分支预测</code>，现代计算机的猜测准确率高达90%</li>
+</ol>
+</li>
+</ol>
+<p>cpu上还可以使用<code>超标量处理器SUPERCALAR PROCESSOR</code>一次性处理多条指令(类似多线程)。为出现频率很高的指令加多几个相同的电路,ALU执行。</p>
+<p>而以上的流程是针对一个流水线CPU来说的，另一个方法是运行多个指令流。CPU芯片内的多个独立处理单元(多核)就像有多个CPU能够合作运算(共用一个CPU的缓存)。如果多核还不够就用多个cpu</p>
+<h3 id="早期编程方式"><a href="#早期编程方式" class="headerlink" title="早期编程方式"></a>早期编程方式</h3><h4 id="可编程纺织机"><a href="#可编程纺织机" class="headerlink" title="可编程纺织机"></a>可编程纺织机</h4><p>用孔板控制的<code>可编程纺织机</code>，用于为衣服织出复杂图案</p>
+<ol>
+<li><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220814225711949-249810888.png" alt="可编程纺织机"></li>
+</ol>
+<h4 id="穿控卡纸编程"><a href="#穿控卡纸编程" class="headerlink" title="穿控卡纸编程"></a>穿控卡纸编程</h4><p>根据穿孔卡孔有无决定数据有无的<code>穿控卡纸编程</code>，存的是数据而不是程序，曾用于美国人口普查，穿孔表示信息状态。</p>
+<ol>
+<li><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220814231853472-1506050623.png" alt="穿控卡纸编程"></li>
+</ol>
+<h4 id="插线板编程"><a href="#插线板编程" class="headerlink" title="插线板编程"></a>插线板编程</h4><p>通过插电线控制机器不同部分传数据和信号的<code>插线板编程</code>，用于使计算机正确执行不同运算，但是更换程序换线流程在当时计算机上非常繁琐，机电计算机普遍采用</p>
+<ol>
+<li><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220814232115037-1696928336.png" alt="插线板编程"></li>
+</ol>
+<h4 id="冯诺依曼体系结构"><a href="#冯诺依曼体系结构" class="headerlink" title="冯诺依曼体系结构"></a>冯诺依曼体系结构</h4><p>现在计算机的基础-<code>冯诺依曼体系结构</code>，将程序与所需数据，程序产生数据都存在<code>内存</code>中。早期冯诺依曼结构计算机仍旧使用穿孔纸卡的方式将程序指令传入内存中，也使用打孔的方式输出程序运行之后的结果。冯诺依曼结构组成包括</p>
+<ol>
+<li>处理器(包括ALU)</li>
+<li>数据寄存器</li>
+<li>指令寄存器</li>
+<li>指令地址寄存器</li>
+<li>内存(存数据和指令)</li>
+</ol>
+<h4 id="面板编程"><a href="#面板编程" class="headerlink" title="面板编程"></a>面板编程</h4><p>用一大堆开关和按钮控制，通过开关进行二进制代码编写运行程序。面板上的指示灯则表示函数的状态和内存的值</p>
+<ol>
+<li><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220815034912249-1077631113.png" alt="面板编程"></li>
+</ol>
+<h3 id="编程语言发展史"><a href="#编程语言发展史" class="headerlink" title="编程语言发展史"></a>编程语言发展史</h3><h4 id="机器语言"><a href="#机器语言" class="headerlink" title="机器语言"></a>机器语言</h4><p>使用<code>二进制(机器语言,机器码)</code>编写的程序，早期编写时将对应的<code>操作码</code>编写成<code>操作码表</code>，写入程序前用操作码在纸上写出相应的<code>伪代码</code>，写入时对照操作码表喂入计算机运行。</p>
+<h4 id="汇编语言"><a href="#汇编语言" class="headerlink" title="汇编语言"></a>汇编语言</h4><p>将每个操作码分配一个方便记忆的<code>助记符</code>，助记符后紧跟数据形成完整指令。于是可以使用诸如<code>LOAD_A 14</code>等形式编写代码而不是101010这样子写。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220817134801656-782430105.png" alt="汇编语言表"></p>
+<p>写成的汇编语言通过<code>汇编器</code>来通过输入助记符等文字指令自动转换成二进制指令。</p>
+<h4 id="高级语言"><a href="#高级语言" class="headerlink" title="高级语言"></a>高级语言</h4><p>A-0语言是相比汇编语言更高级的语言，一行高级语言可能会转换成几十条二进制指令。同时当时还出现了<code>编译器</code>的概念：将高级语言转换成汇编语言或CPU可以直接执行的机器码(机器语言)这种低级语言。高级语言抽象了与底层硬件如内存，寄存器交互的细节。出现了如<code>变量</code>这种代表<code>内存地址</code>的抽象。</p>
+<p>例如图中Python和汇编语言的对比，Python不需要像汇编一样考虑从哪个内存位置中存取值，计算结果存储在哪个寄存器等问题。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220817135550751-1828190406.png" alt="汇编语言对应高级语言(Python)"></p>
+<p>而主宰了早期计算机编程的语言Fortran语言比同等的手写汇编代码短20倍，并且Fortran编译器(Compiler)会把代码转成机器码，虽然运行速度会慢一点，但是代码编写速度会大大提高。</p>
+<h4 id="通用编程高级语言"><a href="#通用编程高级语言" class="headerlink" title="通用编程高级语言"></a>通用编程高级语言</h4><p>早期大部分语言和编译器只能运行在一种计算机上，升级电脑后可能导致所有代码需要重写(现在不少语言就为了兼容老版本会留一些兼容性处理，但不是一直兼容，会标记代码过时或许将在未来某个版本废弃)。于是当时人们组成联盟开发了一种通用商业语言<code>Cobol</code>，这种语言使当时所有编译器都可以接受相同的Cobol代码。</p>
+<ul>
+<li>1960年代 Algol, Lisp, Basic</li>
+<li>70年代 Pascal, C, Smalltalk</li>
+<li>80年代 C++, Objective-C</li>
+<li>90年代 Python, Java, Ruby</li>
+<li>新千年 Swift, C#, Go</li>
+</ul>
+<h3 id="编程原理-语句和函数"><a href="#编程原理-语句和函数" class="headerlink" title="编程原理-语句和函数"></a>编程原理-语句和函数</h3><blockquote>
+<p>通用的语法和函数</p>
+</blockquote>
+<h4 id="语句和语法"><a href="#语句和语法" class="headerlink" title="语句和语法"></a>语句和语法</h4><p>语句是指提前设定语法规则后在编程语言中能表达一定含义的编程命令。以下是一般的<code>赋值语句</code>，使用Python实现<br>当下大部分的编程语言都是<code>自顶向下的顺序执行</code>，上面的代码就是从上至下创建了三个变量abc，并将对应的值赋值给了相应的变量<br>此处赋值语句只需要注意 变量名&#x3D;变量值这样的形式即可</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">114514</span></span><br><span class="line">b = <span class="number">1919810</span></span><br><span class="line">c = <span class="number">42</span></span><br></pre></td></tr></table></figure>
+
+<p>然后顺序执行还不足够，还需要相应的<code>流程控制语句</code>控制代码执行的顺序等状态。最常见的流程控制语句如<code>条件判断语句if</code>简单说就是<code>如果什么为真就做什么，否则就做其余什么</code>在if语句内条件为真则执行if下面的代码，否则执行else下面的代码</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220817143805086-1747771925.png" alt="if语句在不同语言的使用"></p>
+<p>除了if这种只能判断一次的语句，还有可以多次循环判断的语句<code>while</code>, while判断条件为真时则重复执行内部代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">8</span></span><br><span class="line"><span class="comment"># 程序输出8 7 6 5 4</span></span><br><span class="line"><span class="keyword">while</span> a&gt;<span class="number">3</span>:</span><br><span class="line">    <span class="built_in">print</span>(a)</span><br><span class="line">    a = a - <span class="number">1</span></span><br><span class="line">    <span class="comment"># 赋值为变量自身当前值-1</span></span><br></pre></td></tr></table></figure>
+
+<p>或者<code>for循环结构</code>，一般是判断当前变量大小进行指定次数的循环</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># range生成相应范围整数数组[0, 1, 2, 3, 4]</span></span><br><span class="line"><span class="keyword">for</span> a <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">    <span class="built_in">print</span>(a)</span><br><span class="line">    <span class="comment"># 输出0 1 2 3 4</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)&#123;</span><br><span class="line">	<span class="variable language_">console</span>.<span class="title function_">log</span>(i);</span><br><span class="line">    <span class="comment">//js代码，输出0 1 2 3 4</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>将代码封装成函数是将代码语句封装隐藏程序复杂度与提高复用度的方法。即将<code>重复的代码抽象成直接调用的函数语句</code>有些语言也称为方法或子程序。类似模块化，将一些底层的东西封装起来只需要知道其输入，输出等状态。内部细节不需要特别在意。当前的低代码平台感觉也是同样的逻辑，于是现在编程语言中大部分语言都不需要自己编写代码实现数学函数，例如求幂，角度弧度互换等基本都已经被专业人员预先写好了(一般被预先写好封装的代码函数集合叫做库Libraries)。当然到算法就不可避免的需要自己编写一些算法的实现，如快速幂</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// n代表指数，m代表次幂</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">pow</span><span class="params">(<span class="type">int</span> n, <span class="type">int</span> m)</span> </span><br><span class="line">    <span class="type">int</span> <span class="variable">res</span> <span class="operator">=</span> <span class="number">1</span>;                     </span><br><span class="line">    <span class="type">int</span> <span class="variable">base</span> <span class="operator">=</span> n;                    </span><br><span class="line">    <span class="keyword">while</span>(m != <span class="number">0</span>) &#123;                  </span><br><span class="line">        <span class="keyword">if</span> ((m&amp;<span class="number">1</span>) == <span class="number">1</span>) &#123;            </span><br><span class="line">            res = res * base;        </span><br><span class="line">        &#125;                            </span><br><span class="line">        base = base * base;          </span><br><span class="line">        m = m &gt;&gt; <span class="number">1</span>;                  </span><br><span class="line">    &#125;                                </span><br><span class="line">    <span class="keyword">return</span> res;                      </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="算法入门"><a href="#算法入门" class="headerlink" title="算法入门"></a>算法入门</h3><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220817152435050-1139094099.png" alt="大家最喜欢的算法" style="zoom: 25%;" />
+
+<p>算法是用于解决某种问题的具体方法，解决方法通常关注<code>所需要的时间</code>和<code>所需要的空间</code>两个因素。</p>
+<h4 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h4><p>常见的算法可以说都是在排序，常见的顺序如升序 1 2 3 4 ，降序 4 3 2 1 以及各种特定要求下的顺序… 最常见的算法如冒泡排序,希尔排序,归并排序,选择排序,快速排序,插入排序等(虽然之前学过一个月算法，但也只记得冒泡怎么写了)。视频中选择排序就是先扫一遍数据，最小的放最前面，然后从第二位开始重复扫数据放最小到第二第三第四位到数据末尾排好了。复杂度O(n^2)</p>
+<p>复杂度又是个需要细讲的东西了，简单说就是用算法复杂度表示算法的执行效率，如单次操作一条语句即可完成程序，那算法复杂度就是O(1)，如果需要循环整个数组(设数组长为n)，那复杂度就是O(n)。这种就是大O表示法。其中n是指最优情况和最差情况的平均值，且忽略常系数取最高位。括号中的值描述了算法的增速趋势</p>
+<p>如选择排序，最优情况下数据本身是升序，那就不用排序，全部逆序的最差情况就需要执行交换操作n-1次，耗时约为 (n-1) + (n-2) + (n-3) + … + 1 ，则总计T &#x3D; [n*(n-1)]&#x2F;2 &#x3D; (n^2)&#x2F;2 - n&#x2F;2 取最高位忽略常系数为n^2</p>
+<p>图搜索也是常见的问题之一，求有权图最短路径通常使用<em>Dijkstra</em>算法，复杂度O(n^2)</p>
+<p>等下次蓝桥之前或许会提前再次夯基础用算法4复习做个相关的算法笔记。</p>
+<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><p>数据结构用于格式化要处理的数据，方便算法统一处理读取。</p>
+<p>常见数据结构</p>
+<ul>
+<li>数组 Array</li>
+<li>字符串 String</li>
+<li>矩阵 Matrix</li>
+<li>结构体 Struct</li>
+<li>指针 Pointer</li>
+<li>节点 Node</li>
+<li>链表 Linked List</li>
+<li>队列 Queue</li>
+<li>栈 Stack</li>
+<li>二叉树 Binary Tree</li>
+<li>红黑树 Red-Black Tree</li>
+<li>堆 Heaps</li>
+</ul>
+<h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><p>数组在内存地址中表示为一组连续的内存空间，长度为10的数组arr可以使用 arr[0] ~ arr[9]的地址存储数值。数组变量本身一般表示的是首元素地址arr[0]。即创建数组后得到一个可访问连续左闭右开区间的容器，使用<code>数组名[下标]</code>获取数组内存地址引用以修改或获取值。</p>
+<h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><p>字符串是由字符组成的不可变数组，一般表示为<code>&quot;String&quot;</code>可以表现为<code>[&#39;S&#39;,&#39;t&#39;,&#39;r&#39;,&#39;i&#39;,&#39;n&#39;,&#39;g&#39;,NULL]</code>数组，末尾通常是空值NULL表示字符串末尾。</p>
+<h4 id="矩阵"><a href="#矩阵" class="headerlink" title="矩阵"></a>矩阵</h4><p>大致可以看作嵌套数组，如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">matrix = [</span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],</span><br><span class="line">[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>],</span><br><span class="line">[<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>常用于处理图像，表格等情况</p>
+<h4 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h4><p>将多种不同类型的数据抽象在一起表示为结构体，类似于面对对象的感觉。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#incude<span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">// 定义结构体</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">	<span class="type">int</span> a;</span><br><span class="line">	<span class="type">int</span> b;</span><br><span class="line">&#125; my_struct,my_test;<span class="comment">// 结构体名字</span></span><br><span class="line"><span class="comment">// c语言程序入口</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Please input:&quot;</span>);</span><br><span class="line">    <span class="comment">// 获取输入设置参数</span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>,&amp;(my_struct.a),&amp;(my_struct.b));</span><br><span class="line">    <span class="comment">// 对象赋值，应该是引用传递</span></span><br><span class="line">    my_test = my_struct;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d %d\n&quot;</span>,my_test.a,my_test.b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h4><p>用到两个类型，<code>指针</code>表示一个指向内存地址的变量方便调用设置值，一个<code>节点</code>包括定义值和指向前后内存地址的指针(可选)。 <code>节点</code>也是一种定义的结构体，包括变量值和指针，多个连成的节点就叫链表。</p>
+<blockquote>
+<p>链表的设计于相对数组开辟一串连续的内存空间，链表不用开辟连续的内存空间，因为节点指针可以自己指向别的内存地址。而数组连续的内存空间可以保证查询数据快(可以使用下标)，而链表需要从第一个节点一个个往下一个节点的指针中递归查询。</p>
+</blockquote>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220819155421134-1397204897.jpg" alt="链表"></p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220901112730094-967847949.png" alt="链表维护当前节点和头节点"></p>
+<h4 id="队列和栈"><a href="#队列和栈" class="headerlink" title="队列和栈"></a>队列和栈</h4><p>队列和栈基于链表或数组都可以实现。<code>队列</code>是<code>先进先出(FIFO)</code>的数据结构，像排队一样数据在末尾入队插入，出队将队首的数据取出。<code>栈</code>像是羽毛球筒一样的<code>先进后出(FILO)</code>的结构,数据插入提取都是从栈顶(末尾)操作，想象一个羽毛球筒，入栈是扔进羽毛球叠到最后(栈顶)，出栈则是倒出最后(栈顶)一个羽毛球。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220819162912537-933568587.gif" alt="入♂栈"></p>
+<h4 id="树"><a href="#树" class="headerlink" title="树"></a>树</h4><p>二叉树表现为一个节点最多拥有两个指针指向两个子节点，往下指向更多子节点,子节点又各自指向一个或两个子节点的树结构。最高的节点为子节点，其余都是子节点，妹有任何子节点的节点为叶节点。像是从上至下的有向图，从根到叶是单向的。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220819163427947-1032936256.jpg" alt="树"></p>
+<h4 id="图"><a href="#图" class="headerlink" title="图"></a>图</h4><p>图是数据<code>节点</code>间通过<code>边</code>链接，边可以有权值和方向，通常是求一个节点到其它节点的最短路径啥的问题会用到图。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220819173157393-134812365.jpg" alt="图"></p>
+<p>其余数据结构包括堆，树拓展的b+树,红黑树,哈夫曼树啥的希望有生之年能了解以下(</p>
+<h3 id="图灵"><a href="#图灵" class="headerlink" title="图灵"></a>图灵</h3><h4 id="可判定性的问题"><a href="#可判定性的问题" class="headerlink" title="可判定性的问题"></a>可判定性的问题</h4><p>是否存在一种可以回答任何正确的逻辑语句正确与否的算法。</p>
+<h4 id="图灵机"><a href="#图灵机" class="headerlink" title="图灵机"></a>图灵机</h4><p>图灵机是一台<code>理论上的计算设备</code>，有无限可以<code>存储符号的纸带</code>和<code>读写符号的读写头</code>以及一个<code>保存当前状态的状态量</code>。加上一组<code>描述机器运行的规则</code>，在<code>理论上</code>有足够的内存和时间可以实现任何计算(类似无限猴子)</p>
+<h4 id="停机问题"><a href="#停机问题" class="headerlink" title="停机问题"></a>停机问题</h4><p>停机问题指是否存在可以在不执行某一问题的前提下判断图灵机是否会一直运算下去，即是否存在一个<code>程序</code>能够判断<code>另外一个程序</code>在<code>特定的输入</code>下，是会<code>给出结果(停机)</code>还是会<code>无限执行下去(不停机)</code></p>
+<p>而结论是没有这样的算法&#x2F;程序, 即<code>不是所有问题都能用计算解决</code></p>
+<p>例如一个函数可以判断出另一个函数是否会停机</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 伪代码 Pseudocode</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">is_halt</span>(<span class="params">program, <span class="built_in">input</span></span>) -&gt; <span class="built_in">bool</span></span><br><span class="line"><span class="comment"># 如果程序program有返回则返回true表示会停机，无返回则返回false表示不停机</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 无限循环函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">loop</span>():</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">True</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fuc</span>(<span class="params">inp</span>)</span><br><span class="line">	<span class="keyword">if</span> inp == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        loop()</span><br><span class="line"><span class="comment"># 停机</span></span><br><span class="line">is_halt(fuc,<span class="number">0</span>)</span><br><span class="line"><span class="comment"># 不停机</span></span><br><span class="line">is_halt(fuc,<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 以下是利用自我指涉证明停机问题无法解决的hack函数</span></span><br><span class="line"><span class="comment"># 自我指涉一般指自我描述</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">hack</span>(<span class="params">program</span>)：</span><br><span class="line">	<span class="keyword">if</span> is_halt(program,program):</span><br><span class="line">        loop()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    </span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">调用时会引发矛盾和悖论 如果停机程序is_halt认为hack(hack)会停机</span></span><br><span class="line"><span class="string">那么实际上是不断递归循环调用自己不停机</span></span><br><span class="line"><span class="string">如果认为hack(hack)不会停机，那么返回空输出(return) ，那么实际上hack(hack)会立即返回结果</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span> </span><br><span class="line">is_halt(hack,hack)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220820234132279-1939785060.jpg" alt="自我指涉例子"></p>
+<h4 id="人工智能与图灵测试"><a href="#人工智能与图灵测试" class="headerlink" title="人工智能与图灵测试"></a>人工智能与图灵测试</h4><p>图灵测试指如果计算机能让人类相信它是人类才算是智能。人工智能就是制造智能的机器，更特指制作人工智能的程序。人工智能模仿人类的思考方式使计算机能智能的思考问题，人工智能通过研究人类大脑的思考、学习和工作方式，然后将研究结果作为开发智能软件和系统的基础。</p>
+<h3 id="软件工程"><a href="#软件工程" class="headerlink" title="软件工程"></a>软件工程</h3><blockquote>
+<p>将大型软件的代码进行科学管理的一门学科。</p>
+</blockquote>
+<h4 id="面对对象"><a href="#面对对象" class="headerlink" title="面对对象"></a>面对对象</h4><p>这里面对对象是将<code>代码结构化</code>优化层级管理也能<code>隐藏复杂度</code>的一种方法。如将代码打包成函数，这里将相关代码和函数都打包在一起打包成对象。如</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span>&#123;</span><br><span class="line">    String name;</span><br><span class="line">    <span class="type">int</span> age;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAge</span><span class="params">(<span class="type">int</span> age)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getAge</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//将person相关属性函数封装成对象</span></span><br><span class="line"><span class="type">Person</span> <span class="variable">p</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line">p.setAge(<span class="number">24</span>);</span><br><span class="line">System.out.printf(<span class="string">&quot;%d岁，是学生&quot;</span>, p.getAge());</span><br></pre></td></tr></table></figure>
+
+<p>一个对象可以包含其他对象，函数和变量。需要访问对象中包含对象的某个函数时就需要通过该对象不断向内寻找<code>Person.Organ.Hand.CatchSomething(target)</code>，这样将底层代码封装提供继承以隐藏复杂度(当然学习代码编写还是要看源码是怎么实现的)</p>
+<h4 id="开发文档"><a href="#开发文档" class="headerlink" title="开发文档"></a>开发文档</h4><p>面向对象可以将代码模块化使人们可以直接使用它而<code>不关心内部细节</code>，这样子团队协作就可以专注于自己的模块使多人能够同时工作于一个大项目。而<code>开发文档</code>就是用于<code>协定统一开发标准</code>的一种方式。开发完项目后，团队需要完成解释文档，帮助理解代码都在做什么，以及定义好<code>程序编程接口(API)</code></p>
+<p>API帮助不同程序员合作且不需要知道具体细节只用知道调用方式。API还控制项目哪些函数和数据开放给外部访问调用，哪些只提供内部访问使用。</p>
+<p>面向对象的核心是<code>隐藏复杂度</code>和<code>选择性公开代码功能</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="string">&quot;这个字符串外部无法调用&quot;</span></span><br><span class="line"><span class="comment">// 这个方法外部可调用，这样避免外部直接调用到程序内部的变量 方便进一步处理数据等操作</span></span><br><span class="line"><span class="keyword">public</span> String <span class="keyword">void</span> <span class="title function_">getStr</span><span class="params">()</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">this</span>.str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="集成开发环境IDE"><a href="#集成开发环境IDE" class="headerlink" title="集成开发环境IDE"></a>集成开发环境IDE</h4><p>现代软件的开发，一般需要借助开发器。开发器集成了编译、调试、整理代码等功能，因为集成了所有的东西，因此叫集成开发环境，简称<code>IDE(Integrated Develop Environment)</code></p>
+<p>如果代码编译时出现错误，IDE会定位出错误代码并给出提示来解决问题。运行时也可以通过打断点等方式来调试debug。</p>
+<h4 id="源代码管理"><a href="#源代码管理" class="headerlink" title="源代码管理"></a>源代码管理</h4><p>源代码管理也叫版本控制，大型程序都有源代码管理，他们将代码放到另一个称为代码仓库的服务器上可实现远程开发多地协作的操作。因为放在远程服务器做着代码管理，代码出现错误时也可以通过备份找到未修改前的版本并定位出是谁修改了哪里的代码。通常使用git,svn等工具进行版本控制。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220821211416977-1949795927.png" alt="git"></p>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><p>测试代码是相当重要的一环，测试一般由个人或者小团队完成。测试又统称为<code>质量保存测试</code>，简称QA，它需要严格测试软件的各方面并模拟各种情况看看软件会不会出错。特别是某些金融，安全相关的地方更是需要特别注意。程序在发布前往往会有多个版本，<code>beta版本</code>是接近完成可以面向大众进行免费测试的版本，而<code>alpha版本</code>则是比较粗糙用来测试效果的版本。</p>
+<h3 id="集成电路与摩尔定律"><a href="#集成电路与摩尔定律" class="headerlink" title="集成电路与摩尔定律"></a>集成电路与摩尔定律</h3><h4 id="集成电路的出现"><a href="#集成电路的出现" class="headerlink" title="集成电路的出现"></a>集成电路的出现</h4><p>一开始计算机由独立的部件通过线路连在一起组成(即<code>分立元件</code>)。因为元件都是分立的所以计算机体积非常大而且昂贵。而解决方法就是将计算机所有元件集成，将多个组件整合在一块变成一个独立元件，这就是<code>集成电路IC(Integrated Circuit)</code></p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220821224245970-331464566.jpg" alt="IC"></p>
+<h4 id="印刷电路板-PCB-Printed-Circuit-Board"><a href="#印刷电路板-PCB-Printed-Circuit-Board" class="headerlink" title="印刷电路板 PCB Printed Circuit Board"></a>印刷电路板 PCB Printed Circuit Board</h4><p>为了解决集成电路仍需通过电路连接制造计算机的问题制造了<code>印刷电路板PCB</code>，PCB可以大规模生产而无需焊接或用一大堆线，它通过蚀刻金属线的方式将零件连接到一起。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220821224304836-1995793887.jpg" alt="pcb"></p>
+<h4 id="光刻"><a href="#光刻" class="headerlink" title="光刻"></a>光刻</h4><p>光刻简单说就是把复杂图案印到如半导体等材料上，可以通过这种技术将复杂金属电路印在半导体上面以集成个多的元件制造复杂电路。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220821225708926-1798303386.png" alt="光刻"></p>
+<p>光刻机光刻电路的流程为，对于一块硅(晶圆)，上面加氧化层，光刻胶和光掩模，然后用强光照射使光刻胶消失，把露出部分的氧化层清晰掉再清洗掉光刻胶。然后为了提高导电性将硅露出来的区域掺杂其余元素材料。于是就可以接着在氧化层上做通道以使用细小金属导线链接不同晶体管。通过类似的方式就可以集成出晶体管，电容，电阻等集成电路</p>
+<h4 id="摩尔定律"><a href="#摩尔定律" class="headerlink" title="摩尔定律"></a>摩尔定律</h4><p>1965年，摩尔看到了趋势：<strong>每两年左右，得益于材料和制造技术的发展，同样大小的空间，能塞进两倍数量的晶体管。这叫摩尔定律</strong>。芯片的价格也不断下降。即<code>集成电路上可以容纳的晶体管数目在大约每经过18个月到24个月便会增加一倍</code></p>
+<p>但是摩尔定律现在也在接近极限，进一步做小，会<strong>面临两个问题。</strong></p>
+<ol>
+<li>用光掩膜把图案加到晶圆上，因为光的波长，精度已经达到极限。</li>
+<li>当晶体管非常小，电极之间可能只距离几个原子，电子会跳过间隙，叫<strong>量子隧道贯穿效应</strong></li>
+</ol>
+<h3 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h3><h4 id="批处理"><a href="#批处理" class="headerlink" title="批处理"></a>批处理</h4><p>早期计算机处理程序还是一个一个处理的，而现在可以运行多个。系统运行完一个程序后会自动运行下一个程序，不会浪费时间在更换程序上，因为早期计算机放程序的时间比程序本身运行的时间要慢，所以诞生了<code>批处理</code>这种可以<code>一次性给计算机载入多个程序</code>且<code>运行完一个程序后自动运行下一个程序</code>的技术。</p>
+<h4 id="操作系统简介与作用"><a href="#操作系统简介与作用" class="headerlink" title="操作系统简介与作用"></a>操作系统简介与作用</h4><p><code>操作系统OS(Operating System)</code>是拥有<code>操作硬件能力</code>和特殊权限，能够<code>运行和管理其它程序</code>的一种程序。OS一般是<code>开机第一个启动的程序</code>。其它程序都由操作系统启动。</p>
+<p>OS作为硬件和软件之间的媒介能够一套硬件适配不同软件,提供了<code>API以抽象化硬件(设备驱动程序)</code>能够使程序员不需要特意考虑外部设备的交互。且拥有能同时运行多个程序的<code>多任务处理</code>能力，通过<code>中断</code>和<code>调度</code>等技术在执行一个程序的同时让其休眠并执行其它程序。</p>
+<h4 id="虚拟内存"><a href="#虚拟内存" class="headerlink" title="虚拟内存"></a>虚拟内存</h4><p>不同的数据在计算机中存放于不同的位置(内存地址), 为了更方便的追踪管理这些数据隐藏手动管理搜索这些地址的复杂性，操作系统将<code>内存地址进行虚拟化</code>即将一个虚拟的内存地址映射到实际的物理地址上。对一个程序来说所有地址都是从0开始的连续地址，实际被映射的实际地址可能实际并不连续。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220823012019222-76780861.png" alt="图中A程序被分配了两块不连续的内存，但是对程序来说是连续的"></p>
+<p>操作系统会自动地将程序的虚拟地址与物理地址进行映射，这种机制使得程序的内存大小可以被灵活的增减分配，这种灵活增减内存大小的技术叫<code>动态内存分配</code></p>
+<p>而为了避免程序出错乱写数据，会给程序一定的内存范围，使程序不会将错误的数据写到其它内存下，这叫<code>内存保护</code></p>
+<h4 id="分时操作系统"><a href="#分时操作系统" class="headerlink" title="分时操作系统"></a>分时操作系统</h4><p><code>分时操作系统</code>是为了让<code>多个用户使用一台计算机</code>而开发的系统，它通过让每一个用户只能使用CPU和内存的一部分，确保了不同用户数据的安全性。Multics是早期最有影响的分时操作系统，它从设计时就考虑到了安全的重要性(不希望恶意用户访问到不公开的数据)，但是因为其系统过度设计导致内存占用计算机一半之多而未能流行起来。</p>
+<h4 id="Unix操作系统"><a href="#Unix操作系统" class="headerlink" title="Unix操作系统"></a>Unix操作系统</h4><p>Unix系统将操作系统分为两个部分</p>
+<ol>
+<li>操作系统核心功能<ol>
+<li>内核: 如多任务,内存管理和I&#x2F;O管理</li>
+</ol>
+</li>
+<li>一些有用的工具<ol>
+<li>相关程序，库</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220823020518824-2073287419.png" alt="unix"></p>
+<h3 id="内存和储存介质"><a href="#内存和储存介质" class="headerlink" title="内存和储存介质"></a>内存和储存介质</h3><h4 id="内存和存储器"><a href="#内存和存储器" class="headerlink" title="内存和存储器"></a>内存和存储器</h4><p><code>内存Memory</code>是非永久性保存数据，断电时会丢失，称内存为<code>易失性存储器</code>。而<code>存储器Storage</code>可以永久性存储数据。<code>纸卡</code>因为便宜耐用且不用电作为最早的存储介质，坏处就是读取慢而且只能写入一次，若要存储临时值用纸卡就不合适了。</p>
+<h4 id="延迟线存储器-Delay-Line-Memory"><a href="#延迟线存储器-Delay-Line-Memory" class="headerlink" title="延迟线存储器 Delay Line Memory"></a>延迟线存储器 Delay Line Memory</h4><p><code>延迟线存储器</code>的原理是一个管子装满如水银的液体，管子一端为扬声器，另一端为麦克风。麦克风接受扬声器发出的声波转换为电信号，而声波的延迟可以用来存储数据，接收到表示1，无则表示0。收到声波转换为电信号通过放大器放大再通过线路接入扬声器<code>形成循环回路</code>就可以存储这段信号。而延长线存储器的缺点是<code>每个时刻只能读取1bit数据</code>，访问特定数据需要等待它从循环中出现。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220823194343948-249460384.png" alt="延迟线存储器"></p>
+<h4 id="磁芯存储器-Magnetic-Core-Memory"><a href="#磁芯存储器-Magnetic-Core-Memory" class="headerlink" title="磁芯存储器 Magnetic Core Memory"></a>磁芯存储器 Magnetic Core Memory</h4><p>中间还出过用金属线的震动表示数据的<code>磁致伸缩延迟存储器</code>但是后来出现了性能、可靠性和成本都更好的<code>磁芯存储器</code>就导致延迟存储器很快过期了。<code>磁芯存储器</code>给磁芯绕电线形成磁圈，并<code>施加正反电流使其正反磁化</code>就可<code>以表示01</code>存储信息。这样关掉电流后磁化方向也不会变确保长期存储，而单个磁芯还不够用需要将<code>磁芯排列成矩阵</code>，通过行列的导线来选择特定磁芯读取数据。(参照前面矩阵排列锁存器)</p>
+<img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220823195657691-633607038.png" alt="磁致伸缩延迟存储器" style="zoom:50%;" />
+
+<img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220823195746708-1500974393.png" alt="磁芯存储器" style="zoom:67%;" />
+
+<h4 id="磁带"><a href="#磁带" class="headerlink" title="磁带"></a>磁带</h4><p>磁带是纤薄柔软的一长条磁性带子，卷在轴上。磁带驱动器的写头绕上电线，通上电流之后可以使磁带的一部分磁化来写入数据，读头用来检测磁带极性以读取数据。磁带驱动器很贵，但是磁带很便宜所以磁带一般用于数据存储。但是磁带不能随机存取数据，只能<code>连续存取数据导致访问速度是磁带的缺点</code></p>
+<h4 id="现代存储器"><a href="#现代存储器" class="headerlink" title="现代存储器"></a>现代存储器</h4><p><code>磁鼓存储器Magneic Drum Memory</code>促进了硬盘的发展，其通过金属圆筒覆盖磁性材料用以记录数据，磁鼓持续旋转可以读取数据，其运行原理和磁带的原理差不多。都是用读写头探测表面的磁性从而存取数据。</p>
+<img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220823210947871-89799079.jpg" alt="硬盘" style="zoom:50%;" />
+
+<p><code>光盘CD</code>采用光学原理存储数据，光盘表面存在很多小坑，由光学传感器捕获解码为二进制信号</p>
+<p><code>磁盘Disk(软盘)</code>形状类似于光盘，一张磁盘很薄，可以将很多张磁盘叠在一起。读写头可以上下寻找需要的磁盘，等待其转到相应的数据位置进行读取(同时具备随机存取和顺序存取的特点)</p>
+<img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220823211541251-1196886482.png" alt="当今存储图标原型的软盘" style="zoom: 67%;" />
+
+<h4 id="计算机内存层次结构"><a href="#计算机内存层次结构" class="headerlink" title="计算机内存层次结构"></a>计算机内存层次结构</h4><p>一台<code>计算机的内存组成</code>通常不是单一的而是由很多种不同原理结构的内存组成。小部分但昂贵快速的结构在金字塔结构上层。大部分但便宜相对慢的结构在金字塔结构下层。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220823212006171-1418704087.png" alt="内存层次结构"></p>
+<p>而如今计算机仍然采用<code>混合内存组成结构</code>，一般是固态SSD硬盘作为系统盘，机械硬盘存储数据。而内存存储的趋势是<code>朝着固态的方向发展</code>，尽可能减少机械结构，这样可以提高读写速度，同时可以减少机械结构带来的故障</p>
+<h3 id="文件与文件系统"><a href="#文件与文件系统" class="headerlink" title="文件与文件系统"></a>文件与文件系统</h3><h4 id="文件格式"><a href="#文件格式" class="headerlink" title="文件格式"></a>文件格式</h4><p>文件本质都是0和1组成的二进制码，不同的文件格式可以更快更方便的管理文件。最简单的文本文件格式就是TXT格式，其文件内容通常编码为<code>ANSI编码(ASCII编码基础上拓展的一种编码)</code>或者<code>Unicode编码</code>。</p>
+<h4 id="元数据-文件头"><a href="#元数据-文件头" class="headerlink" title="元数据 | 文件头"></a>元数据 | 文件头</h4><p>常见的<code>音频文件</code>如波形文件(wave)的格式<code>wav</code>,能存储音频文件，码率，单声道和立体声等数据。而<code>描述文件数据内容</code>的数据叫<code>元数据</code>。<code>元数据(也叫文件头，文件头规定了文件的基本属性)</code>通常位于实际数据前面。如波形文件的音频数据紧跟在元数据后面就是一长串数字，数字代表每秒捕获多次的声音幅度。这些振幅就是对声音每秒上千次采样的表示，播放音频文件时扬声器就会产生相同的波形来播出声音。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220823214254763-820008719.png" alt="wav"></p>
+<p>而存储图片的就是<code>位图bmp(Bitmap)</code>格式，通常将图片以RGB三种颜色的通道混合表示颜色，将图片切分为最小单位就是<code>像素(即图片由像素矩阵组成)</code>。每个像素由rgb加色三原色形成。bmp文件开头也是元数据，有<code>图像宽度</code>，<code>图像高</code>，<code>颜色深度</code>等信息。BMP文件是一串二进制代码，每三位分别表示红绿蓝的深度。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220823221011514-1459755282.png" alt="常见的颜色格式"></p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220823221145557-1714773327.gif" alt="等比例放大的像素画"></p>
+<img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220823221202899-1802069705.png" alt="像素画原始尺寸"  />
+
+<h4 id="现代计算机存储文件的方式"><a href="#现代计算机存储文件的方式" class="headerlink" title="现代计算机存储文件的方式"></a>现代计算机存储文件的方式</h4><ol>
+<li>平面文件系统</li>
+</ol>
+<p>早期计算机只能存一个文件，会顺序连续放置文件。而后面随着计算能力和存储容量的提高，存储多个文件就非常的有用。通常最简单的是连续存储，而连续存储文件时为了<code>获取不同文件的开头和结尾等位置</code>需要通过<code>存储在存储器开头</code>的<code>目录文件</code>。</p>
+<p><code>目录文件</code>存储着所有文件的名称，创建时间，是否可写，文件起始位置和文件大小信息。这种将文件连续存储的就是<code>平面文件系统</code>。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220824010242905-420873274.jpg" alt="平面文件系统"></p>
+<p><code>文件连续存储</code>时，如果前一个文件存储信息过多就可能会覆盖后一个文件。解决方案有:</p>
+<ol>
+<li>将空间分块分配，那么一些较小的文件就会留出一些预留空间可以方便移动和管理(似乎很多问题都是动态分配来处理呢)。</li>
+<li>将文件拆分到多个分块内，目录文件中记录拆分后文件所在的块，类似之前虚拟内存的映射处理方法。</li>
+</ol>
+<p>删除某个文件时，计算机会将目录文件内对应的文件信息删除，而实际文件可能并未被删除而是被其它新文件覆盖。</p>
+<p>文件因为拆分成分块(称为<code>碎片</code>)，分散在多个块内不利于读取和写入。所以出现了碎片化管理技术，<code>碎片化整理</code>就是将原来分散在多个块内的数据按顺序整理好方便整理(针对顺序存取结构)。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220824010334376-962894832.png" alt="碎片化存储"></p>
+<p>2.分层文件系统</p>
+<p>平面层的数据不利用文件查看，所以出现了<code>树结构</code>的<code>分层文件系统</code></p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220824011828066-351011658.png" alt="树结构文件显示"></p>
+<p>即会有一个根目录，根目录下可能有文件，文件夹。而文件夹也可以包含文件夹。这样就可以实现无限深度的文件夹。在同一个文件夹下做文件的移动只需要修改删除对应的目录文件即可。而文件数据存储的地方并不发生变化。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220824012244247-1869200440.jpg" alt="分层文件系统"></p>
+<h3 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h3><blockquote>
+<p>压缩是为了能够存储更多文件与提高传输文件时的速度。</p>
+</blockquote>
+<h4 id="游程编码压缩-Run-Length-Encoding"><a href="#游程编码压缩-Run-Length-Encoding" class="headerlink" title="游程编码压缩 Run-Length Encoding"></a>游程编码压缩 Run-Length Encoding</h4><p>游程编码压缩适合<code>经常出现相同值</code>的文件，如图片文件中的重复颜色，就可以为最开始的颜色前加一个数字表示重复次数，相应的还要为所有颜色前都加上数字表示重复次数以统一规范方便解压程序解压。</p>
+<blockquote>
+<p>当时看到这里就想起来偶尔了解过的霍夫曼树，结果下面还真讲了。类似于摩斯电码中使用频率高的字母拼写也会相对容易一些。</p>
+</blockquote>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220824024416561-1427706750.png" alt="在颜色前标注该颜色连续出现次数"></p>
+<p>而这种压缩没有损失任何数据的压缩就是<code>无损压缩</code></p>
+<h4 id="霍夫曼树-Huffman-Tree-和-字典编码-Dictionary-coders"><a href="#霍夫曼树-Huffman-Tree-和-字典编码-Dictionary-coders" class="headerlink" title="霍夫曼树 Huffman Tree 和  字典编码 Dictionary coders"></a>霍夫曼树 Huffman Tree 和  字典编码 Dictionary coders</h4><p>另一种无损压缩<code>字典编码</code>用更紧凑的方式表示数据块。字典编码需要一个字典存储代码和数据之间的对应关系。</p>
+<p>如将一张图片的颜色将按照指定像素进行分块。1像素包含3位颜色rgb数据，即1像素占3个字节。此处将例子中图片2个像素当成一个块。于是图片只剩下了四种<code>不同</code>的色组分块。接下来就是为这些色组生成<code>紧凑代码(用于映射色组的值)</code>。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220824025741089-1429442028.jpg" alt="色组分块结果"></p>
+<p>而霍夫曼树就是一种高效的编码方式。方法如下</p>
+<ol>
+<li>列出所有块和相应的出现频率</li>
+<li>每轮选两个最低频率</li>
+<li>两个最低频率块组成树(树的频率为组成频率总和)</li>
+<li>重复流程</li>
+</ol>
+<p>​              <img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220824030112944-1236824587.jpg" alt="霍夫曼树"></p>
+<p>霍夫曼树最后组合生成的树是<code>按照频率排列</code>的，且树的每个<code>分支用01</code>表示。就得到了二进制与颜色块的字典(唯一不重复)。因为<code>每条路径是唯一</code>的，这意味着每个代码都是<code>无前缀</code>不需要以其它代码作为开头。而得到字典就可以将图片原来的颜色二进制码压缩。</p>
+<p><code>消除冗余法</code>和<code>紧凑表示法</code>通常会组合使用，几乎所有的无损格式都用了它们，比如GIF、PNG、PDF、ZIP。<code>游程编码</code>和<code>字典编码</code>，都是无损压缩，压缩不会丢失位信息，解压可以完全恢复。</p>
+<h4 id="感知编码-和-有损压缩"><a href="#感知编码-和-有损压缩" class="headerlink" title="感知编码 和 有损压缩"></a>感知编码 和 有损压缩</h4><p><code>删除人类无法感知的数据</code>的有损压缩方法为<code>感知编码</code>。如音频文件中录到了人类听不到的超声波数据都可以扔掉，MP3就是音频的一种压缩方式。而图像的<code>有损压缩</code>也有jpeg格式的例子</p>
+<p>因为人眼会<code>习惯性的观察对比度强的区域</code></p>
+<blockquote>
+<p>这也是绘画中常见技巧，将引导视线集中处细节描绘的精致而其余地方细节量调低乃至鬼捣几笔，具体例子可参考wlop画作中常见的近景人物与远景的乌鸦的处理啥的</p>
+</blockquote>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220824035323301-2088826695.png" alt="感觉能很容易的将视线吸引到刻画多的地方"></p>
+<p>比如物体边缘</p>
+<blockquote>
+<p>因为人眼需要图形感来识别物体，乃至人物图形设计会给人物带来相应的情感属性，常见于美式画风(人物有棱有角或者圆润)，一眼识别不出来的那基本属于抽象艺术范畴了</p>
+</blockquote>
+<p>以及<code>看不出不大的颜色变化</code>。(同样有相关的绘画技巧应用如藏色，调整明度丰富画面等技巧。可参考krenz画作，好像私货加的有点多，就当引入例子加强记忆吧)</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220824035051769-798771559.png" alt="角的底部是掺了头发反光的藏色的"></p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220824031145130-238771526.jpg" alt="jpeg有损压缩"></p>
+<p>这种有损压缩方法打开ps选择存储为web格式可以看到很多相关技术，如舍弃一些元数据，开启图片仿色等都可以有效压缩数据。</p>
+<blockquote>
+<p>仿色是个很有趣的话题，之前画像素画的时候就了解过类似的技法，应该是<code>抖动dither</code></p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220824031643483-1053408911.jpg" alt="左：原图；中：Floyd–Steinberg dithering；右：Ordered dithering。图源 wiki"></p>
+</blockquote>
+<h4 id="时间冗余"><a href="#时间冗余" class="headerlink" title="时间冗余"></a>时间冗余</h4><p>视频就是一长串的连续图片帧的组合，每秒可能有24帧或者60帧往上，而视频之间帧与帧之间有时变化很小，比如背景，这叫<code>时间冗余</code>，视频不用每一帧都存这些像素，可以只存变化的部分。还有的通过帧分析，用多个补丁代表物体，然后帧之间直接移动这些补丁。MP4就是一种很流行的视频压缩格式。</p>
+<h3 id="命令行界面-人机交互"><a href="#命令行界面-人机交互" class="headerlink" title="命令行界面 | 人机交互"></a>命令行界面 | 人机交互</h3><p><code>人机交互Human-Computer Interaction</code>指关于<code>用户通过输入和输出获得数据</code>，<code>设备如何显示反馈输出信息</code>等相关知识的学科。</p>
+<h4 id="人机交互设备的变化"><a href="#人机交互设备的变化" class="headerlink" title="人机交互设备的变化"></a>人机交互设备的变化</h4><p>早期通过齿轮，旋钮和开关等<code>机械结构</code>来输入输出。反馈输出信息则是打印在纸上。而之后出现了<code>打孔纸卡和磁带</code>则取代了机械输入，而反馈输出信息仍旧是是打印在纸上。在小型计算机变得足够便宜和快之后出现了<code>键盘QWERTY 打字机</code>用以输入。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220824235220726-326055143.jpg" alt="QWERTY型键盘"></p>
+<p>早期的计算机使用的特殊打字机即<code>电传打字机</code>可用于发电报使得两人可以长距离通信。此时的电传打字机可用于输出，接受到远程的电信号以打印出相应的字符。</p>
+<h4 id="命令行界面与屏幕"><a href="#命令行界面与屏幕" class="headerlink" title="命令行界面与屏幕"></a>命令行界面与屏幕</h4><p>随着电视机的量产，<code>屏幕</code>也逐渐变得可以代替电传打字机作为输出的承载。屏幕就像无限长度的纸，除了输入和输出字，没有其它东西。这种代替电传打字机的屏幕也叫做<code>终端</code>。通过电传打字机的协议处理计算机的输入和输出。</p>
+<blockquote>
+<p>现在的程序输出语句常用的<code>print</code>就是取打印的意思，只不过是把内容打印在屏幕上。</p>
+</blockquote>
+<p>利用键盘，输入一个命令，然后按回车，计算机就会输出结果回来，这叫“命令行界面”。比如，输入ls，计算机就会列出所有文件到打印机上。这就是早期的命令交互界面。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220824235419045-61011589.png" alt="cmd"></p>
+<p>现在使用win+r -&gt; input: cmd -&gt; enter 就能打开win10自带的命令行(据说win11要更新命令行工具来着)</p>
+<p>命令行工具可以说是编程不得不碰了，linux系统当下还多是纯命令行的系统(部署服务器常用)</p>
+<h3 id="屏幕和2D图形显示"><a href="#屏幕和2D图形显示" class="headerlink" title="屏幕和2D图形显示"></a>屏幕和2D图形显示</h3><h4 id="早期屏幕用途"><a href="#早期屏幕用途" class="headerlink" title="早期屏幕用途"></a>早期屏幕用途</h4><p>早期输出显示是分开的，将<code>文本任务和图形任务分开处理</code>。因为早期屏幕虽然<code>无法显示清晰文字</code>但是<code>更新显示内容很快</code>，就多用于<code>跟踪程序的运行情况</code>，比如寄存器的值这种<code>临时值</code>。而输出的计算结果当时一般还是打印在纸上。</p>
+<p><img src="https://pic3.zhimg.com/80/v2-a1c804e261a33376cb517da16d242ee6_1440w.jpg" alt="屏幕和电传打字机"></p>
+<h4 id="阴极射线管-CRT-Cathode-Ray-Tube"><a href="#阴极射线管-CRT-Cathode-Ray-Tube" class="headerlink" title="阴极射线管 CRT Cathode Ray Tube"></a>阴极射线管 CRT Cathode Ray Tube</h4><p><code>阴极射线管CRT</code>是当时<code>最早最有影响力的显示技术</code></p>
+<blockquote>
+<p>原理是把电子发射到有磷光体涂层的屏幕上，当电子撞击涂层时，会发光几分之一秒，由于电子是带电粒子，路径可以用磁场控制，屏幕内用板子或线圈，把电子引导到想要的位置上。</p>
+</blockquote>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220825231838762-82786192.png" alt="电子枪发射电子到磷光体涂层"></p>
+<p>CRT绘图方式有两种:</p>
+<ol>
+<li><code>矢量扫描</code> : 引导电子束描绘出形状，重复地够快就可以显示出图形</li>
+<li><code>光栅扫描</code> : 按照固定路径，一行行来，从上到下，从左到右，不断重复，只在特定路径扫描。</li>
+</ol>
+<blockquote>
+<p>ps:现在给图片增加复古效果就有通过为图片添加类似CRT的电视扫描线效果实现的</p>
+</blockquote>
+<h4 id="液晶显示技术LCD和像素Pixel"><a href="#液晶显示技术LCD和像素Pixel" class="headerlink" title="液晶显示技术LCD和像素Pixel"></a>液晶显示技术LCD和像素Pixel</h4><p>随着技术发展，出现了<code>LCD (Liquid Crystal Displays)</code>液晶显示技术，LCD绘图方式也是用的光栅扫描，每秒更新多次像素里的RGB颜色。像素则是屏幕上清晰显示的点。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220825231902654-1830116630.png" alt="LCD"></p>
+<h4 id="字符生成器-和-字符显示"><a href="#字符生成器-和-字符显示" class="headerlink" title="字符生成器 和 字符显示"></a>字符生成器 和 字符显示</h4><p>早期计算机因为存储空间不够所以不用像素显示而是使用<code>Ascii码字符集</code>显示。当时屏幕显示字符使用的是<code>80 x 25字符模式</code>(一行80列，共25行，当下代码编写也基本遵守代码一行不超过80个字符的规范)。</p>
+<blockquote>
+<p>80 * 25 &#x3D; 2000，即当时屏幕一页最多显示2000个符号，符号用八位Ascii码显示总计也才16000bit相对使用像素显示图片要节省的多。</p>
+</blockquote>
+<p>计算机需要一个能<code>从内存中读取符号转换成光栅图像</code>的额外硬件才能在屏幕上显示图像。这个硬件就是<code>字符生成器</code>，算是第一代显卡。字符生成器内部只用一小块只读存储器ROM以<code>存储每个字符的点阵图案图形</code>。</p>
+<p>为了显示，字符生成器会访问内存中专为图形保留的一块特殊区域，即<code>屏幕缓冲区</code>。程序需要显示或修改文字的时候修改这块区域的值就可以了。当时人们就用这些Ascii码绘制界面，绘制Ascii艺术等。(现在b站页面打开开发者工具调到控制台也能看到一个Ascii码组成的小电视)</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220825232653717-933039158.png" alt="Ascii码组成字*伏地魔梗"></p>
+<h4 id="矢量扫描-绘制图形"><a href="#矢量扫描-绘制图形" class="headerlink" title="矢量扫描 绘制图形"></a>矢量扫描 绘制图形</h4><p>通过<code>矢量扫描法</code>以绘制任意图案，包括文字也是用线条画出来。通过矢量命令以绘制图案，因为可以不断改变命令所以可以绘制动态图像(动画)。</p>
+<blockquote>
+<p>现在web前端的canvas绘图也是差不多的方式，类似在纸上标记点连线</p>
+</blockquote>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220826003042895-398108076.png" alt="矢量绘图"></p>
+<h4 id="Sketchpad-与-位图显示"><a href="#Sketchpad-与-位图显示" class="headerlink" title="Sketchpad  与 位图显示"></a>Sketchpad  与 位图显示</h4><p><code>Sketchpad</code>是在1962年诞生的一个<code>交互式图形界面</code>，用途是<code>计算机辅助设计（CAD）</code>。用户可以用光笔画线和简单形状，程序里面还自带了许多元件，帮助进行设计图案(使绘制线条完美平行，长度相同包括动态缩放等)。这个发明有巨大意义，它们代表了人机交互的关键转折点。</p>
+<p>而1960年代末才出现最早用真正像素显示的计算机和显示器。将内存中的位(bit)对应屏幕上的像素，这叫<code>位图显示</code>。图形类似于一个巨大像素矩阵。类似将字符数据，矢量数据存在内存中的缓存区，计算机把像素数据存在内存中一个叫<code>帧缓冲区</code>的特殊区域。早期这些数据还存在内存里，后来则存在<code>高速视频内存VRAM</code>内，而VRAM则在显卡上(显卡的显存的一种形式)</p>
+<h3 id="冷战和消费主义"><a href="#冷战和消费主义" class="headerlink" title="冷战和消费主义"></a>冷战和消费主义</h3><h4 id="冷战"><a href="#冷战" class="headerlink" title="冷战"></a>冷战</h4><p>二战后美苏冷战，美国在这期间花费大量资金在科学与工程学上使计算机技术迅速发展到了足够商用，消费者购买商用产品又继续推动了产品发展。</p>
+<h4 id="Memex假想计算机-与-美国国家科学基金会"><a href="#Memex假想计算机-与-美国国家科学基金会" class="headerlink" title="Memex假想计算机 与 美国国家科学基金会"></a>Memex假想计算机 与 美国国家科学基金会</h4><p>Memex是当时假想的计算机，Memex的出现促进了人民对计算机未来的思考，在Memex假想的发布者<code>范内瓦·布什</code>建议下，美国建立了国家科学基金会，负责给科学研究提供政府资金。</p>
+<h4 id="晶体管设备-与-太空竞赛"><a href="#晶体管设备-与-太空竞赛" class="headerlink" title="晶体管设备 与 太空竞赛"></a>晶体管设备 与 太空竞赛</h4><p>1950年代，消费者开始买晶体管设备，收音机因为小而便携受到人们欢迎。于是日本为了从二战后恢复从贝尔实验室获得了晶体管得授权使索尼制作了晶体管收音机帮助振兴了日本的半导体行业。</p>
+<p>1961年苏联把加加林送上太空，美国为了追赶苏联提出登月计划花费大量资金资助太空计划，为了使用计算机导航太空船而促进了世界计算机工艺发展(太空电脑使用集成电路促进集成电路发展)。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220826031741458-1205759311.png" alt="太空船导航"></p>
+<h4 id="消费级电子设备"><a href="#消费级电子设备" class="headerlink" title="消费级电子设备"></a>消费级电子设备</h4><p>这期间集成电路发展随着军事需要得到了更进一步的发展，特别是洲际导弹，核弹。超级计算机推进集成电路工艺的前提就是服务于美国政府机构。</p>
+<p>美国半导体最初只看重政府高利润合同而忽略了消费者市场，被日本抓住机会发展消费级电子设备使市场被日本占领大半而导致美国半导体行业开始衰败，很多公司倒闭，英特尔也转型处理器。</p>
+<h3 id="个人计算机革命"><a href="#个人计算机革命" class="headerlink" title="个人计算机革命"></a>个人计算机革命</h3><p>1970年代初随着集成技术和CPU发展<code>提升性能</code>使计算机<code>制造成本下降</code>，使个人拥有计算机变得可行。</p>
+<h4 id="商业计算机和Basic语言"><a href="#商业计算机和Basic语言" class="headerlink" title="商业计算机和Basic语言"></a>商业计算机和Basic语言</h4><p>1975年出现第一台取得商业成功的个人计算机<code>Altair 8800</code>，这台计算机需要自己购买组件进行组装。当时的计算机编程语言仍然是机器语言，于是比尔·盖茨和保罗·艾伦为这台计算机开发了能运行Basic语言的程序<code>Basic解释器(Interpreter)</code>,区别于运行前提前转换的<code>编译器Compiler</code>，解释器在运行时将Basic语言转换为机器语言。</p>
+<h4 id="开箱即用的计算机"><a href="#开箱即用的计算机" class="headerlink" title="开箱即用的计算机"></a>开箱即用的计算机</h4><p>后面的计算机选择了<code>提供全套设备的整体机</code>而不用自己购买组配各个组件。如Apple-Ⅱ，当时的<code>Apple-II</code>，<code>TRS-80 1型</code>，<code>Commodore PET 2001</code>等计算机都是一体化设计且<code>自带Basic解释器</code>使不那么精通计算机的人也能使用Basic编写程序。</p>
+<p>这些计算机针对普通消费者使计算机第一次大规模的出现在家庭，小公司以及学校中。扩大了市场也为计算机行业注入了全新的可能性。</p>
+<h4 id="IBM兼容框架-与-苹果公司封闭框架"><a href="#IBM兼容框架-与-苹果公司封闭框架" class="headerlink" title="IBM兼容框架 与 苹果公司封闭框架"></a>IBM兼容框架 与 苹果公司封闭框架</h4><p>IBM公司为了抓住市场，也开发了自己的计算机，这台计算机最与众不同的是，它可以添加其他外设设备，比如显卡、声卡和游戏控制杆等等。</p>
+<p>这种开放式架构叫<code>IBM兼容IBM Compatible</code>。开放的架构使得当时这台电脑包括IBM的对手公司也可以基于这套架构开发自己的软硬件，于是市面公司几乎都选择了使用同种架构，除了苹果公司之外不使用IBM兼容架构得计算机都失败了。</p>
+<p>而苹果公司选择了相反的<code>封闭架构</code>，使用户无法添加新设备到计算机中，因此苹果可以控制从硬件到软件自己设计以保证用户体验和可靠性。后续为了对抗IBM兼容体系，苹果公司推出了普通人第一台可以买到的带图形用户界面的计算机<code>麦金塔Macintosh</code></p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220826034357530-1607119756.png" alt="麦金塔Macintosh"></p>
+<h3 id="图形用户界面-Graphical-User-Interface"><a href="#图形用户界面-Graphical-User-Interface" class="headerlink" title="图形用户界面 Graphical User Interface"></a>图形用户界面 Graphical User Interface</h3><p>GUI相对于命令行界面不需要记住指令，只需要在屏幕上直观的点击就可以完成指定的任务，使<code>普通人也能轻易的使用计算机</code>。</p>
+<p>而图形化界面是从1968年<code>道格拉斯·恩格尔巴特</code>设计的现代化计算机演示得到启发的，他设计的现代化的计算机，包括图形界面、鼠标等等，功能包括进行视频通话、多人文档操作和多窗口等等。</p>
+<h4 id="施乐奥托-与-WIMP界面"><a href="#施乐奥托-与-WIMP界面" class="headerlink" title="施乐奥托 与 WIMP界面"></a>施乐奥托 与 WIMP界面</h4><p>第一台真正带有GUI的计算机<code>施乐奥托Xerox Alto</code>在施乐公司新成立的帕洛阿尔托研究中心完成。施乐计算机<code>将2D屏幕当作桌面</code>。用户可以<code>打开多个程序</code>，每个程序都在一个框里，叫<code>窗口</code>。窗口可以重叠，挡住后面的东西。还有桌面组件，比如计算器和时钟。这台计算机的发明者用<code>窗口Window</code>、<code>图标Icon</code>、<code>菜单Menu</code>和<code>指针Pointer</code>来设计界面，因此叫<code>WIMP界面</code>。施乐奥托团队首先使用了“<code>剪切</code>，<code>复制</code>，<code>粘贴</code>这样的术语。</p>
+<p>WIMP界面还提供了一套基本部件，包括可复用的基本元素如按钮，可选框，滑动条和标签页等组件。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220826035716381-2080999133.png" alt="参考"></p>
+<p>需要注意的是GUI是<code>事件驱动编程</code>，不像之前代码从上到下顺序执行，GUI代码可以在任意时间执行以相应事件。</p>
+<p>假如一个按钮点击触发事件，就需要在GUI初始化时在初始化函数中为按钮的点击事件设置相应的函数以处理事件。然后按钮点击时就会触发相应的函数以响应事件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//伪代码 通过new方式获取相应实例</span></span><br><span class="line"><span class="keyword">let</span> gui = <span class="keyword">new</span> <span class="title class_">Gui</span>();</span><br><span class="line"><span class="keyword">let</span> button = <span class="keyword">new</span> <span class="title class_">Button</span>();</span><br><span class="line"><span class="comment">// 在gui界面初始化时设置点击事件</span></span><br><span class="line">gui.<span class="property">onInit</span> = <span class="function">()=&gt;</span>&#123;</span><br><span class="line">    <span class="comment">//设置点击事件 此处使用js lambda表达式传入按钮对象view</span></span><br><span class="line">    button.<span class="title function_">setOnClick</span>( <span class="function"><span class="params">view</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="title function_">btnClick</span>();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//按钮事件</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">btnClick</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;我被点击了捏&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="微软苹果后日谈"><a href="#微软苹果后日谈" class="headerlink" title="微软苹果后日谈"></a>微软苹果后日谈</h4><p>后面史蒂夫·乔布斯去施乐参观后也推出了相应的图形化计算机，微软也从最开始1.0的DOS命令行界面继续推陈出新并在1995年推出 <code>Windows 95</code> 提供新的图形界面。甚至微软为了让桌面更简单友好开发了<code>Microsoft Bob</code>——类似于房子的设计却大获失败(</p>
+<p>于是现在使用的界面都是人们自然选择后的结果，现在Windows，Mac，Linux包括其它GUI几乎都是施乐奥托WIMP的变化版，未来只会设计出更强大的GUI。</p>
+<h3 id="3D图形"><a href="#3D图形" class="headerlink" title="3D图形"></a>3D图形</h3><h4 id="图像投影"><a href="#图像投影" class="headerlink" title="图像投影"></a>图像投影</h4><p>三维空间使用的是xyz的三维坐标，但是2d屏幕的计算机无法表示三维坐标。所以要<code>将三维图形投影到二维平面屏幕上(MVP变换Model-View-Projection)</code>。三维投影包括正交投影，透视投影等。</p>
+<blockquote>
+<p>正交投影即每边互相平行，透视投影则符合现实世界透视规律，平行线段会在远处聚拢于一点消失</p>
+</blockquote>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220827154449571-1111136439.png" alt="左:正交投影,右:透视投影"></p>
+<h4 id="图形渲染"><a href="#图形渲染" class="headerlink" title="图形渲染"></a>图形渲染</h4><p>3D图形学中<code>组成图形</code>的一般是使用<code>三角形</code>，此处三角形在在3D图形学中称之为多<code>边形(Polygons)</code>。一堆多边形的集合则称之为网格(Mesh)，网格越密，表面越光滑，细节越多。但是计算量也更多，游戏设计者通常就要为平衡角色真实度和多边形数量费心。下面将3D坐标投影成2D的坐标后就可以使用画2D线段的函数来链接这些点，这叫<code>线框渲染</code>。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220827160414649-815731911.png" alt="网格"></p>
+<blockquote>
+<p>当年远哭就是硬叠多边形导致一代硬件杀手流传</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220827160110696-1709665738.jpg" alt="Can it run Crysis?"></p>
+</blockquote>
+<p>使用三角形是因为三角形的简单稳固，给定3个3d坐标就能<code>绘制出一个唯一平面</code>。</p>
+<h4 id="图像填充"><a href="#图像填充" class="headerlink" title="图像填充"></a>图像填充</h4><p><code>扫描线渲染Scanline Rendering</code>是填充图像的经典算法，图像填充通常是将3D图像的多边形转换成一块填满像素的区域。扫描线算法填充的速度叫<code>填充速率(fillrate)</code></p>
+<blockquote>
+<p>扫描线算法会填充两个相交点之间的像素:</p>
+<pre><code>1. 读取多边形的3个点
+1. 从最高点(y值最大的点)到最低点逐行处理
+1. 计算每一行和多边形相交的两个点
+1. 填充每一行两个交点之间的像素
+</code></pre>
+</blockquote>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220828092326562-560810178.png" alt="扫描线渲染"></p>
+<p>为了避免边缘都是<code>锯齿(狗牙)Jaggies</code>，通常会使用<code>抗锯齿Anti-	Aaliasing</code>，通常是在<code>多边形边缘位置</code>将填充颜色的明度，饱和度等参数进行调整让<code>颜色浅一些</code>。类似于ps的羽化效果。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220828094123419-1473142119.png" alt="feathering of the edges"></p>
+<h5 id="画家算法"><a href="#画家算法" class="headerlink" title="画家算法"></a>画家算法</h5><p>用于处理渲染图片时的<code>遮挡Occlusion</code>，用排序算法从远到近排列，然后从远到近渲染，因为画家也是先画背景再画更近的物体所以叫画家算法。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220828094612571-1019126326.png" alt="排序后依次渲染"></p>
+<h5 id="深度缓冲-Z-Buffering"><a href="#深度缓冲-Z-Buffering" class="headerlink" title="深度缓冲 Z Buffering"></a>深度缓冲 Z Buffering</h5><p>深度缓冲是另一种绘制遮挡物体的方法，该算法不需要排序，其<code>记录每个像素与摄像机的距离</code>并<code>在内存中存一个数字矩阵</code>。首先每个像素的<code>初始距离初始化为无限大</code>，然后从第一个多边形开始处理。<code>比较当前记录距离与多边形距离的最小值并记录</code>。比较完后在内存存储相应的距离矩阵，所有多边形处理完后就拥有一个能表示多边形哪些能显示哪些被遮挡的<code>数字矩阵Z缓冲区</code>。通过处理后的Z缓冲区配合扫描线算法的改进高级版配合就可以解决<code>勘测到线的交叉点</code>，<code>判断某像素是否在最终场景可见</code>的问题。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220828134139803-1419970148.png" alt="深度缓冲"></p>
+<blockquote>
+<p>两个多边形距离相同时会出现哪个绘制在上面的问题，因为<code>没对多边形排序</code>且多边形会在内存中移来移去，访问顺序会不断变化以及<code>计算浮点数的舍入误差</code>导致哪一个绘制在上面是不可预测的，于是就会导致出现游戏中两个物体闪来闪去的显现，这称作<code>Z-fighting错误</code>。</p>
+</blockquote>
+<p>3D游戏里面有个优化叫<code>背景剔除Back Face Culling</code>，也就是三角形的两面，游戏只加载玩家能看到的那一面，另一面不加载因为玩家角色的头部或地面往往只能看到朝外的一面。这样若穿到另一面，容易产生透视BUG。CF就经常能卡出相应的bug，卡箱子缝隙啥的。</p>
+<h4 id="明暗处理"><a href="#明暗处理" class="headerlink" title="明暗处理"></a>明暗处理</h4><p><code>明暗处理</code>要考虑这些<code>多边形面对的方向</code>，它们不平行于屏幕，而是面对不同方向。它们面对的方向叫<code>表面法线</code>。得到多边形的面对的方向就可以根据设置的光照角度计算出多边形被照亮的程度。对每个多边形执行同样的步骤就实现了最基本的照明算法<code>平面着色</code>。</p>
+<blockquote>
+<p>法线:始终垂直于某平面的虚线</p>
+</blockquote>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220828170158148-2022966120.png" alt="表面法线"></p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220828201644911-1949426950.png" alt="平面着色"></p>
+<p>通过 <code>高洛德着色</code>或 <code>冯氏着色</code>等算法就能得到光滑的光影。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220828201802096-1921804334.png" alt="更平滑的光影效果"></p>
+<h4 id="纹理映射"><a href="#纹理映射" class="headerlink" title="纹理映射"></a>纹理映射</h4><p><code>纹理映射</code>是最简单的为3D模型填充纹理的算法，其使用<code>扫描线算法</code>填充多边形时根据内存内的纹理图像决定像素用什么颜色。为了实现填充相应颜色需要把多边形坐标和纹理坐标对应，从相应区域中取平均颜色并填充多边形。为了处理渲染3D场景的并行渲染也有专门的处理器即<code>GPU图形处理单元</code>，GPU在显卡上，周围有专用的RAM。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220828202712774-654877548.png" alt="纹理映射"></p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220828203127294-2066450135.png" alt="带有纹理的茶壶"></p>
+<h3 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h3><h4 id="第一个计算机网络"><a href="#第一个计算机网络" class="headerlink" title="第一个计算机网络"></a>第一个计算机网络</h4><p>计算机网络出现是因为大型计算机开始随处可见以后对<code>信息的快速交换</code>的需求变得迫切了起来。第一个计算机网络<code>球鞋网络Sneakernet</code>出现在1950~1960年代通常在公司或研究室内部使用，比把纸卡和磁带送到另一栋楼里更快速可靠。而且网络还可以<code>共享物理资源</code>，如办公室共享一台联网打印机。</p>
+<h4 id="局域网-Local-Area-Networks-和-MAC地址"><a href="#局域网-Local-Area-Networks-和-MAC地址" class="headerlink" title="局域网 Local Area Networks 和 MAC地址"></a>局域网 Local Area Networks 和 MAC地址</h4><p><code>局域网LAN</code>指计算机近距离构成的小型网络，局域网能小到是同一个房间里的两台机器，或大到校园里的上千台机器。最著名和成功的局域网技术是<code>以太网Ethernet</code>，从1970年代开发使用到至今。</p>
+<p>以太网通过以太网电缆将计算机互相链接，数据被计算机通过电信号的形式在电缆中传送。因为电缆是共享的，所有连在同一个以太网上的计算机都能观察到数据。为了让特定唯一的计算机可以接收到指定数据，以太网需要每台计算机自带<code>唯一</code>的<code>MAC地址(Media Access Control address)</code>。这样计算机就只需要监听到以太网电缆中出现自己的MAC地址才处理数据。常用于以太网和WIFI无线网络。</p>
+<h4 id="载波侦听多路访问CSMA-与-指数退避-Exponential-Backoff"><a href="#载波侦听多路访问CSMA-与-指数退避-Exponential-Backoff" class="headerlink" title="载波侦听多路访问CSMA 与 指数退避 Exponential Backoff"></a>载波侦听多路访问CSMA 与 指数退避 Exponential Backoff</h4><p><code>CSMA(Carrier Sense Multiple Access)</code>指<code>多台电脑共享一个传输媒介</code>，<code>载体(Carrier)</code>指传输数据的<code>共享媒介</code>。例如以太网的载体是铜线电缆，WIFI的载体是无线电波。<code>带宽</code>则是<code>载体传输数据的速度</code>。</p>
+<p>随着网络流量上升 两台计算机想同时写入数据的概率也会上升，则数据可能会混在一起导致<code>冲突Collision</code>。最明显的解决方法是停止传输等待网络空闲再重试一遍，而其他计算机也这样做的话就导致冲突的发生率更高。</p>
+<p>于是以太网使用了更简单有效的解决方法，数据冲突的时候依然停止传输等待，但不等待同样的时间，而是<code>在原本同样的等待时间下增加一个随机时间</code>。这样子以错开相同的计算机冲突的可能性，但这不能完全解决问题，所以还需要另一个技巧:<code>指数退避</code>。指数退避则是随着冲突的次数增加使<code>等待时间指数级增长</code>。如第一次冲突为等待 1秒+随机时间，第二次就等待 2秒，然后4秒，8秒，16秒直到传输成功。因为计算机退避的时间越长冲突的次数就降的越低，这样就可以使数据不再轻易冲突使网络变得顺畅。</p>
+<h4 id="冲突域-Collision-Domain"><a href="#冲突域-Collision-Domain" class="headerlink" title="冲突域 Collision Domain"></a>冲突域 Collision Domain</h4><p>为了<code>减少冲突</code>与<code>提升效率</code>，需要<code>减少同一载体中设备的数量</code>。这里<code>载体和其中的设备</code>总称为<code>冲突域</code>。而减少设备数量的方法可以是使用<code>交换机Switch</code>将一个冲突域拆成两个冲突域，交换机位于两个更小的网络之间只在必要时在两个网络间传数据。</p>
+<p>交换机会记录一个标记了哪个MAC地址在哪个网络的列表。于是单独一个网络内的数据传输不会通过交换机，因此交换机拆分的网络中的数据传输可以同时发生，但是如果拆分的网络间想要互相传输数据，那么两个网络都会被短暂的占用。包括最大的网络互联网，大的计算机网络也是这样构建的。</p>
+<blockquote>
+<p>事实上华为就是做交换机起家的(电话交换机)</p>
+</blockquote>
+<h4 id="报文交换-Message-Switching"><a href="#报文交换-Message-Switching" class="headerlink" title="报文交换 Message Switching"></a>报文交换 Message Switching</h4><p>连接两台相隔遥远的计算机或网路，最简单的办法, 是分配一条专用的通信线路。早期电话系统这样运作时往往需要一些接线员来将电路链接到正确的目的地以实现电话的指定拨打，这种将电路连接到正确目的地的任务就叫<code>电路交换</code>。这种方法能用但是总有闲置的线路导致不灵活而且价格昂贵，于是现代有了另一个传输数据的方法即<code>报文交换</code>。</p>
+<p>报文可以判断数据传输时的目标地址以选择相关的路由节点，乃至根据网络状况选择最快的节点以及传输路径发生故障时选择另一条路径重新传输数据。简单说就是报文交换决定了数据传输的目标以及如何传输。</p>
+<p>报文的具体格式为<code>IP Internet Protocol</code>，每一个联网的电脑都会有一个IP地址用于传输数据。这里的<code>路由Route</code>指路由器从一个接口收到数据进行定向转发到另一个接口的过程，可以理解为指明数据传输最短路径。路由节点则通常是<code>路由器Router</code>，可以连接不同的网络，能够选择数据传送路径并对数据进行转发 的网络设备。</p>
+<p><img src="https://pic2.zhimg.com/v2-8b30ab2eb8fecd1574bcc4357ab35321_b.webp" alt="这和处理图的最短路径很像"></p>
+<p>报文交换的优点是可以根据网络状况选择不同路由，相对可靠而且容错率高。但是当报文比较大时则会堵塞线路。所以就有了<code>分组交换</code>这种将大报文切分成很多名为<code>数据包</code>的小文件来运输的技术。并且有<code>阻塞控制</code>技术，即路由器会平衡与其他路由器之间的负载，以确保传输可以快速可靠。</p>
+<p>消息沿着路由跳转的次数 叫<code>跳数(Hop-Count)</code>，看到哪条线路的跳数很高，说明大概率出了故障需要即时处理，这叫<code>跳数限制(Hop-Limit)</code>。</p>
+<h3 id="互联网"><a href="#互联网" class="headerlink" title="互联网"></a>互联网</h3><h4 id="电脑如何连接互联网"><a href="#电脑如何连接互联网" class="headerlink" title="电脑如何连接互联网"></a>电脑如何连接互联网</h4><p>电脑链接互联网需要先连到通过<code>WIFI路由器</code>连接所有设备组成的<code>局域网LAN</code>,WIFI路由器一般属于<code>互联网提供商ISP(Internet Service Provider)</code>如移动联通等公司。然后局域网再连接到<code>广域网WAN</code>,广域网通过一个可能覆盖一个街区的<code>区域性路由器</code>连接到更大的可能覆盖整个城市的广域网，连续跳转连接几次就能连接到<code>互联网主干</code>。</p>
+<h4 id="互联网协议-IP-Internet-Protocol"><a href="#互联网协议-IP-Internet-Protocol" class="headerlink" title="互联网协议 IP Internet Protocol"></a>互联网协议 IP Internet Protocol</h4><p>互联网是一个巨型分布式网络<a href="%E5%88%86%E5%B8%83%E5%BC%8F%E7%BD%91%E7%BB%9C%E6%8C%87%E7%94%B1%E5%88%86%E5%B8%83%E5%9C%A8%E4%B8%8D%E5%90%8C%E5%9C%B0%E7%82%B9%E4%B8%94%E5%85%B7%E6%9C%89%E5%A4%9A%E4%B8%AA%E7%BB%88%E7%AB%AF%E7%9A%84%E4%B8%8D%E5%90%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E8%8A%82%E7%82%B9%E7%BB%84%E6%88%90%E7%9A%84%E7%BD%91%E7%BB%9C">^3</a>，会把传输的数据拆成一个个数据包来传输。大的数据包还会拆成小的数据包以传输。而<code>数据包(packet)</code>想要在互联网上传输就要符合<code>互联网协议(IP)</code>标准。</p>
+<p>IP协议是一个非常底层的协议，数据包的头部(数据负载前面)只包含含数据地址。此处图中<code>IP HEADER</code>存储描述传输数据的数据即<code>元数据(meta-data)</code>，<code>DATA PAYLOAD 数据负载</code>指则是被传输的数据。两者一同组成符合IP协议的数据包。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220830142343501-638579036.png" alt="IP"></p>
+<h4 id="用户数据协议-UDP与校验和"><a href="#用户数据协议-UDP与校验和" class="headerlink" title="用户数据协议 UDP与校验和"></a>用户数据协议 UDP与校验和</h4><p><code>UDP(User Datagram Protocol)</code>是高级于IP的协议，IP只负责描述将数据传输到哪台计算机，而UDP则负责描述将数据包传输到计算机上的哪个程序上。</p>
+<p>UDP也具有头部，这个头部包括了两个信息，用于描述数据包发往哪个程序的<code>端口号Port Number</code>以及校验数据是否损坏的<code>校验和 Check Sum</code>。</p>
+<p>每个想访问网络的程序都要向操作系统申请一个端口号，操作系统收到数据包的时候就会读取UDP头部中的端口号将其交给对应的程序。而校验和则是<code>发送数据包前</code>将<code>所有数据加在一起算出校验和</code>存储在头部。然后接收到这个数据包的时候就会<code>将收到的数据重新加在一起</code>将<code>结果与头部校验和进行验证</code>。结果一致则代表数据正常无损坏，如果不一致则说明数据在传输时损坏了。那只能把损坏数据扔掉。UDP校验和以 16 位形式存储 (就是16个0或1)如果校验和超过了16位能表示的最大值65535高位数就会被扔掉保留低位。</p>
+<p>虽然UDP <code>无法得知发送数据包后是否到达</code>，也<code>不提供数据修复或数据重发的机制</code>。但是它<code>既简单又快</code>，在一些<code>不要求完整数据传输</code>的程序中会很有用。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220830143111384-631724061.png" alt="UDP"></p>
+<h4 id="传输控制协议-TCP"><a href="#传输控制协议-TCP" class="headerlink" title="传输控制协议 TCP"></a>传输控制协议 TCP</h4><p><code>TCP(Transmission Control Protocol)</code>在需要完整数据传输时使用，TCP 和 UDP 一样，头部也在存数据前面，通常这样的组合被称为TCP&#x2F;IP 。</p>
+<blockquote>
+<p>TCP&#x2F;IP是一个协议族，因为TCP&#x2F;IP协议包括TCP、IP、UDP、ICMP、RIP、TELNET、FTP、SMTP、ARP、TFTP等许多协议，而不单单是TCP和IP。 </p>
+</blockquote>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220830150206484-5218155.png" alt="TCP/IP"></p>
+<p>TCP也有端口号和校验和，但它还有更高级的功能，包括以下两种以及更多</p>
+<ol>
+<li>TCP数据包有序号 - 可控制接收方收到数据包后根据序号排成正确顺序，即使到达时间不同或者到达时乱序。</li>
+<li>TCP要求接收方收到数据包后需要给发送方发送<code>确认码(ACK)</code>表示收到了</li>
+</ol>
+<p>得知上一个数据包成功抵达后，发送方会发下一个数据包，假设这次发出去之后，没收到确认码那么肯定哪里错了。如果过了一定时间还没收到确认码，发送方会再发一次。因为收件方有序列号，所以也不怕确认码只是延误或者中途丢失，收到重复的数据包直接删掉即可。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220830151008799-126668580.png" alt="TCP三次握手确认双方序列号"></p>
+<p>而且TCP可以同时发多个数据包，收多个确认码，不用浪费时间等确认码。而且可以通过确认码的成功率和来回时间用于推测网络的拥堵程度，TCP可以根据这个调整同时发包数量，解决拥堵问题。</p>
+<p>即TCP可以处理<code>乱序</code>和<code>丢失数据包</code>，<code>丢了重发</code>并且可以<code>根据拥挤情况自动调整传输率</code>。</p>
+<p>而TCP对时间要求很高的程序则不适用，因为这些确认码使得数据包数量翻倍却没有传输更多信息。</p>
+<h4 id="域名系统-DNS-Domain-Name-System"><a href="#域名系统-DNS-Domain-Name-System" class="headerlink" title="域名系统 DNS Domain Name System"></a>域名系统 DNS Domain Name System</h4><p>计算机网络访问一个网站需要<code>IP地址</code>与<code>端口号</code>。例如163.177.151.109的80端口<code>http://163.177.151.109:80</code>，这是百度首页的IP地址和端口号。</p>
+<p>事实上直接输入IP地址也可以，因为80端口作为HTTP协议的默认端口是被隐藏起来的可以直接访问。不同协议有不同的默认端口。</p>
+<p>为了更方便记忆网站地址，互联网通过域名系统把域名和IP地址一一对应。例如直接输入<code>www.baidu.com</code>浏览器就会向<code>ISP</code>提供的<code>DNS服务器</code>查询相应的IP地址，DNS查表查到相应域名就会返回对应的IP地址。为了方便管理注册的域名，DNS通过<code>顶级域名TLD</code>等方式将域名分级进行树结构的存储。而这些子树的数据就散布在很多DNS服务器上使不同服务器负责树的不同部分。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220830152301573-1513439142.png" alt="域名的树结构"></p>
+<h4 id="OSI-开放式系统互联通信参考模型"><a href="#OSI-开放式系统互联通信参考模型" class="headerlink" title="OSI 开放式系统互联通信参考模型"></a>OSI 开放式系统互联通信参考模型</h4><p>OSI(Open System Interconnection)是概念性框架，将网络通信抽象划分成多层使每一层可以只处理各自的问题。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220830154808531-174557672.png" alt="OSI七层模型"></p>
+<p><code>物理层</code>的范围包括线路里的电信号以及无线网络的无线信号。</p>
+<p>而<code>数据链路层</code>负责操控物理层，范围包括媒体<code>访问控制地址MAC</code>，<code>碰撞检测</code>，<code>指数退避</code>以及其他底层协议。</p>
+<p><code>网络层</code>则负责各种<code>报文交换</code>和<code>路由</code></p>
+<p><code>UDP</code>,<code>TCP</code>这些协议负责<code>在计算机之间进行点到点的传输</code>，而且还会<code>检测和修复错误</code>。这些就包括在<code>传输层</code>的范围内。</p>
+<p><code>会话层</code>则使用<code>TCP</code>和<code>UDP</code>来<code>创建链接</code>，<code>传递信息</code>，然后<code>关掉链接</code>。这一套流程就叫做<code>会话</code>。查询DNS或者查看网页时就会发生这一套流程。</p>
+<h3 id="万维网-WWW-World-Wide-Web"><a href="#万维网-WWW-World-Wide-Web" class="headerlink" title="万维网 WWW World Wide Web"></a>万维网 WWW World Wide Web</h3><h4 id="万维网基本单位-与-超链接"><a href="#万维网基本单位-与-超链接" class="headerlink" title="万维网基本单位 与 超链接"></a>万维网基本单位 与 超链接</h4><p><code>万维网</code>在互联网之上运行，是互联网中<code>传输最多数据的程序</code>。万维网分布在全球数百万个服务器上，可以用浏览器来访问万维网。</p>
+<p>万维网<code>基本单位</code>是<code>单个页面</code>，页面有内容也有去往另一个页面的<code>超链接(Hyperlinks|Hypertext)</code>。这些超链接连接着不同的页面形成巨大的互联网网络。</p>
+<img src="http://5b0988e595225.cdn.sohucs.com/images/20190312/592fd0b0cafa444492ce068e2bcc6b9c.jpeg" alt="万维网带来的变化" style="zoom: 25%;" />
+
+<h4 id="状态码-统一资源定位器-超文本传输协议"><a href="#状态码-统一资源定位器-超文本传输协议" class="headerlink" title="状态码, 统一资源定位器, 超文本传输协议"></a>状态码, 统一资源定位器, 超文本传输协议</h4><p><code>状态码</code>代表当前所访问网页的状态，常见的包括访问正常200，服务器资源不存在404等。400-499状态码代表客户端出错。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220830192547102-55873998.png" alt="status code"></p>
+<p>每个网页需要一个唯一的地址去定位区分，即<code>URL Uniform Resource Locator</code>。才能使使网页能相互连接。当访问一个网站输入<code>url</code>后计算机会进行<code>DNS查找</code>获取对应<code>IP地址</code>，然后浏览器打开一个<code>TCP连接</code>到这个运行着<code>网络服务器</code>的IP地址。然后通过服务器<code>标准端口80端口</code>向服务器请求默认的主页或者url内请求的子页面。这里从服务器获取页面的方法是使用<code>HTTP(超文本传输协议)</code></p>
+<h4 id="超文本标记语言-HTML"><a href="#超文本标记语言-HTML" class="headerlink" title="超文本标记语言 HTML"></a>超文本标记语言 HTML</h4><p><code>HTML(Hypertext Markup Language)</code>适用于开发页面的标记语言，一开始用于区分什么是链接什么是文本。现在通过层叠样式表 (CSS)和JavaScript等语言配合就能开发出现代网页。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220830194603425-728966856.jpg" alt="html"></p>
+<h4 id="万维网发展-与-网络中立性"><a href="#万维网发展-与-网络中立性" class="headerlink" title="万维网发展 与 网络中立性"></a>万维网发展 与 网络中立性</h4><p>第一个浏览器和服务器由 Tim Berners-Lee 编写，后面为了方便访问网页一开始人们维护一些超链接目录。后续随着网络越来越大出现了<code>搜索引擎</code>。出现了<code>爬虫</code>，<code>索引</code>等概念。</p>
+<p><code>网络中立性Net Neutrality</code>则是要求平等对待每个数据包，不让某些数据包的速度和优先级出现区别。</p>
+<p><img src="https://www.qzjlw.com.cn/uploads/images/20200721/20200721141323_50784.jpg" alt="怎么回事捏"></p>
+<p>后面的部分大概会比较草率的带过，因为感觉有点概念上的了解就可以了。真正需要学习相关专业知识的时候再细分补充。</p>
+<h3 id="计算机安全"><a href="#计算机安全" class="headerlink" title="计算机安全"></a>计算机安全</h3><p>计算机安全是保护系统和数据的<code>保密性</code>，<code>完整性</code>和<code>可用性</code>。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220830195102847-1663454076.png" alt="计算机安全需谨慎"></p>
+<ul>
+<li>保密性：只有有权限的人，才能读取计算机系统和数据</li>
+<li>完整性：只有有权限的人，才能使用和修改系统和数据</li>
+<li>可用性：有权限的人，可以随时访问计算机系统和数据</li>
+</ul>
+<h4 id="威胁模型"><a href="#威胁模型" class="headerlink" title="威胁模型"></a>威胁模型</h4><p>为了实现这三个性质，安全专家会从抽象层面想象<code>敌人</code>可能是谁。这叫<code>威胁模型分析</code>模型会对攻击者有个大致描述：<code>能力如何</code>，<code>目标可能是什么</code>，<code>可能用什么手段</code>，攻击手段又叫<code>攻击矢量</code>，<code>威胁模型分析</code>让你能为特定情境做准备，不被可能的攻击手段数量所淹没。</p>
+<p>很多安全问题可以总结成2个问题：你是谁？你能访问什么？</p>
+<h4 id="身份验证-Authentication"><a href="#身份验证-Authentication" class="headerlink" title="身份验证 Authentication"></a>身份验证 Authentication</h4><p>为了区分谁是谁，使用 <code>身份认证(Authentication)</code>让计算机得知使用者是谁。身份认证有三种各有利弊的方式:</p>
+<ol>
+<li><code>What you know</code>, 你知道什么 - 例如通过只有用户和计算机知道的用户名，密码等进行验证</li>
+<li><code>What you have</code>, 你有什么  - 基于用户有特定物体，例如加密狗这种加密硬件</li>
+<li><code>What you are</code>, 你是什么 - 基于人，例如生物识别验证器，虹膜，指纹，人脸等识别</li>
+</ol>
+<p><img src="http://dingyue.ws.126.net/2021/1021/04f11665g00r1aa22011sc000dc009eg.gif" alt="生物识别有成功率的问题"></p>
+<h4 id="访问控制-Access-Control"><a href="#访问控制-Access-Control" class="headerlink" title="访问控制 Access Control"></a>访问控制 Access Control</h4><p>系统知道你是谁后，它需要知道你能访问什么，因此需要有个规范，说明谁能访问什么，修改什么，使用什么。这可以通过<code>权限</code>或<code>访问控制列表(ACL)</code>来实现，其中描述了用户对每个文件，文件夹和程序的访问权限。</p>
+<p>常见权限包括三种:</p>
+<ol>
+<li><code>读Read</code>权限允许用户查看文件内容</li>
+<li><code>写Write</code>权限允许用户修改内容</li>
+<li><code>执行Execute</code>权限允许用户运行文件，比如程序</li>
+</ol>
+<p>为了确保保密性，完整性和可用性，权限还需要织需要不同层级，例如有三个访问级别：公开，机密，绝密。那么拥有每个权限的用户只能访问自己当前级别与以下的数据，只能修改自己当前级别的数据。这样就可以保证<code>绝密</code>, 不会意外泄露到<code>机密</code>文件或<code>公共</code>文件里。这个<code>不能向上读，不能向下写</code>的方法，叫 Bell-LaPadula 模型。还有许多其他的访问控制模型，但哪个模型最好，取决于具体情况。</p>
+<h4 id="安全内核，独立安全检查和质量验证"><a href="#安全内核，独立安全检查和质量验证" class="headerlink" title="安全内核，独立安全检查和质量验证"></a>安全内核，独立安全检查和质量验证</h4><p><code>身份验证</code>和<code>访问控制</code>帮助计算机知道<code>你是谁</code>以及<code>你可以访问什么</code>，但计算机无法确保哪些程序或代码会出现漏洞以被控制了计算机的操作系统。为了减少执行错误，减少执行，使用<code>安全内核</code>或<code>一组尽可能少的操作系统软件</code>以确保<code>安全性接近可验证</code>并保证<code>系统级安全</code>。</p>
+<p>即通过<code>最小化代码数量</code>试图保证代码是安全的。而现在最好的<code>验证代码安全性</code>的手段是<code>独立安全检查和质量验证</code>。包括安全型代码几乎都是开源的，可以让外部开发人员以新鲜的眼光和不同领域的专业知识，以发现代码的问题。</p>
+<h4 id="隔离Isolation-和-沙盒-Sandbox"><a href="#隔离Isolation-和-沙盒-Sandbox" class="headerlink" title="隔离Isolation 和 沙盒 Sandbox"></a>隔离Isolation 和 沙盒 Sandbox</h4><p><code>隔离</code>指开发人员在程序开发时就计划好当程序被攻破后，如何限制损害，控制损害的最大程度，并且不让它危害到计算机上其他东西。要实现隔离可以<code>沙盒</code>程序，即将软件运行于一个<code>受限的系统环境中</code>，操作系统会给<code>每个程序独有的内存块</code>，其他程序不能动。一台计算机可以运行多个虚拟机，如果一个程序出错，最糟糕的情况是它自己崩溃，或者搞坏它处于的虚拟机。</p>
+<h3 id="黑客与攻击"><a href="#黑客与攻击" class="headerlink" title="黑客与攻击"></a>黑客与攻击</h3><h4 id="黑客种类"><a href="#黑客种类" class="headerlink" title="黑客种类"></a>黑客种类</h4><ol>
+<li><code>黑帽子</code>:　也就是黑客,　可以是对热衷技术的人才的称呼,这时候是个中性带褒义色彩的; 也可以是对利用技术破解软&#x2F;硬件系统,　以达到谋利,　技术炫耀,　或带有某种情感诉求的目的(如发泄愤怒,　报复等)的人的称呼.</li>
+<li><code>红帽子</code>:　是指维护国家利益，利用网络技术入侵别的国家电脑，为自己国家争光的黑客. </li>
+<li><code>白帽子</code>:　这是针对那些以保护各式各样的软&#x2F;硬件系统为目的,　利用技术对系统进行侵入破解,以寻找系统漏洞或弱点,　进而帮助加固系统的技术人才的称呼.</li>
+<li><code>灰帽子</code>:  是指那些懂得技术防御原理，并且有实力突破这些防御的黑客——虽然一般情况下他们不会这样去做。</li>
+</ol>
+<blockquote>
+<p>单纯的提到红帽也可能是在说红帽公司，一家开源解决方案供应商</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220831090542971-1363028971.png" alt="红帽"></p>
+</blockquote>
+<h4 id="社会工程学"><a href="#社会工程学" class="headerlink" title="社会工程学"></a>社会工程学</h4><p><code>社会工程学Social Engineering</code>是黑客入侵最常见的方式，不是通过技术而是通过<code>欺骗</code>让别人泄密信息。或让别人配置电脑系统，变得易于攻击。</p>
+<h4 id="网络钓鱼-Phishing-和-假托-Pretexing"><a href="#网络钓鱼-Phishing-和-假托-Pretexing" class="headerlink" title="网络钓鱼 Phishing 和 假托 Pretexing"></a>网络钓鱼 Phishing 和 假托 Pretexing</h4><p>最常见的攻击是<code>网络钓鱼</code>。例如通过信息，邮件等发送一个链接让人登录然后实际上很有可能会进入一个像官网的假网站导致输入用户名和密码后，信息会发给黑客导致账户信息暴露。</p>
+<p>另一种方法叫<code>假托(Pretexting)</code>。例如攻击者给某个公司打电话，假装是IT部门的人。攻击者的第一通电话一般会叫人转接，这样另一个人接的时候，电话看起来像内部的。然后让别人把电脑配置得容易入侵，或让他们泄露机密信息，比如密码或网络配置。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220831093139637-2122050012.jpg" alt="钓鱼即使成功率低但总有人中招"></p>
+<h4 id="木马-与-暴力破解"><a href="#木马-与-暴力破解" class="headerlink" title="木马 与 暴力破解"></a>木马 与 暴力破解</h4><p><code>木马病毒(Trojan Hourses)</code>是计算机黑客用于远程控制计算机的程序,木马会伪装成无害的东西，比如照片或发票，但实际上是会<code>偷数据</code>，比如银行凭证，或者会<code>加密文件</code>，交赎金才解密的恶意程序。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220831093921950-1516739775.jpg" alt="*勒索病毒meme*"></p>
+<p>如果攻击者无法用木马或电话欺骗，那攻击者只能被迫用其他手段。例如<code>暴力尝试</code>，尝试所有可能的密码，直到进入系统。大多数现代系统会加长等待时间，来抵御这种攻击，每次失败就加长等待时间，甚至失败超过一定次数后，完全锁住。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220831094750307-108520850.jpg" alt="Hydra"></p>
+<h4 id="NAND镜像-与-漏洞利用-Exploit"><a href="#NAND镜像-与-漏洞利用-Exploit" class="headerlink" title="NAND镜像 与 漏洞利用 Exploit"></a>NAND镜像 与 漏洞利用 Exploit</h4><p><code>NAND镜像(NAND Mirroring)</code>是最近出现一种攻破方法，适用于能物理接触到电脑的情况。可以往内存上接几根线复制整个内存，复制之后，暴力尝试密码，直到设备让你等待。这时只要把复制的内容覆盖掉内存，本质上重置了内存，就不用等待，可以继续尝试密码了，现在更新的设备已经有机制阻止这种攻击。</p>
+<p>无法物理接触到设备时黑客就必须远程攻击，比如通过互联网。远程攻击一般需要攻击者利用系统漏洞来获得某些能力或访问权限，这叫<code>漏洞利用(Exploit)</code></p>
+<h4 id="缓存区溢出-，边界检查-与-金丝雀"><a href="#缓存区溢出-，边界检查-与-金丝雀" class="headerlink" title="缓存区溢出 ，边界检查 与 金丝雀"></a>缓存区溢出 ，边界检查 与 金丝雀</h4><p><code>缓冲区溢出(Buffer Overflow)</code>是一种常见的漏洞利用。<code>缓冲区</code>是预留的一块内存空间的一种概称。缓存区溢出则是在系统缓存数据时<code>输入数据超出系统给定缓存区大小时</code>覆盖掉相邻内存的数据。入侵者可以利用这个漏洞在程序的内存中注入有意义的值以获取管理员权限。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220831135553025-1734269296.png" alt="缓存区溢出"></p>
+<p>有很多方法能阻止缓冲区溢出，最简单的方法是<code>边界检查(Bounds Checking)</code>，即将用户输入值复制到缓冲区之前先检查长度是否超出缓冲区大小。许多现代编程语言都自带了边界检查，程序也会随机存放变量在内存中的位置，使入侵者就不知道应该覆盖内存的哪里。</p>
+<p>程序也可以在缓冲区附近留一些不用的空间去跟踪里面的值，看是否发生变化，如果发生了变化，说明有攻击者在乱来。这些不用的内存空间叫<code>金丝雀(Canaries)</code>，因为以前矿工会带金丝雀下矿，他们通过随时观察金丝雀的状况来判断矿井内瓦斯和有害气体的含量，确保自己的安全。</p>
+<p><img src="https://img-blog.csdnimg.cn/20190601221021727.png" alt="Index Out Of Bounds Exception 常见的索引越界错误"></p>
+<h4 id="代码注入-和-零日漏洞"><a href="#代码注入-和-零日漏洞" class="headerlink" title="代码注入 和 零日漏洞"></a>代码注入 和 零日漏洞</h4><p><code>代码注入Code Injection</code>是最常用于攻击用数据库的网站的入侵手段。服务器在检查用户输入数据时一般会<code>执行一段SQL查询代码</code>指定从数据库中查询什么数据，但是代码注入可以通过在用户名等字段中<code>插入SQL代码</code>以进行删除数据库，数据表等破坏。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220831140837879-967062498.png" alt="大部分网站都使用数据库"></p>
+<p>而<code>零日漏洞(Zero Day Vulnerability)</code>就是当软件制造者还不知道软件有新漏洞被发现时的这个新漏洞。</p>
+<h4 id="蠕虫-和-僵尸网络"><a href="#蠕虫-和-僵尸网络" class="headerlink" title="蠕虫 和 僵尸网络"></a>蠕虫 和 僵尸网络</h4><p><code>蠕虫(Worms)</code>是一种能够利用系统漏洞通过网络进行自我传播的恶意程序，它是利用网络进行复制和传播，传染途径是通过网络和电子邮件。最初的蠕虫病毒定义是因为在DOS环境下，病毒发作时会在屏幕上出现一条类似虫子的东西，胡乱吞吃屏幕上的字母并将其改形。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220831142529845-1073504703.png" alt="蠕虫病毒概念图"></p>
+<p><code>僵尸网络(Botnet)</code>则是黑客将入侵控制的大量电脑组成的网络。可以用于发大量垃圾邮件，用别人电脑的计算能力和电费挖比特币，或发起<code>拒绝服务攻击(DDoS)</code>以攻击服务器。</p>
+<h3 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h3><p>系统架构师为了保护系统安全会部署<code>多层防御</code>即<code>多层不同的安全机制</code>来阻碍攻击者，计算机安全中最常见的防御形式就是通过<code>密码学(cryptography)</code>将信息进行加密。为了加密信息，要用<code>加密算法(Cipher)</code> 把明文转为密文，不知道解密方法的话密文看起来就只是一堆乱码。把明文转成密文叫<code>加密(encryption)</code>，把密文恢复回明文叫<code>解密(decryption)</code></p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220831171820322-1915210577.jpg" alt="加密"></p>
+<h4 id="恺撒加密-和-移位加密"><a href="#恺撒加密-和-移位加密" class="headerlink" title="恺撒加密 和 移位加密"></a>恺撒加密 和 移位加密</h4><p><code>恺撒加密</code>是<code>替换加密</code>这一大类的一种，算法把每个字母替换成其他字母，例如将所有明文FIRST中所有密码后移一位得出密文GJSTU,这里后移的一位就是偏移量。</p>
+<p>下面是位移1次的对比：</p>
+<table>
+<thead>
+<tr>
+<th>明文字母表</th>
+<th>Z</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>E</th>
+<th>F</th>
+<th>G</th>
+<th>H</th>
+<th>I</th>
+<th>J</th>
+<th>K</th>
+<th>L</th>
+<th>M</th>
+<th>N</th>
+<th>O</th>
+<th>P</th>
+<th>Q</th>
+<th>R</th>
+<th>S</th>
+<th>T</th>
+<th>U</th>
+<th>V</th>
+<th>W</th>
+<th>X</th>
+<th>Y</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>密文字母表</td>
+<td>A</td>
+<td>B</td>
+<td>C</td>
+<td>D</td>
+<td>E</td>
+<td>F</td>
+<td>G</td>
+<td>H</td>
+<td>I</td>
+<td>J</td>
+<td>K</td>
+<td>L</td>
+<td>M</td>
+<td>N</td>
+<td>O</td>
+<td>P</td>
+<td>Q</td>
+<td>R</td>
+<td>S</td>
+<td>T</td>
+<td>U</td>
+<td>V</td>
+<td>W</td>
+<td>X</td>
+<td>Y</td>
+<td>Z</td>
+</tr>
+</tbody></table>
+<p>而另一类加密算法是<code>移位加密</code>，例如<code>列移位加密</code>加密就是将明文填入网格，然后选择一个顺序，从左从上至下读取，这样就得到了不同排列顺序的加密顺序。解密的关键则是知道读取反向和网格大小。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220831220010076-663358763.png" alt="列移位加密"></p>
+<h4 id="英格码机-和-对称加密"><a href="#英格码机-和-对称加密" class="headerlink" title="英格码机 和 对称加密"></a>英格码机 和 对称加密</h4><p>德国的<code>英格玛(Enigma)机</code>是纳粹在战时用于加密通讯信息的机器，它有一系列<code>转子(rotros)</code> ，是加密的关键。转子一面有26个接触点，代表26个字母，输入字母后线会连到另一面，替换字母。</p>
+<p>这个字母替换的流程也是<code>替换加密</code>。而英格玛机更复杂一些，因为它有3个或更多转子，并让一个转子的输出作为下一个转子的输入。还可以按不同顺序放入转子，提供更多字母替换映射。</p>
+<p>转子之后是一个叫<code>反射器(Reflector)</code>的特殊电路,它每个引脚会连到另一个引脚，并把信号发回给转子，最后发回到机器表面的插板就可以得到加密后的字母。这里插板的字母按照既定的顺序排列的话还可以增加一层复杂度，类似某些app的安全键盘会让用户使用乱序的键盘。</p>
+<p>而这样子的设计字母加密后一定会变成另一个字母，为了避免被观察出规律，后续设计成每输入一个字母，转子会转一格。如果输入A-A-A，可能会变成B-D-K，映射会随着每次按键而改变。这样解密难度又上升了不少。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220831224258807-811449108.png" alt="英格玛加密流程"></p>
+<p><code>对称加密(Symmetrical Encryption)</code>也称为密钥加密，所谓<code>对称</code>，就是采用这种加密方法的双方，使用方式用同样的<code>密钥(Secret Key)</code>进行加密和解密。密钥是控制加密以及解密过程的指令。</p>
+<p>早期对称加密算法中应用最广泛的是IBM 和 NSA 于1977年开发的<code>数据加密标准</code>即<code>Data Encryption Standard (DES)</code>, DES最初用的是56 bit长度的二进制密钥,意味着有2的56次方，或大约72千万亿个不同密钥。在当年大部分人都没有足够计算能力 来暴力破解所有可能密钥。直到技术进步到1999年以后暴力破解变得可能。</p>
+<p>于是 2001 年又出现了：<code>高级加密标准</code>即 <code>Advanced Encryption Standard (AES)</code>，AES 用更长的密钥 - 128位&#x2F;192位&#x2F;256位 - 让暴力破解更加困难，AES将数据切成一块一块，每块16个字节，然后用密钥进行一系列替换加密和移位加密，再加上一些其他操作，进一步加密信息，每一块数据，会重复这个过程10次或以上。只重复10次和使用128位密钥是基于基于性能的权衡，当前的加密已经足够使暴力破解困难了，就没必要加大加密难度使时间浪费在加密上。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220831234708889-2044757843.jpg" alt="DES vs AES"></p>
+<h4 id="密钥交换-和-非对称加密"><a href="#密钥交换-和-非对称加密" class="headerlink" title="密钥交换 和 非对称加密"></a>密钥交换 和 非对称加密</h4><p>以上的加密技术都依赖于发送者和接收者都知道密钥，发件人用密钥加密，收件人用相同的密钥解密。而互联网时代密钥没办法简单的通过口头约定，或依靠物品来约定。而在公开的互联网上传递密钥的解决方案是<code>密钥交换</code>。</p>
+<p>密钥交换是一种不发送密钥， 但依然让两台计算机在密钥上达成共识的算法。可以用<code>单向函数</code>来实现，单项函数是一种数学操作，很容易算出结果，但想从结果逆向推算出输入非常困难。</p>
+<p><code>迪菲-赫尔曼(Diffie-Hellman)密钥交换</code>就是一种相关的安全协议 ，在 Diffie-Hellman 中，单向函数是模幂运算。</p>
+<p>意思是先做幂运算，拿一个数字当底数，拿一个数字当指数，比如 <code>A^b mod C</code>。</p>
+<blockquote>
+<p>例如想算3的5次方，模31，先算3的5次方，得到243，然后除31，取余数，得到26。</p>
+<p>即 3^5 mod 31 &#x3D; 243 mod 31 &#x3D; 26</p>
+<p>重点是  <code>如果只给余数和基数。很难得知指数是多少</code></p>
+<p>如果已知3的某次方 模31，余数是7，需要试很多次才能直到次方是多少，如果把数字变长一些，比如几百位长那么想找到秘密指数是多少，几乎是不可能的。</p>
+</blockquote>
+<p> Diffie-Hellman用&#96;模幂运算算出双方共享的密钥的流程:</p>
+<ul>
+<li>首先，有公开的值 - <code>基数:B</code>和<code>模数:M</code>，发送方选取<code>秘密指数:X</code></li>
+<li>然后计算出 <code>B^X mod M</code> 的结果发送给接收方</li>
+<li>接收方也选一个<code>秘密指数:Y</code>，然后把 <code>B^Y mod M</code> 的结果发回发送方</li>
+<li>为了算出 双方共用的密钥，双方用收到的结果与自身选取的秘密指数，进行模幂运算</li>
+<li><code>(B^Y mod M)^X mod M</code> &#x3D; <code>(B^X mod M)^Y mod M</code>， <code>B^XY mod M</code> &#x3D; <code>B^YX mod M</code></li>
+</ul>
+<p>其中最后一步数学上是相等的，也就能做到即使双方从来没给对方发过各自的秘密指数也能通过收到的结果当密钥以建立共享密钥。</p>
+<blockquote>
+<p>建议自己推一下，视频中给出的算法描述是错误的。因为数学学的不咋地我是带了个值验证了一下</p>
+</blockquote>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220901001337813-1966164158.png" alt="模幂运算"></p>
+<p><code>非对称加密( Asymmetric Encryption)</code>则是有两个不同的密钥，一个是公开的，另一个是私有的。人们用公钥加密消息，只有有私钥的人能解密。</p>
+<p>知道公钥只能加密但不能解密，或者用私钥加密公钥解密。就像一个不可伪造的签名，任何人都可以用公钥解密，但加密只有私钥的持有人 能加密。这能证明数据来自正确的服务器或个人，而不是某个假冒者。目前最流行的非对称加密技术是 <code>RSA</code></p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220901004302540-58568175.jpg" alt="RSA"></p>
+<p>emm…再说最后一遍，時間が加速する，后面的地方确实还没打算学习，只是将字幕文本进行大致的复制整理。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220831235249250-1124330411.png" alt="Made In Heaven"></p>
+<h3 id="机器学习与人工智能"><a href="#机器学习与人工智能" class="headerlink" title="机器学习与人工智能"></a>机器学习与人工智能</h3><h4 id="机器学习-ML-Machine-Learning"><a href="#机器学习-ML-Machine-Learning" class="headerlink" title="机器学习 ML Machine Learning"></a>机器学习 ML Machine Learning</h4><p><code>机器学习</code>的本质是利用计算机擅长存放，整理，获取和处理大量数据的特质去用特定的算法使计算机可以<code>从数据中学习</code>，然后<code>自行做出预测和决定</code>。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220901112703531-835559310.png" alt="机器学习"></p>
+<h4 id="人工智能-AI-Artificial-Intelligence"><a href="#人工智能-AI-Artificial-Intelligence" class="headerlink" title="人工智能 AI Artificial Intelligence"></a>人工智能 AI Artificial Intelligence</h4><p>虽然机器学习（ML）和人工智能（AI）常常混着用，但大多数计算机科学家认为机器学习是为了实现人工智能这个更宏大目标而研究的技术之一。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220901112618161-737550227.png" alt="AI"></p>
+<h4 id="分类-决策边界-混淆矩阵"><a href="#分类-决策边界-混淆矩阵" class="headerlink" title="分类 决策边界 混淆矩阵"></a>分类 决策边界 混淆矩阵</h4><p>这里以<code>分类 Classification</code>作为例子。例如判断飞蛾是<code>月蛾</code>还是<code>帝蛾</code>，做分类的算法叫<code>分类器Classifier</code>。算法为了<code>减少复杂性</code>会把<code>数据简化成特征</code>用于帮助分类。</p>
+<p>对于飞蛾分类的例子，可以用两个特征:<code>翼展</code>和<code>重量</code>，为了训练分类器做出好的预测，需要得到足够的<code>训练数据</code>。收集训练数据时不只记录<code>特征值Feature</code>，还会把<code>种类</code>也写上，这叫<code>标记数据</code>。</p>
+<p>因为只有两个特征，很容易就能用<code>散点图</code>把数据可视化。红色标了100个帝蛾，蓝色标了100个月蛾，中间有一定重叠表明想完全区分两个组比较困难。</p>
+<p>这里就需要使用机器学习算法找出最佳区分。这里通过估算判断翼展小于45毫米的 很可能是帝蛾，重量必须小于0.75g的很可能是帝蛾。在散点图为这两个数据标记一条线继续细分数据。这些线叫 <code>决策边界Decision boundaries</code></p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220901124449159-738542879.png" alt="散点图 + 决策边界"></p>
+<p>而分类错误数和正确数用一个叫做<code>混淆矩阵Confusion Matrix</code>的表记录。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220901145433505-1988568920.png" alt="混淆矩阵"></p>
+<p>机器学习算法的目的就是是最大化正确分类 + 最小化错误分类。如果碰到一只不认识的飞蛾就可以测量它的特征, 并绘制到决策空间上。这样的数据是<code>未标签数据</code>, 通过决策边界就可以猜测其种类。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220901155846079-1262567814.png" alt="利用决策边界判断"></p>
+<h4 id="决策树-支持向量机"><a href="#决策树-支持向量机" class="headerlink" title="决策树 支持向量机"></a>决策树 支持向量机</h4><p>这个用决策边界把决策空间切成几个盒子的简单方法，可以用<code>决策树Decision tree</code>来表示。用 if 语句写代码，会像右侧，画成图像的数据结构就像左侧的树结构。用多个决策树来预测就被称为<code>森林</code>。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220901160405181-745626333.png" alt="决策树"></p>
+<p><code>支持向量机Support Vector Machines</code>则是不用树的方法，本质上是用不一定是直线的任意线段来切分决策空间，可以用多项式或其他数学函数切分。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220901160855987-1079773187.png" alt="机器学习算法负责找出最好的线，最准的决策边界"></p>
+<h4 id="人工神经网路-深度学习"><a href="#人工神经网路-深度学习" class="headerlink" title="人工神经网路 深度学习"></a>人工神经网路 深度学习</h4><p><code>人工神经网络Artificial Neural Network</code>是一大类用了统计学的机器学习算法中，不用统计学的算法其灵感来自大脑里的神经元。可以接收多个输入，然后整合并发出一个信号。</p>
+<p>其分为<code>输入层</code>、<code>隐藏层</code>和<code>输出层</code>。通过使用标记数据进行训练，不断调节神经网络的<code>权重</code>，增减<code>偏差值</code>修正，一开始这些偏差和权重会设置成随机值。随着算法执行的结果调整这些值逐渐提高准确性以模拟人类学习的过程。</p>
+<p>神经元有应用于输出的<code>激活函数</code>，也叫<code>传递函数</code>。激活函数应用于输出和对结果执行最后一次数学修改。例如<code>修正输出值</code>限制在-1和+1之间。加权，求和，偏置，激活函数会应用于一层里的每个神经元并向前传播，一次一层。最后输出层中数字最高的就是结果。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220901162914141-1043482798.png" alt="人造神经元，输出层数字最高的就是结果"></p>
+<p><code>深度学习Deep learning</code>指其隐藏层不是只能有一层，可以有很多层。训练更复杂的网络 需要更多的计算量和数据，尽管神经网络已经发明了很多年。但还是深层神经网络也直到最近才随着近年来硬件的发展成为可能。现今的深层神经网络可以执行开车，翻译，诊断医疗状况等等任务。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220901161852314-1488790522.png" alt="深度学习"></p>
+<h4 id="强AI与弱AI"><a href="#强AI与弱AI" class="headerlink" title="强AI与弱AI"></a>强AI与弱AI</h4><p>这种只能做特定任务的AI叫<code>弱AI</code>或<code>窄AI</code>，真正通用的，像人一样聪明的AI，叫 <code>强AI</code>。但目前没人能做出来接近人类智能的 AI</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220901224103039-384285773.jpg" alt="AI meme"></p>
+<h4 id="强化学习"><a href="#强化学习" class="headerlink" title="强化学习"></a>强化学习</h4><p> <code>强化学习</code> 是一种很强大的方法，其和人类的学习方式非常类似。都是学习什么管用，什么不管用，并自己发现成功的策略。</p>
+<h3 id="计算机视觉"><a href="#计算机视觉" class="headerlink" title="计算机视觉"></a>计算机视觉</h3><p>因为视觉是信息最多的感官，视觉也是最常用的与世界交互的方式。所以计算机科学家一直都致力于让计算机有视觉感知，<code>计算机视觉</code>这个领域目标便是让计算机理解图像和视频</p>
+<h4 id="颜色跟踪法"><a href="#颜色跟踪法" class="headerlink" title="颜色跟踪法"></a>颜色跟踪法</h4><p><code>颜色跟踪法</code>是最简单的计算机视觉算法，算法运行时是一个个像素搜索，因为颜色是在一个像素里。其通常从图片左上角开始，逐个检查像素，找出<code>最接近</code>跟踪物体颜色的像素。但是因为光线和阴影等情况，跟踪效果可能不会很好，还可能会因为某个其他物体颜色与跟踪物体的颜色而导致结果混乱。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220901230439554-434952681.png" alt="颜色跟踪法"></p>
+<h4 id="边缘检测-核-过滤器-卷积"><a href="#边缘检测-核-过滤器-卷积" class="headerlink" title="边缘检测  核&#x2F;过滤器 卷积"></a>边缘检测  核&#x2F;过滤器 卷积</h4><p>颜色跟踪法不适合占多个像素的特征，为了识别如<code>物体边缘</code>等由多个像素组成的特征。算法要将图片中的像素分块处理。</p>
+<p>例如寻找垂直边缘，这里先将图片转成灰度图(去色&#x2F;饱和度降为0)，然后对比一张图片某点左右两侧的图像差异，差异越大，越有可能证明这点就是边缘点。这个操作用到一个矩阵完成检测，这个矩阵叫做<code>核kernel</code>或<code>过滤器filter</code></p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220901230812100-635237913.png" alt="核或过滤器"></p>
+<p>里面的数字用来<code>带入像素块做乘法</code>，然后将<code>总和存到块的中心像素</code>里。</p>
+<p>例如下图中将图片灰度化后每个像素只保留了灰度值，现在把核矩阵的中心匹配上进行检测的像素，根据<code>核</code>指定每个像素要乘的值，然后把所有数字加起来就得出最后的结果147并应用于块的中心(重新设置了灰度值)。这种把 应用于像素块的操作叫<code>卷积convolution</code></p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220901231359170-279256354.png" alt="块带入矩阵计算值，总和存在中心，图中结果为147"></p>
+<h4 id="Prewitt-算子-人脸检测"><a href="#Prewitt-算子-人脸检测" class="headerlink" title="Prewitt 算子  人脸检测"></a>Prewitt 算子  人脸检测</h4><p>上面的核是<code>检测垂直边缘</code>的核。如果要检测水平边缘，可以使用其他的核（就是上面矩阵的转置）。这两个水平和垂直边缘增强的核叫<code>Prewitt 算子 Prewitt Operators</code>以发明者命名，核能做很多种图像转换。例如<code>匹配特定形状</code>，<code>锐化图像</code>，<code>模糊图像</code>。</p>
+<p>虽然每个核单独找出脸的能力很弱，但组合在一起会相当准确，于是把多个核组合进行检测，就可以识别到人脸，这叫<code>人脸检测算法</code>，这是一个早期比较重要的算法。叫 <code>维奥拉·琼斯 人脸检测算法</code></p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220901232617426-81812575.png" alt="计算机扫描图像时，最常见的是用一个窗口来扫"></p>
+<h4 id="卷积积神经网络-Convolutional-Neural-Networks"><a href="#卷积积神经网络-Convolutional-Neural-Networks" class="headerlink" title="卷积积神经网络 Convolutional Neural Networks"></a>卷积积神经网络 Convolutional Neural Networks</h4><p>现在最热门的是<code>卷积神经网络</code>。神经网络可以学习核中的值，来完成图像识别。每一层的卷积网络，可以做出一部分检测，经过多层卷积网络，最后得到图像的检测结果。卷积神经网络的设计一般需要很多层，所以算是深度学习。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220901232859126-1899200616.jpg" alt="卷积神经网络"></p>
+<p>卷积神经网络有很多作用，比如可以进行<code>文字识别OCR</code>，CT扫描中发现肿瘤，检测马路是否拥堵等等。计算机可以利用目标定位和机器视觉，判断人们人脸表情。此外还有<code>生物识别</code>，通过判断两只眼睛之间的距离，以及前额多高等等，让计算机来识别生物特征。</p>
+<h3 id="自然语言处理-NLP"><a href="#自然语言处理-NLP" class="headerlink" title="自然语言处理 NLP"></a>自然语言处理 NLP</h3><p>人类的语言叫<code>自然语言</code>，自然语言有大量词汇，有些词有多种含义，不同口音。人写们在作和说时话也会错犯，但大部情况分下言语序顺的并不解理影响。而<code>自然语言处理</code>，便是让计算机理解语言的领域，结合计算机科学与语言学的交叉学科。</p>
+<h4 id="NLP过程-分析树"><a href="#NLP过程-分析树" class="headerlink" title="NLP过程 分析树"></a>NLP过程 分析树</h4><p>早期NLP的问题是怎么把句子切成一块块以方便处理(分治处理嘛可不是)。为了使计算机懂得语法，NLP通过词汇的<code>词性</code>和<code>短语结构规则</code>以构建<code>分析树</code>。</p>
+<p>分析树给每个单词标了可能是什么词性，也标明了句子的结构使数据块更小 更容易处理。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220901234425061-342757783.png" alt="分析树"></p>
+<h4 id="知识图谱"><a href="#知识图谱" class="headerlink" title="知识图谱"></a>知识图谱</h4><p>短语结构规则和其他语言结构化的方法，还可以用来生产句子。当数据存在<code>语义网络</code>时，这种方法最有效。实体相互连接，提供了构造句子的所有成分。这种技术谷歌版的叫<code>知识图谱</code>。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220901235226788-1960773768.png" alt="知识图谱"></p>
+<h4 id="语音识别"><a href="#语音识别" class="headerlink" title="语音识别"></a>语音识别</h4><p><code>语音识别</code>这个领域是关于<code>如何从声音中提取词汇</code>，随着计算机处理能力的发展，实时处理语言变得可能。语言处理，也不是手工提取，而是基于<code>机器学习</code>。</p>
+<p>如今，最强大的语音识别系统，用的是<code>深度神经网络</code>。我们得到的语音，如果直接利用其波形振幅时间图，我们不能很好识别。但是通过<code>快速傅里叶变换(Fast Fourier Transform)</code>，得到不同频率的<code>振幅时间图</code>(这里横轴是时间,竖轴是不同频率的振幅)。通过不同的<code>高峰区域（共振峰）</code>，高峰区域指的是声音较大的区域（亮纹处），可以让计算机识别元音然后紧接着识别出整个词。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220901235923513-1057444047.png" alt="频谱图"></p>
+<p>而构成单词的声音片段叫<code>音素</code>，英语大概有44种音素，所以声音识别变成了音素识别。语音识别结合里面包含有单词顺序的统计信息的<code>语言模型</code>，语音识别成功率会更高。</p>
+<blockquote>
+<p><code>音素（phone）</code>，是根据语音的自然属性划分出来的最小语音单位，依据音节里的发音动作来分析，一个动作构成一个音素。音素分为元音与辅音两大类。如汉语音节啊（ā）只有一个音素，爱（ài）有两个音素，代（dài）有三个音素等。</p>
+</blockquote>
+<h4 id="语音合成"><a href="#语音合成" class="headerlink" title="语音合成"></a>语音合成</h4><p><code>语音合成 Speech Synthesis</code>是让计算机输出语音，原理是让计算机分解各个词，然后播放出音频。早期的语音合成是音素合成。但现在的各种智能语音助手已经显得好了很多。</p>
+<h3 id="机器人"><a href="#机器人" class="headerlink" title="机器人"></a>机器人</h3><p>机器人总的来说，就是由计算机控制，可以自动执行一系列动作的机器。</p>
+<h4 id="CNC机器"><a href="#CNC机器" class="headerlink" title="CNC机器"></a>CNC机器</h4><p>早期的机器人，可以认为是一些自动机器，如自动计时器等等。第一台计算机控制的机器出现在1940年代晚期，叫<code>数控机器,Computer Numerical Control(CNC)</code>可以执行一连串程序指定的操作。精细控制，生产出人类用普通机械工具很难手工生产的物品。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220902164757948-2122720510.png" alt="计算机控制机床"></p>
+<h4 id="负反馈回路-PID控制器"><a href="#负反馈回路-PID控制器" class="headerlink" title="负反馈回路 PID控制器"></a>负反馈回路 PID控制器</h4><p>第一个商业贩卖的可编程工业机器人叫Unimate，于1960年卖给通用汽车公司。严格控制环境如工厂流水线内的生产环境下一般使用<code>负反馈回路</code>控制机器。负反馈回路包含获取环境信息的<code>传感器</code>，处理传感器传入值与目标值差异的<code>控制器</code>，然后用电机等<code>物理组件</code>做出动作。</p>
+<p>但是现实世界中机器人会受到如摩擦力，风，等等各种外力影响。为了处理这些外力，通过一个包含有控制回路和反馈机制的机制，叫 <code>比例-积分-微分控制器(PID 控制器)</code> 。现在已经从硬件改进为纯软件了，包括比如汽车的循环系统，无人机调整螺旋桨速度保持水平等都运用了PID控制器。</p>
+<blockquote>
+<p>PID控制器通过控制三个值以帮助解决未来可能出现的错误。三个值包括</p>
+<ul>
+<li>比例值——实际值和理想值差多少</li>
+<li>积分值——一段时间误差的总和</li>
+<li>导数值（微分值）——期望值和实际值之间的变化率</li>
+</ul>
+</blockquote>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220902222550398-248037390.jpg" alt="pid"></p>
+<h4 id="机器人三定律"><a href="#机器人三定律" class="headerlink" title="机器人三定律"></a>机器人三定律</h4><p>艾萨克·阿西莫夫为机器人行为指定的道德指南，简单说就是让机器人不要伤害人类。</p>
+<blockquote>
+<ul>
+<li>第一定律：机器人不得伤害人类个体，或者目睹人类个体将遭受危险而袖手不管</li>
+<li>第二定律：机器人必须服从人给予它的命令，当该命令与第一定律冲突时例外</li>
+<li>第三定律：机器人在不违反第一、第二定律的情况下要尽可能保护自己的生存</li>
+</ul>
+</blockquote>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220902223241966-1697802100.png" alt="robot meme"></p>
+<h3 id="计算机心理学"><a href="#计算机心理学" class="headerlink" title="计算机心理学"></a>计算机心理学</h3><p>为了做出方便人类使用的计算机，需要了解计算机和人类的优缺点，利用计算心理学，以求更好的计算机设计。优秀的系统设计师在创造软件时会运用社会心理学，认知心理学，行为心理学，感知心理学的原理</p>
+<h4 id="利用视觉系统，认知系统设计界面"><a href="#利用视觉系统，认知系统设计界面" class="headerlink" title="利用视觉系统，认知系统设计界面"></a>利用视觉系统，认知系统设计界面</h4><p>人类<code>擅长给颜色强度排序</code>，但<code>不擅长给颜色排序</code>。前者指按照颜色深浅排列很容易，但是将颜色排序按照色相排序对人类就很困难，即使能想到按照光的波长排序也显得很累，大部分人会排的很满而且容易出错。由于<code>视觉系统</code>天生是这样，所以用不同颜色显示连续性数据，是个糟糕的选择。如果数据没有顺序(如分类数据)，用不同颜色就很合适</p>
+<p>两者对于界面设计的利用包括<a target="_blank" rel="noopener" href="https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=00897B&secondary.color=FF7043">Android的材料设计</a>，颜色上就会要求一个界面限定一个色系的颜色，通过不同颜色区分出内容的重要级别以及强调某些内容。而多个(一般一个界面颜色不超过3个)不同的颜色会干扰对界面优先级的判断而很少使用。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220902232906950-981706741.png" alt="材料设计"></p>
+<p>理解人类的<code>认知系统</code>能帮助设计更好的界面，比如，如果<code>信息分块</code>了即(把信息分成更小，更有意义的块),会更容易读，更容易记。界面设计使用分块虽然更费时费空间效率更低，但比如下拉菜单和带按钮的菜单栏等分块更有利于人类浏览，记忆以提高效率。</p>
+<h4 id="直观功能"><a href="#直观功能" class="headerlink" title="直观功能"></a>直观功能</h4><p><code>直观功能</code> 为如何操作物体提供线索且广泛用于图形界面，直观功能做的好，用户只需要看一眼就知道怎么做：</p>
+<p>例如窗口右上角的三个按钮，可以很直观的感觉出是控制窗口三个状态(最小化，最大化和关闭)</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220902233826984-1575498829.png" alt="窗口控制"></p>
+<p>当然这可能是习惯<del>被电子驯化</del>之后的结果，类似于看到手柄就感觉是游戏相关，看到一个▶就感觉是播放什么东西。再联想到事实上拨号键盘和1.44mb软盘现在已经很少用了，但还是作为图标符号被保留了下来。</p>
+<h4 id="认出与回想"><a href="#认出与回想" class="headerlink" title="认出与回想"></a>认出与回想</h4><p><code>认出与回想</code>是和直观功能相关的一个心理学概念，指的是用文字，图片或声音等感觉来触发记忆会容易得多，例如考试中选择题比填空题容易得多(再例如百词斩脱离图片就不记得单词)。所以使用图标表示功能，如垃圾桶表示回收站。</p>
+<p>但是，让所有菜单选项好找好记，有时候意味着用的时候会慢一些。这与另一个心理学概念<code>专业知识</code>冲突，当使用界面熟悉之后，速度会更快一些，所以好的界面应该提供多种方法来实现目标，一个例子是复制粘贴，可以在右键的下拉菜单中找到，也可以用快捷键，一种适合新手，一种适合专家，两者都不耽误。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220903133625884-1634037419.png" alt="ps快捷键"></p>
+<h4 id="情感计算-与-人机交互"><a href="#情感计算-与-人机交互" class="headerlink" title="情感计算 与 人机交互"></a>情感计算 与 人机交互</h4><p>情感计算系统，能够通过传感器等分析人类情感，根据用户的状态做出合适地反应，让使用电脑更加愉快以此来优化计算机使用体验。通过情感计算，计算机知道如何回应用户的状态。</p>
+<p>人们往往会被看到的内容情绪影响，变得积极或消极。如果想说服，讲课，或引起注意，眼神注视非常重要，谈话时注视对方，可以提升参与感等等，这些东西都是计算心理学的内容。</p>
+<p>人机交互也是一个重要的领域，人类喜欢拟人化的物体尤其是会动的物体。<code>人机交互HRI</code>，是一个研究人类和计算机交互的领域。而随着机器人做得越来越像人类，人们对其外貌与人类的相似度，做出的行为都会被心理学+计算机科学很大程度的影响。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220903134344670-431940176.png" alt="机器人可信度造成的感受"></p>
+<h3 id="教育科技"><a href="#教育科技" class="headerlink" title="教育科技"></a>教育科技</h3><p>计算机带来的最大改变之一是信息的创造和传播能力。随着知识载体从广播和电视，到DVD和光碟逐步迭代，教育科技行业在高速地发展着。(小时候英语听力还是发磁带，现在都是小程序打开听力视频了)</p>
+<h4 id="影像学习-大型开放式在线课程MOOC"><a href="#影像学习-大型开放式在线课程MOOC" class="headerlink" title="影像学习 大型开放式在线课程MOOC"></a>影像学习 大型开放式在线课程MOOC</h4><p>影像学习中有三个主动学习的技巧可以显著提高学习概率:</p>
+<ol>
+<li>调整视频速度到适合自己帮助理解视频</li>
+<li>在理解困难处暂停仔细思考</li>
+<li>完成视频中提供练习</li>
+</ol>
+<p>而<code>MOOC(Massive Open Online Courses)</code>是这个老想法的新化身。其为了有效学习，学生需要及时获得反馈，于是有两种相对有效的方法，一个方法是同学相互打分，另一个是开发相应的电脑打分算法辅助作业打分。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220903140244374-2008819084.png" alt="mooc"></p>
+<h4 id="智能辅导系统-Intelligent-Tutoring-Systems"><a href="#智能辅导系统-Intelligent-Tutoring-Systems" class="headerlink" title="智能辅导系统 Intelligent Tutoring Systems"></a>智能辅导系统 Intelligent Tutoring Systems</h4><p><code>智能辅导系统</code>一般使用AI实现，目的是在正确的时间提供正确的资料，让用户练习没理解的难的部分，而不是给出用户已经学会的内容。</p>
+<p>假设学生在一个假想的辅导系统中研究一个代数问题，这里使用<code>判断规则</code>来表示问题的执行步骤。即此例中<code>3x + 7 = 4</code>的判断规则表示正确的下一步即两侧-7，这样通过学生的下一步结果是否符合判断规则就可以判断其常犯错误。</p>
+<p>学生做完一个步骤后可能触发多个<code>判断规则</code>,系为了弄清 是什么原因让学生选了那个答案。会将判断规则和算法结合使用，判断可能原因。判断规则+选择算法，组合在一起成为 <code>域模型</code>。</p>
+<p>智能辅导系统负责创建和维护学生模型，记录学生已经掌握的判断规则，以及还需要练习的生疏部分，这就是个性化辅导需要的。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220903140900638-1753734523.png" alt="判断规则"></p>
+<h4 id="贝叶斯知识追踪"><a href="#贝叶斯知识追踪" class="headerlink" title="贝叶斯知识追踪"></a>贝叶斯知识追踪</h4><p>但只靠学生对一些问题的回答，来弄清学生知道什么，不知道什么，是很大的挑战。所以一般常用<code>贝叶斯知识追踪</code> 来解决这个问题。其通过给学生出题，会看学生答题的正确度，更新学生掌握程度的估算值。再过对学生做题结果的判断，用四种概率更新学生模型：</p>
+<ul>
+<li>学生学会的概率</li>
+<li>学生瞎猜的概率</li>
+<li>学生失误的概率</li>
+<li>学生做题过程中学会的概率</li>
+</ul>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220903140459134-1584537426.png" alt="贝叶斯知识追踪法的概率学习公式"></p>
+<p>通过贝叶斯知识追踪的结果系统会选择适合学生的问题，让学生在挑战中学习知识，这叫自适应式程序</p>
+<h4 id="教育数据挖掘-Educational-Data-Mining"><a href="#教育数据挖掘-Educational-Data-Mining" class="headerlink" title="教育数据挖掘 Educational Data Mining"></a>教育数据挖掘 Educational Data Mining</h4><p>App 或网站收集上百万学习者的数据以发现包括常见错误，一般哪里难倒学生，回答前暂停了多久，哪个部分加速视频，学生如何在论坛和其他人互动等数据评估学生知识掌握状态的领域叫做<code>教育数据挖掘</code>。</p>
+<h3 id="奇点，天网与计算机的未来"><a href="#奇点，天网与计算机的未来" class="headerlink" title="奇点，天网与计算机的未来"></a>奇点，天网与计算机的未来</h3><h4 id="普适计算"><a href="#普适计算" class="headerlink" title="普适计算"></a>普适计算</h4><p><code>普适计算</code>，又称普存计算、普及计算、遍布式计算、泛在计算，是一个强调和环境融为一体的计算概念，而计算机本身则从人们的视线里消失。普适计算已经有了很大发展，现在我们的冰箱、电视和手表等等，凡是电子产品，都有计算机的影子(智能家居生态)。不过它未能像空气一样融入人的生活。</p>
+<h4 id="奇点"><a href="#奇点" class="headerlink" title="奇点"></a>奇点</h4><p>在未来，计算机的计算能力会不断发展，最终会超过人类的计算能力。然后人的参与会越来越少，人工超级智能会开始改造自己。而智能科技的失控性发展则叫<code>奇点</code>，不过暂时奇点还在遥远的未来。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220903145721930-62525756.png" alt="奇点"></p>
+<h4 id="技术性事业"><a href="#技术性事业" class="headerlink" title="技术性事业"></a>技术性事业</h4><p>随着计算机和人工智能的发展，有些职业不需要人来进行了，尤其是一些重复性的行为或者繁杂劳动力的行为，这就是最常见的<code>技术性失业</code>。往早了说当初纺织机出现，纺织工人失业。自动接线板出现，电话接线员事业。现在AI生成代码(文本)，生成绘画作品也逐步出现了，而随着这些科技的进步，结果上看终究是使社会生产力提高，改善了人们的生活水平。</p>
+<p>这里工作可分为四个象限</p>
+<ol>
+<li>手工型工作 - 比如组装零件</li>
+<li>思维型工作 - 比如选股票</li>
+<li>重复性工作 - 流水线做相同的事情</li>
+<li>创造性工作 - 需要创造性的解决问题</li>
+</ol>
+<p>这里暂时除了非重复性思维型工作包括教师和艺术家其余工作都有被自动化逐渐取代的可能。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220903145805747-779109435.png" alt="工作四象限"></p>
+<h4 id="未来"><a href="#未来" class="headerlink" title="未来"></a>未来</h4><p>一些超人类主义者认为会出现改造人，人类和科技融合在一起，增强智力和身体。也有人说，人死后人的脑子里的信息进入电脑中，成为数字人。或者机器人以超出人类的寿命替代人类去探索宇宙。</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220903144428103-1920798503.png" alt="机械飞升"></p>
+<h3 id="总结和感想"><a href="#总结和感想" class="headerlink" title="总结和感想"></a>总结和感想</h3><blockquote>
+<p>这里是提前写好的一些总结和感想</p>
+</blockquote>
+<p>大概花了三个星期多才记了这些笔记，起初刚看到这个视频的时候还是直接硬看。然后看到ALU那块遭重了，一眼看不明白决定在纸上理一理。</p>
+<p>然后感觉容易忘想着记个笔记，然后搜索到了相关笔记进行<del>缝合</del>借鉴。感觉自己的体会和总结能力似乎没有得到相应的提升，倒是了解了不少相关的知识，然后发现计算机这一学科真的水好深啊(难视)，每一个知识点下面都有几乎查不完的细节，就光算法和数据结构我估计啃一个学期也拿捏不住。</p>
+<p>估计最后做完笔记自己看一遍理一理做个思维导图啥的就去从<code>编码</code>和<code>计算机是怎么跑起来</code>这两本书里学习了。然后再考虑<code>CSAPP</code>和<code>TAOCP</code>吧。能从暑假大概划拉一个月鸟瞰一下cs感觉也不算特别摆了。开学看前两本书的中间还想顺便学学数据库(mysql&amp;php)和linux(两个都是学校课业要求)，捡起第一行代码敲敲复习。下面是一个简单总结的脑图，可能有不少问题</p>
+<p><img src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220903152732647-1378321966.png" alt="脑图"></p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><blockquote>
+<p>前面大致参考(几乎就是缝合)两个知乎回答的，后面不想看视频找到了视频的<a target="_blank" rel="noopener" href="https://github.com/1c7/crash-course-computer-science-chinese">字幕</a>和相关总结笔记，于是后面是同时开着三个窗口对比试图总结学习。</p>
+</blockquote>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/103840715">32 计算机科学速成课 02：电子计算机、继电器、术语“bug”的来源、真空管、晶体管、发展路径 - 小王同学在积累的文章 - 知乎 </a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/151043418">零基础学习计算机原理：布尔逻辑和逻辑门 - 知乎 (zhihu.com)</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39606396/article/details/119094466">计算机中常用的三种码制,码制_weixin_39606396的博客-CSDN博客</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/144697348">浮点数的二进制表示(IEEE 754标准) - 冯文斌的文章 - 知乎</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/460879375">计算机科学速成课笔记 - 问夏的文章 - 知乎 ，挺细节</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/78717667">【计算机科学速成课笔记】CrashCourse_CS_notes (P1-P5) - Syddd的文章 - 知乎 ，偏概括</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaohupashu/article/details/60965598">C语言中的结构体与面向对象编程思想_zmcity的博客-CSDN</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20081359/answer/275107187">如何通俗地解释停机问题（Halting Problem）？ - 黄玄的回答 - 知乎</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/1c7/crash-course-computer-science-chinese">https://github.com/1c7/crash-course-computer-science-chinese</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://space.bilibili.com/357394001">汉苍茫茫</a> : <a target="_blank" rel="noopener" href="https://shimo.im/docs/PJAUY30F1uYksv0h/">石墨文档(<code>很全</code>)，偏概括</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/60325181">从仿色图案（Dither Pattern）到半调（Halftone） - Aya Magician的文章 - 知乎</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/fenggewan/article/details/89735056">80x25彩色字符模式_别人家的好孩子的博客-CSDN博客</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/news/275226">你现在还在保持80的列宽吗</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://qastack.cn/software/148677/why-is-80-characters-the-standard-limit-for-code-width">https://qastack.cn/software/148677/why-is-80-characters-the-standard-limit-for-code-width</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43149051/article/details/105925787">【3】现代计算机图形学（正交投影，透视投影，MVP变换 …</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/149243461">到底什么是路由？ - 知乎</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.sohu.com/a/300685528_166433">万维网（WWW）诞生记丨科学史_蒂姆·李</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/21230301/answer/17588179">IT圈说的白帽子，红帽子，黑帽子都是指什么？ - larmbr宇的回答 - 知乎</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%9C%A8%E9%A9%AC%E7%97%85%E6%AF%92/333298">木马病毒_百度百科</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86/2152944">对称加密_百度百科</a></p>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://xqher.gitee.io">虚青海</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://xqher.gitee.io/post/3ac0a3d1be26/">https://xqher.gitee.io/post/3ac0a3d1be26/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://xqher.gitee.io" target="_blank"> 虚青海的博客 </a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CS/">CS</a></div><div class="post_share"><div class="social-share" data-image="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220809214409822-534956115.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/post/c1668d50ac8a/" title="开发流程记录"><img class="cover" src="https://img2022.cnblogs.com/blog/1674552/202209/1674552-20220927211814642-994800873.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">开发流程记录</div></div></a></div><div class="next-post pull-right"><a href="/post/6131308ae59c/" title="SQL笔记"><img class="cover" src="https://img2022.cnblogs.com/blog/1674552/202208/1674552-20220807181025472-2116361347.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">SQL笔记</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://img2023.cnblogs.com/blog/1674552/202307/1674552-20230722183629733-139482028.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">虚青海</div><div class="author-info__description">想到啥写啥.</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">18</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">14</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Xqh233"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Xqh233" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:xqher@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">这里是公告, 确实</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CS%E9%80%9F%E6%88%90%E8%AF%BE%E7%AC%94%E8%AE%B0"><span class="toc-number">1.</span> <span class="toc-text">CS速成课笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%85%83%E4%BB%B6-%E5%BC%80%E5%85%B3"><span class="toc-number">1.2.</span> <span class="toc-text">计算机的基本元件-开关</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%A7%E7%94%B5%E5%99%A8"><span class="toc-number">1.2.1.</span> <span class="toc-text">继电器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9C%9F%E7%A9%BA%E7%AE%A1"><span class="toc-number">1.2.2.</span> <span class="toc-text">真空管</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8D%95%E9%A1%B9%E6%B5%81%E9%80%9A%E7%94%B5%E6%B5%81-%E4%BA%8C%E6%9E%81%E7%AE%A1"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">单项流通电流 - 二极管</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%AF%E6%8E%A7%E5%88%B6%E7%94%B5%E6%B5%81%E5%BC%80%E9%97%AD-%E4%B8%89%E6%9E%81%E7%AE%A1"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">可控制电流开闭 - 三极管</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%99%B6%E4%BD%93%E7%AE%A1"><span class="toc-number">1.2.3.</span> <span class="toc-text">晶体管</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%83%E5%B0%94%E9%80%BB%E8%BE%91%E5%92%8C%E9%80%BB%E8%BE%91%E9%97%A8"><span class="toc-number">1.3.</span> <span class="toc-text">布尔逻辑和逻辑门</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%83%E5%B0%94%E9%80%BB%E8%BE%91"><span class="toc-number">1.3.1.</span> <span class="toc-text">布尔逻辑</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B8%83%E5%B0%94%E4%BB%A3%E6%95%B0"><span class="toc-number">1.3.2.</span> <span class="toc-text">布尔代数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E9%97%A8"><span class="toc-number">1.3.3.</span> <span class="toc-text">逻辑门</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#AND-%E4%B8%8E%E9%97%A8"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">AND 与门</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#OR-%E6%88%96%E9%97%A8"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">OR 或门</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#NOT-%E9%9D%9E%E9%97%A8"><span class="toc-number">1.3.3.3.</span> <span class="toc-text">NOT 非门</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#XOR-%E5%BC%82%E6%88%96%E9%97%A8"><span class="toc-number">1.3.3.4.</span> <span class="toc-text">XOR 异或门</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6"><span class="toc-number">1.4.</span> <span class="toc-text">二进制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%A1%A8%E7%A4%BA%E6%AD%A3%E8%B4%9F%E6%95%B4%E6%95%B0"><span class="toc-number">1.4.1.</span> <span class="toc-text">二进制表示正负整数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A0%81%E5%88%B6"><span class="toc-number">1.4.2.</span> <span class="toc-text">码制</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%8D%E7%A0%81"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">反码</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A1%A5%E7%A0%81"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">补码</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#bit%E5%92%8Cbyte"><span class="toc-number">1.4.3.</span> <span class="toc-text">bit和byte</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%A1%A8%E7%A4%BA-%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="toc-number">1.4.4.</span> <span class="toc-text">二进制表示 浮点数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%A1%A8%E7%A4%BA%E6%96%87%E5%AD%97-Ascii%E7%A0%81"><span class="toc-number">1.4.5.</span> <span class="toc-text">二进制表示文字-Ascii码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%97%E6%95%B0%E9%80%BB%E8%BE%91%E5%8D%95%E5%85%83-ALU"><span class="toc-number">1.5.</span> <span class="toc-text">算数逻辑单元 ALU</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ALU-Arithmetic-and-Logic-Unit"><span class="toc-number">1.5.1.</span> <span class="toc-text">ALU | Arithmetic and Logic Unit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E4%B8%80%E4%BD%8D%E5%8A%A0%E6%B3%95-%E5%8D%8A%E5%8A%A0%E5%99%A8"><span class="toc-number">1.5.2.</span> <span class="toc-text">处理一位加法|半加器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%84%E7%90%863bit%E5%8A%A0%E6%B3%95-%E5%85%A8%E5%8A%A0%E5%99%A8"><span class="toc-number">1.5.3.</span> <span class="toc-text">处理3bit加法|全加器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%AB%E4%BD%8D%E8%A1%8C%E6%B3%A2%E8%BF%9B%E4%BD%8D%E5%8A%A0%E6%B3%95%E5%99%A8"><span class="toc-number">1.5.4.</span> <span class="toc-text">八位行波进位加法器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BA%A2%E5%87%BA-StackOverFlow"><span class="toc-number">1.5.5.</span> <span class="toc-text">溢出 StackOverFlow</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B6%85%E5%89%8D%E8%BF%9B%E4%BD%8D%E5%8A%A0%E6%B3%95%E5%99%A8"><span class="toc-number">1.5.6.</span> <span class="toc-text">超前进位加法器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ALU%E5%8F%AF%E5%AE%9E%E7%8E%B0%E6%93%8D%E4%BD%9C%E4%B8%8E%E7%BB%93%E6%9E%84"><span class="toc-number">1.5.7.</span> <span class="toc-text">ALU可实现操作与结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8%E5%92%8C%E5%86%85%E5%AD%98"><span class="toc-number">1.6.</span> <span class="toc-text">寄存器和内存</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%98%E5%82%A8"><span class="toc-number">1.6.1.</span> <span class="toc-text">存储</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E4%BD%8D%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8"><span class="toc-number">1.6.2.</span> <span class="toc-text">一位数据存储</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%94%81%E5%AD%98%E5%99%A8-LATCH"><span class="toc-number">1.6.3.</span> <span class="toc-text">锁存器 LATCH</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%A8%E9%94%81-GATED-LATCH"><span class="toc-number">1.6.4.</span> <span class="toc-text">门锁 GATED LATCH</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8-REGISTER"><span class="toc-number">1.6.5.</span> <span class="toc-text">寄存器 REGISTER</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%87%E5%AE%9A%E5%AF%84%E5%AD%98%E5%99%A8%E4%B8%AD%E8%A1%8C%E5%88%97"><span class="toc-number">1.6.6.</span> <span class="toc-text">指定寄存器中行列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E5%AD%98"><span class="toc-number">1.6.7.</span> <span class="toc-text">内存</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E5%A4%AE%E5%A4%84%E7%90%86%E5%99%A8CPU"><span class="toc-number">1.7.</span> <span class="toc-text">中央处理器CPU</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CPU-Central-Processing-Unit-%E7%BB%84%E6%88%90%E4%B8%8E%E7%94%A8%E5%A4%84"><span class="toc-number">1.7.1.</span> <span class="toc-text">CPU | Central Processing Unit 组成与用处</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E8%BF%90%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="toc-number">1.7.2.</span> <span class="toc-text">指令运行流程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E5%92%8C%E7%A8%8B%E5%BA%8F"><span class="toc-number">1.8.</span> <span class="toc-text">指令和程序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E9%9B%86"><span class="toc-number">1.8.1.</span> <span class="toc-text">指令集</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E5%92%8C%E6%9D%A1%E4%BB%B6%E6%8C%87%E4%BB%A4"><span class="toc-number">1.8.2.</span> <span class="toc-text">循环和条件指令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E9%95%BF%E5%BA%A6"><span class="toc-number">1.8.3.</span> <span class="toc-text">指令长度</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7CPU%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.9.</span> <span class="toc-text">高级CPU设计</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BACPU%E6%8F%90%E9%80%9F"><span class="toc-number">1.9.1.</span> <span class="toc-text">为CPU提速</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E8%BF%90%E8%A1%8C%E6%96%B9%E5%BC%8F"><span class="toc-number">1.9.2.</span> <span class="toc-text">指令运行方式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A9%E6%9C%9F%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F"><span class="toc-number">1.10.</span> <span class="toc-text">早期编程方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AF%E7%BC%96%E7%A8%8B%E7%BA%BA%E7%BB%87%E6%9C%BA"><span class="toc-number">1.10.1.</span> <span class="toc-text">可编程纺织机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A9%BF%E6%8E%A7%E5%8D%A1%E7%BA%B8%E7%BC%96%E7%A8%8B"><span class="toc-number">1.10.2.</span> <span class="toc-text">穿控卡纸编程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%92%E7%BA%BF%E6%9D%BF%E7%BC%96%E7%A8%8B"><span class="toc-number">1.10.3.</span> <span class="toc-text">插线板编程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%AF%E8%AF%BA%E4%BE%9D%E6%9B%BC%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-number">1.10.4.</span> <span class="toc-text">冯诺依曼体系结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%A2%E6%9D%BF%E7%BC%96%E7%A8%8B"><span class="toc-number">1.10.5.</span> <span class="toc-text">面板编程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E5%8F%91%E5%B1%95%E5%8F%B2"><span class="toc-number">1.11.</span> <span class="toc-text">编程语言发展史</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%BA%E5%99%A8%E8%AF%AD%E8%A8%80"><span class="toc-number">1.11.1.</span> <span class="toc-text">机器语言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80"><span class="toc-number">1.11.2.</span> <span class="toc-text">汇编语言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AB%98%E7%BA%A7%E8%AF%AD%E8%A8%80"><span class="toc-number">1.11.3.</span> <span class="toc-text">高级语言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E7%BC%96%E7%A8%8B%E9%AB%98%E7%BA%A7%E8%AF%AD%E8%A8%80"><span class="toc-number">1.11.4.</span> <span class="toc-text">通用编程高级语言</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A8%8B%E5%8E%9F%E7%90%86-%E8%AF%AD%E5%8F%A5%E5%92%8C%E5%87%BD%E6%95%B0"><span class="toc-number">1.12.</span> <span class="toc-text">编程原理-语句和函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%AD%E5%8F%A5%E5%92%8C%E8%AF%AD%E6%B3%95"><span class="toc-number">1.12.1.</span> <span class="toc-text">语句和语法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BD%E6%95%B0"><span class="toc-number">1.12.2.</span> <span class="toc-text">函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8"><span class="toc-number">1.13.</span> <span class="toc-text">算法入门</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95"><span class="toc-number">1.13.1.</span> <span class="toc-text">排序算法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">1.14.</span> <span class="toc-text">数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E7%BB%84"><span class="toc-number">1.14.1.</span> <span class="toc-text">数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">1.14.2.</span> <span class="toc-text">字符串</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9F%A9%E9%98%B5"><span class="toc-number">1.14.3.</span> <span class="toc-text">矩阵</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E4%BD%93"><span class="toc-number">1.14.4.</span> <span class="toc-text">结构体</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%93%BE%E8%A1%A8"><span class="toc-number">1.14.5.</span> <span class="toc-text">链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%9F%E5%88%97%E5%92%8C%E6%A0%88"><span class="toc-number">1.14.6.</span> <span class="toc-text">队列和栈</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%91"><span class="toc-number">1.14.7.</span> <span class="toc-text">树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BE"><span class="toc-number">1.14.8.</span> <span class="toc-text">图</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E7%81%B5"><span class="toc-number">1.15.</span> <span class="toc-text">图灵</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AF%E5%88%A4%E5%AE%9A%E6%80%A7%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">1.15.1.</span> <span class="toc-text">可判定性的问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BE%E7%81%B5%E6%9C%BA"><span class="toc-number">1.15.2.</span> <span class="toc-text">图灵机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%81%9C%E6%9C%BA%E9%97%AE%E9%A2%98"><span class="toc-number">1.15.3.</span> <span class="toc-text">停机问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E4%B8%8E%E5%9B%BE%E7%81%B5%E6%B5%8B%E8%AF%95"><span class="toc-number">1.15.4.</span> <span class="toc-text">人工智能与图灵测试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B"><span class="toc-number">1.16.</span> <span class="toc-text">软件工程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.16.1.</span> <span class="toc-text">面对对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E6%96%87%E6%A1%A3"><span class="toc-number">1.16.2.</span> <span class="toc-text">开发文档</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83IDE"><span class="toc-number">1.16.3.</span> <span class="toc-text">集成开发环境IDE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BA%90%E4%BB%A3%E7%A0%81%E7%AE%A1%E7%90%86"><span class="toc-number">1.16.4.</span> <span class="toc-text">源代码管理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-number">1.16.5.</span> <span class="toc-text">测试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E4%B8%8E%E6%91%A9%E5%B0%94%E5%AE%9A%E5%BE%8B"><span class="toc-number">1.17.</span> <span class="toc-text">集成电路与摩尔定律</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E7%9A%84%E5%87%BA%E7%8E%B0"><span class="toc-number">1.17.1.</span> <span class="toc-text">集成电路的出现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%B0%E5%88%B7%E7%94%B5%E8%B7%AF%E6%9D%BF-PCB-Printed-Circuit-Board"><span class="toc-number">1.17.2.</span> <span class="toc-text">印刷电路板 PCB Printed Circuit Board</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%89%E5%88%BB"><span class="toc-number">1.17.3.</span> <span class="toc-text">光刻</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%91%A9%E5%B0%94%E5%AE%9A%E5%BE%8B"><span class="toc-number">1.17.4.</span> <span class="toc-text">摩尔定律</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.18.</span> <span class="toc-text">操作系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%B9%E5%A4%84%E7%90%86"><span class="toc-number">1.18.1.</span> <span class="toc-text">批处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AE%80%E4%BB%8B%E4%B8%8E%E4%BD%9C%E7%94%A8"><span class="toc-number">1.18.2.</span> <span class="toc-text">操作系统简介与作用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98"><span class="toc-number">1.18.3.</span> <span class="toc-text">虚拟内存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E6%97%B6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.18.4.</span> <span class="toc-text">分时操作系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Unix%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.18.5.</span> <span class="toc-text">Unix操作系统</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E5%92%8C%E5%82%A8%E5%AD%98%E4%BB%8B%E8%B4%A8"><span class="toc-number">1.19.</span> <span class="toc-text">内存和储存介质</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E5%92%8C%E5%AD%98%E5%82%A8%E5%99%A8"><span class="toc-number">1.19.1.</span> <span class="toc-text">内存和存储器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BB%B6%E8%BF%9F%E7%BA%BF%E5%AD%98%E5%82%A8%E5%99%A8-Delay-Line-Memory"><span class="toc-number">1.19.2.</span> <span class="toc-text">延迟线存储器 Delay Line Memory</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A3%81%E8%8A%AF%E5%AD%98%E5%82%A8%E5%99%A8-Magnetic-Core-Memory"><span class="toc-number">1.19.3.</span> <span class="toc-text">磁芯存储器 Magnetic Core Memory</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A3%81%E5%B8%A6"><span class="toc-number">1.19.4.</span> <span class="toc-text">磁带</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8E%B0%E4%BB%A3%E5%AD%98%E5%82%A8%E5%99%A8"><span class="toc-number">1.19.5.</span> <span class="toc-text">现代存储器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%86%85%E5%AD%98%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84"><span class="toc-number">1.19.6.</span> <span class="toc-text">计算机内存层次结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8E%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.20.</span> <span class="toc-text">文件与文件系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.20.1.</span> <span class="toc-text">文件格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%83%E6%95%B0%E6%8D%AE-%E6%96%87%E4%BB%B6%E5%A4%B4"><span class="toc-number">1.20.2.</span> <span class="toc-text">元数据 | 文件头</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8E%B0%E4%BB%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%98%E5%82%A8%E6%96%87%E4%BB%B6%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-number">1.20.3.</span> <span class="toc-text">现代计算机存储文件的方式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9"><span class="toc-number">1.21.</span> <span class="toc-text">压缩</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B8%B8%E7%A8%8B%E7%BC%96%E7%A0%81%E5%8E%8B%E7%BC%A9-Run-Length-Encoding"><span class="toc-number">1.21.1.</span> <span class="toc-text">游程编码压缩 Run-Length Encoding</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9C%8D%E5%A4%AB%E6%9B%BC%E6%A0%91-Huffman-Tree-%E5%92%8C-%E5%AD%97%E5%85%B8%E7%BC%96%E7%A0%81-Dictionary-coders"><span class="toc-number">1.21.2.</span> <span class="toc-text">霍夫曼树 Huffman Tree 和  字典编码 Dictionary coders</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%84%9F%E7%9F%A5%E7%BC%96%E7%A0%81-%E5%92%8C-%E6%9C%89%E6%8D%9F%E5%8E%8B%E7%BC%A9"><span class="toc-number">1.21.3.</span> <span class="toc-text">感知编码 和 有损压缩</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E5%86%97%E4%BD%99"><span class="toc-number">1.21.4.</span> <span class="toc-text">时间冗余</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%95%8C%E9%9D%A2-%E4%BA%BA%E6%9C%BA%E4%BA%A4%E4%BA%92"><span class="toc-number">1.22.</span> <span class="toc-text">命令行界面 | 人机交互</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%BA%E6%9C%BA%E4%BA%A4%E4%BA%92%E8%AE%BE%E5%A4%87%E7%9A%84%E5%8F%98%E5%8C%96"><span class="toc-number">1.22.1.</span> <span class="toc-text">人机交互设备的变化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%95%8C%E9%9D%A2%E4%B8%8E%E5%B1%8F%E5%B9%95"><span class="toc-number">1.22.2.</span> <span class="toc-text">命令行界面与屏幕</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%8F%E5%B9%95%E5%92%8C2D%E5%9B%BE%E5%BD%A2%E6%98%BE%E7%A4%BA"><span class="toc-number">1.23.</span> <span class="toc-text">屏幕和2D图形显示</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%A9%E6%9C%9F%E5%B1%8F%E5%B9%95%E7%94%A8%E9%80%94"><span class="toc-number">1.23.1.</span> <span class="toc-text">早期屏幕用途</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%B4%E6%9E%81%E5%B0%84%E7%BA%BF%E7%AE%A1-CRT-Cathode-Ray-Tube"><span class="toc-number">1.23.2.</span> <span class="toc-text">阴极射线管 CRT Cathode Ray Tube</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B6%B2%E6%99%B6%E6%98%BE%E7%A4%BA%E6%8A%80%E6%9C%AFLCD%E5%92%8C%E5%83%8F%E7%B4%A0Pixel"><span class="toc-number">1.23.3.</span> <span class="toc-text">液晶显示技术LCD和像素Pixel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E7%94%9F%E6%88%90%E5%99%A8-%E5%92%8C-%E5%AD%97%E7%AC%A6%E6%98%BE%E7%A4%BA"><span class="toc-number">1.23.4.</span> <span class="toc-text">字符生成器 和 字符显示</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9F%A2%E9%87%8F%E6%89%AB%E6%8F%8F-%E7%BB%98%E5%88%B6%E5%9B%BE%E5%BD%A2"><span class="toc-number">1.23.5.</span> <span class="toc-text">矢量扫描 绘制图形</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Sketchpad-%E4%B8%8E-%E4%BD%8D%E5%9B%BE%E6%98%BE%E7%A4%BA"><span class="toc-number">1.23.6.</span> <span class="toc-text">Sketchpad  与 位图显示</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%B7%E6%88%98%E5%92%8C%E6%B6%88%E8%B4%B9%E4%B8%BB%E4%B9%89"><span class="toc-number">1.24.</span> <span class="toc-text">冷战和消费主义</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%B7%E6%88%98"><span class="toc-number">1.24.1.</span> <span class="toc-text">冷战</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Memex%E5%81%87%E6%83%B3%E8%AE%A1%E7%AE%97%E6%9C%BA-%E4%B8%8E-%E7%BE%8E%E5%9B%BD%E5%9B%BD%E5%AE%B6%E7%A7%91%E5%AD%A6%E5%9F%BA%E9%87%91%E4%BC%9A"><span class="toc-number">1.24.2.</span> <span class="toc-text">Memex假想计算机 与 美国国家科学基金会</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%99%B6%E4%BD%93%E7%AE%A1%E8%AE%BE%E5%A4%87-%E4%B8%8E-%E5%A4%AA%E7%A9%BA%E7%AB%9E%E8%B5%9B"><span class="toc-number">1.24.3.</span> <span class="toc-text">晶体管设备 与 太空竞赛</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B6%88%E8%B4%B9%E7%BA%A7%E7%94%B5%E5%AD%90%E8%AE%BE%E5%A4%87"><span class="toc-number">1.24.4.</span> <span class="toc-text">消费级电子设备</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AA%E4%BA%BA%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%9D%A9%E5%91%BD"><span class="toc-number">1.25.</span> <span class="toc-text">个人计算机革命</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%95%86%E4%B8%9A%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%92%8CBasic%E8%AF%AD%E8%A8%80"><span class="toc-number">1.25.1.</span> <span class="toc-text">商业计算机和Basic语言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%80%E7%AE%B1%E5%8D%B3%E7%94%A8%E7%9A%84%E8%AE%A1%E7%AE%97%E6%9C%BA"><span class="toc-number">1.25.2.</span> <span class="toc-text">开箱即用的计算机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IBM%E5%85%BC%E5%AE%B9%E6%A1%86%E6%9E%B6-%E4%B8%8E-%E8%8B%B9%E6%9E%9C%E5%85%AC%E5%8F%B8%E5%B0%81%E9%97%AD%E6%A1%86%E6%9E%B6"><span class="toc-number">1.25.3.</span> <span class="toc-text">IBM兼容框架 与 苹果公司封闭框架</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%BD%A2%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2-Graphical-User-Interface"><span class="toc-number">1.26.</span> <span class="toc-text">图形用户界面 Graphical User Interface</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%BD%E4%B9%90%E5%A5%A5%E6%89%98-%E4%B8%8E-WIMP%E7%95%8C%E9%9D%A2"><span class="toc-number">1.26.1.</span> <span class="toc-text">施乐奥托 与 WIMP界面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BE%AE%E8%BD%AF%E8%8B%B9%E6%9E%9C%E5%90%8E%E6%97%A5%E8%B0%88"><span class="toc-number">1.26.2.</span> <span class="toc-text">微软苹果后日谈</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3D%E5%9B%BE%E5%BD%A2"><span class="toc-number">1.27.</span> <span class="toc-text">3D图形</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E6%8A%95%E5%BD%B1"><span class="toc-number">1.27.1.</span> <span class="toc-text">图像投影</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BE%E5%BD%A2%E6%B8%B2%E6%9F%93"><span class="toc-number">1.27.2.</span> <span class="toc-text">图形渲染</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E5%A1%AB%E5%85%85"><span class="toc-number">1.27.3.</span> <span class="toc-text">图像填充</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%94%BB%E5%AE%B6%E7%AE%97%E6%B3%95"><span class="toc-number">1.27.3.1.</span> <span class="toc-text">画家算法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E7%BC%93%E5%86%B2-Z-Buffering"><span class="toc-number">1.27.3.2.</span> <span class="toc-text">深度缓冲 Z Buffering</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%98%8E%E6%9A%97%E5%A4%84%E7%90%86"><span class="toc-number">1.27.4.</span> <span class="toc-text">明暗处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%B9%E7%90%86%E6%98%A0%E5%B0%84"><span class="toc-number">1.27.5.</span> <span class="toc-text">纹理映射</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C"><span class="toc-number">1.28.</span> <span class="toc-text">计算机网络</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AA%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C"><span class="toc-number">1.28.1.</span> <span class="toc-text">第一个计算机网络</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%80%E5%9F%9F%E7%BD%91-Local-Area-Networks-%E5%92%8C-MAC%E5%9C%B0%E5%9D%80"><span class="toc-number">1.28.2.</span> <span class="toc-text">局域网 Local Area Networks 和 MAC地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BD%BD%E6%B3%A2%E4%BE%A6%E5%90%AC%E5%A4%9A%E8%B7%AF%E8%AE%BF%E9%97%AECSMA-%E4%B8%8E-%E6%8C%87%E6%95%B0%E9%80%80%E9%81%BF-Exponential-Backoff"><span class="toc-number">1.28.3.</span> <span class="toc-text">载波侦听多路访问CSMA 与 指数退避 Exponential Backoff</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%B2%E7%AA%81%E5%9F%9F-Collision-Domain"><span class="toc-number">1.28.4.</span> <span class="toc-text">冲突域 Collision Domain</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%A5%E6%96%87%E4%BA%A4%E6%8D%A2-Message-Switching"><span class="toc-number">1.28.5.</span> <span class="toc-text">报文交换 Message Switching</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%92%E8%81%94%E7%BD%91"><span class="toc-number">1.29.</span> <span class="toc-text">互联网</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%B5%E8%84%91%E5%A6%82%E4%BD%95%E8%BF%9E%E6%8E%A5%E4%BA%92%E8%81%94%E7%BD%91"><span class="toc-number">1.29.1.</span> <span class="toc-text">电脑如何连接互联网</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%92%E8%81%94%E7%BD%91%E5%8D%8F%E8%AE%AE-IP-Internet-Protocol"><span class="toc-number">1.29.2.</span> <span class="toc-text">互联网协议 IP Internet Protocol</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E6%95%B0%E6%8D%AE%E5%8D%8F%E8%AE%AE-UDP%E4%B8%8E%E6%A0%A1%E9%AA%8C%E5%92%8C"><span class="toc-number">1.29.3.</span> <span class="toc-text">用户数据协议 UDP与校验和</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%A0%E8%BE%93%E6%8E%A7%E5%88%B6%E5%8D%8F%E8%AE%AE-TCP"><span class="toc-number">1.29.4.</span> <span class="toc-text">传输控制协议 TCP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%9F%E5%90%8D%E7%B3%BB%E7%BB%9F-DNS-Domain-Name-System"><span class="toc-number">1.29.5.</span> <span class="toc-text">域名系统 DNS Domain Name System</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OSI-%E5%BC%80%E6%94%BE%E5%BC%8F%E7%B3%BB%E7%BB%9F%E4%BA%92%E8%81%94%E9%80%9A%E4%BF%A1%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.29.6.</span> <span class="toc-text">OSI 开放式系统互联通信参考模型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%87%E7%BB%B4%E7%BD%91-WWW-World-Wide-Web"><span class="toc-number">1.30.</span> <span class="toc-text">万维网 WWW World Wide Web</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%87%E7%BB%B4%E7%BD%91%E5%9F%BA%E6%9C%AC%E5%8D%95%E4%BD%8D-%E4%B8%8E-%E8%B6%85%E9%93%BE%E6%8E%A5"><span class="toc-number">1.30.1.</span> <span class="toc-text">万维网基本单位 与 超链接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E7%A0%81-%E7%BB%9F%E4%B8%80%E8%B5%84%E6%BA%90%E5%AE%9A%E4%BD%8D%E5%99%A8-%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.30.2.</span> <span class="toc-text">状态码, 统一资源定位器, 超文本传输协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B6%85%E6%96%87%E6%9C%AC%E6%A0%87%E8%AE%B0%E8%AF%AD%E8%A8%80-HTML"><span class="toc-number">1.30.3.</span> <span class="toc-text">超文本标记语言 HTML</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%87%E7%BB%B4%E7%BD%91%E5%8F%91%E5%B1%95-%E4%B8%8E-%E7%BD%91%E7%BB%9C%E4%B8%AD%E7%AB%8B%E6%80%A7"><span class="toc-number">1.30.4.</span> <span class="toc-text">万维网发展 与 网络中立性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AE%89%E5%85%A8"><span class="toc-number">1.31.</span> <span class="toc-text">计算机安全</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A8%81%E8%83%81%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.31.1.</span> <span class="toc-text">威胁模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81-Authentication"><span class="toc-number">1.31.2.</span> <span class="toc-text">身份验证 Authentication</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6-Access-Control"><span class="toc-number">1.31.3.</span> <span class="toc-text">访问控制 Access Control</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E5%86%85%E6%A0%B8%EF%BC%8C%E7%8B%AC%E7%AB%8B%E5%AE%89%E5%85%A8%E6%A3%80%E6%9F%A5%E5%92%8C%E8%B4%A8%E9%87%8F%E9%AA%8C%E8%AF%81"><span class="toc-number">1.31.4.</span> <span class="toc-text">安全内核，独立安全检查和质量验证</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9A%94%E7%A6%BBIsolation-%E5%92%8C-%E6%B2%99%E7%9B%92-Sandbox"><span class="toc-number">1.31.5.</span> <span class="toc-text">隔离Isolation 和 沙盒 Sandbox</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%BB%91%E5%AE%A2%E4%B8%8E%E6%94%BB%E5%87%BB"><span class="toc-number">1.32.</span> <span class="toc-text">黑客与攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%BB%91%E5%AE%A2%E7%A7%8D%E7%B1%BB"><span class="toc-number">1.32.1.</span> <span class="toc-text">黑客种类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6"><span class="toc-number">1.32.2.</span> <span class="toc-text">社会工程学</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E9%92%93%E9%B1%BC-Phishing-%E5%92%8C-%E5%81%87%E6%89%98-Pretexing"><span class="toc-number">1.32.3.</span> <span class="toc-text">网络钓鱼 Phishing 和 假托 Pretexing</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%A8%E9%A9%AC-%E4%B8%8E-%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3"><span class="toc-number">1.32.4.</span> <span class="toc-text">木马 与 暴力破解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NAND%E9%95%9C%E5%83%8F-%E4%B8%8E-%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8-Exploit"><span class="toc-number">1.32.5.</span> <span class="toc-text">NAND镜像 与 漏洞利用 Exploit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E5%8C%BA%E6%BA%A2%E5%87%BA-%EF%BC%8C%E8%BE%B9%E7%95%8C%E6%A3%80%E6%9F%A5-%E4%B8%8E-%E9%87%91%E4%B8%9D%E9%9B%80"><span class="toc-number">1.32.6.</span> <span class="toc-text">缓存区溢出 ，边界检查 与 金丝雀</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E6%B3%A8%E5%85%A5-%E5%92%8C-%E9%9B%B6%E6%97%A5%E6%BC%8F%E6%B4%9E"><span class="toc-number">1.32.7.</span> <span class="toc-text">代码注入 和 零日漏洞</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A0%95%E8%99%AB-%E5%92%8C-%E5%83%B5%E5%B0%B8%E7%BD%91%E7%BB%9C"><span class="toc-number">1.32.8.</span> <span class="toc-text">蠕虫 和 僵尸网络</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E5%AF%86"><span class="toc-number">1.33.</span> <span class="toc-text">加密</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%81%BA%E6%92%92%E5%8A%A0%E5%AF%86-%E5%92%8C-%E7%A7%BB%E4%BD%8D%E5%8A%A0%E5%AF%86"><span class="toc-number">1.33.1.</span> <span class="toc-text">恺撒加密 和 移位加密</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8B%B1%E6%A0%BC%E7%A0%81%E6%9C%BA-%E5%92%8C-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="toc-number">1.33.2.</span> <span class="toc-text">英格码机 和 对称加密</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%86%E9%92%A5%E4%BA%A4%E6%8D%A2-%E5%92%8C-%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86"><span class="toc-number">1.33.3.</span> <span class="toc-text">密钥交换 和 非对称加密</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD"><span class="toc-number">1.34.</span> <span class="toc-text">机器学习与人工智能</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-ML-Machine-Learning"><span class="toc-number">1.34.1.</span> <span class="toc-text">机器学习 ML Machine Learning</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD-AI-Artificial-Intelligence"><span class="toc-number">1.34.2.</span> <span class="toc-text">人工智能 AI Artificial Intelligence</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E7%B1%BB-%E5%86%B3%E7%AD%96%E8%BE%B9%E7%95%8C-%E6%B7%B7%E6%B7%86%E7%9F%A9%E9%98%B5"><span class="toc-number">1.34.3.</span> <span class="toc-text">分类 决策边界 混淆矩阵</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%B3%E7%AD%96%E6%A0%91-%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA"><span class="toc-number">1.34.4.</span> <span class="toc-text">决策树 支持向量机</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E8%B7%AF-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.34.5.</span> <span class="toc-text">人工神经网路 深度学习</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%BAAI%E4%B8%8E%E5%BC%B1AI"><span class="toc-number">1.34.6.</span> <span class="toc-text">强AI与弱AI</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.34.7.</span> <span class="toc-text">强化学习</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89"><span class="toc-number">1.35.</span> <span class="toc-text">计算机视觉</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%9C%E8%89%B2%E8%B7%9F%E8%B8%AA%E6%B3%95"><span class="toc-number">1.35.1.</span> <span class="toc-text">颜色跟踪法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B-%E6%A0%B8-%E8%BF%87%E6%BB%A4%E5%99%A8-%E5%8D%B7%E7%A7%AF"><span class="toc-number">1.35.2.</span> <span class="toc-text">边缘检测  核&#x2F;过滤器 卷积</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Prewitt-%E7%AE%97%E5%AD%90-%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B"><span class="toc-number">1.35.3.</span> <span class="toc-text">Prewitt 算子  人脸检测</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%B7%E7%A7%AF%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-Convolutional-Neural-Networks"><span class="toc-number">1.35.4.</span> <span class="toc-text">卷积积神经网络 Convolutional Neural Networks</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86-NLP"><span class="toc-number">1.36.</span> <span class="toc-text">自然语言处理 NLP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#NLP%E8%BF%87%E7%A8%8B-%E5%88%86%E6%9E%90%E6%A0%91"><span class="toc-number">1.36.1.</span> <span class="toc-text">NLP过程 分析树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1"><span class="toc-number">1.36.2.</span> <span class="toc-text">知识图谱</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%AD%E9%9F%B3%E8%AF%86%E5%88%AB"><span class="toc-number">1.36.3.</span> <span class="toc-text">语音识别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%AD%E9%9F%B3%E5%90%88%E6%88%90"><span class="toc-number">1.36.4.</span> <span class="toc-text">语音合成</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%BA%E5%99%A8%E4%BA%BA"><span class="toc-number">1.37.</span> <span class="toc-text">机器人</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CNC%E6%9C%BA%E5%99%A8"><span class="toc-number">1.37.1.</span> <span class="toc-text">CNC机器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B4%9F%E5%8F%8D%E9%A6%88%E5%9B%9E%E8%B7%AF-PID%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="toc-number">1.37.2.</span> <span class="toc-text">负反馈回路 PID控制器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%BA%E5%99%A8%E4%BA%BA%E4%B8%89%E5%AE%9A%E5%BE%8B"><span class="toc-number">1.37.3.</span> <span class="toc-text">机器人三定律</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%BF%83%E7%90%86%E5%AD%A6"><span class="toc-number">1.38.</span> <span class="toc-text">计算机心理学</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E8%A7%86%E8%A7%89%E7%B3%BB%E7%BB%9F%EF%BC%8C%E8%AE%A4%E7%9F%A5%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E7%95%8C%E9%9D%A2"><span class="toc-number">1.38.1.</span> <span class="toc-text">利用视觉系统，认知系统设计界面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B4%E8%A7%82%E5%8A%9F%E8%83%BD"><span class="toc-number">1.38.2.</span> <span class="toc-text">直观功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A4%E5%87%BA%E4%B8%8E%E5%9B%9E%E6%83%B3"><span class="toc-number">1.38.3.</span> <span class="toc-text">认出与回想</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%83%85%E6%84%9F%E8%AE%A1%E7%AE%97-%E4%B8%8E-%E4%BA%BA%E6%9C%BA%E4%BA%A4%E4%BA%92"><span class="toc-number">1.38.4.</span> <span class="toc-text">情感计算 与 人机交互</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%99%E8%82%B2%E7%A7%91%E6%8A%80"><span class="toc-number">1.39.</span> <span class="toc-text">教育科技</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BD%B1%E5%83%8F%E5%AD%A6%E4%B9%A0-%E5%A4%A7%E5%9E%8B%E5%BC%80%E6%94%BE%E5%BC%8F%E5%9C%A8%E7%BA%BF%E8%AF%BE%E7%A8%8BMOOC"><span class="toc-number">1.39.1.</span> <span class="toc-text">影像学习 大型开放式在线课程MOOC</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%99%BA%E8%83%BD%E8%BE%85%E5%AF%BC%E7%B3%BB%E7%BB%9F-Intelligent-Tutoring-Systems"><span class="toc-number">1.39.2.</span> <span class="toc-text">智能辅导系统 Intelligent Tutoring Systems</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%9F%A5%E8%AF%86%E8%BF%BD%E8%B8%AA"><span class="toc-number">1.39.3.</span> <span class="toc-text">贝叶斯知识追踪</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%99%E8%82%B2%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98-Educational-Data-Mining"><span class="toc-number">1.39.4.</span> <span class="toc-text">教育数据挖掘 Educational Data Mining</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A5%87%E7%82%B9%EF%BC%8C%E5%A4%A9%E7%BD%91%E4%B8%8E%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E6%9C%AA%E6%9D%A5"><span class="toc-number">1.40.</span> <span class="toc-text">奇点，天网与计算机的未来</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%99%AE%E9%80%82%E8%AE%A1%E7%AE%97"><span class="toc-number">1.40.1.</span> <span class="toc-text">普适计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A5%87%E7%82%B9"><span class="toc-number">1.40.2.</span> <span class="toc-text">奇点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E6%80%A7%E4%BA%8B%E4%B8%9A"><span class="toc-number">1.40.3.</span> <span class="toc-text">技术性事业</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%AA%E6%9D%A5"><span class="toc-number">1.40.4.</span> <span class="toc-text">未来</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E5%92%8C%E6%84%9F%E6%83%B3"><span class="toc-number">1.41.</span> <span class="toc-text">总结和感想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-number">1.42.</span> <span class="toc-text">参考链接</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/157ba0d2c7bb/" title="Android Studio Google账号登录不了的一个解决方法"><img src="https://img2022.cnblogs.com/blog/1674552/202205/1674552-20220517193643247-1871241772.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Android Studio Google账号登录不了的一个解决方法"/></a><div class="content"><a class="title" href="/post/157ba0d2c7bb/" title="Android Studio Google账号登录不了的一个解决方法">Android Studio Google账号登录不了的一个解决方法</a><time datetime="2023-07-08T14:16:38.000Z" title="发表于 2023-07-08 22:16:38">2023-07-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/82c8d3e69f19/" title="Ubuntu20.04简单配置"><img src="https://img2023.cnblogs.com/blog/1674552/202305/1674552-20230508153315167-1707518652.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Ubuntu20.04简单配置"/></a><div class="content"><a class="title" href="/post/82c8d3e69f19/" title="Ubuntu20.04简单配置">Ubuntu20.04简单配置</a><time datetime="2023-05-08T07:33:13.000Z" title="发表于 2023-05-08 15:33:13">2023-05-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/2eb19ee71dc2/" title="时间复杂度"><img src="https://img2022.cnblogs.com/blog/1674552/202205/1674552-20220517193643247-1871241772.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="时间复杂度"/></a><div class="content"><a class="title" href="/post/2eb19ee71dc2/" title="时间复杂度">时间复杂度</a><time datetime="2023-02-03T11:56:57.000Z" title="发表于 2023-02-03 19:56:57">2023-02-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/e0578cda5c64/" title="记录第一次搭建博客"><img src="https://img2022.cnblogs.com/blog/1674552/202205/1674552-20220517193643247-1871241772.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="记录第一次搭建博客"/></a><div class="content"><a class="title" href="/post/e0578cda5c64/" title="记录第一次搭建博客">记录第一次搭建博客</a><time datetime="2023-02-03T11:56:57.000Z" title="发表于 2023-02-03 19:56:57">2023-02-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/69abeca3241e/" title="取模运算转位运算"><img src="[&quot;https://img2023.cnblogs.com/blog/1674552/202301/1674552-20230128155616027-1247227374.png&quot;]" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="取模运算转位运算"/></a><div class="content"><a class="title" href="/post/69abeca3241e/" title="取模运算转位运算">取模运算转位运算</a><time datetime="2023-01-28T06:56:58.000Z" title="发表于 2023-01-28 14:56:58">2023-01-28</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By 虚青海</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">这里居然有个友链→<a target="_blank" rel="noopener" href="https://aiepoch.cn/">及境丹青</a>←! <br><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2022099830号-1</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><div class="aplayer no-destroy" data-volume="0.2" data-theme="#009688" data-order="random" data-id="2220142299" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="false"> </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
